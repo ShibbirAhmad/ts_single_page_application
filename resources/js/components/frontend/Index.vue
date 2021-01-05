@@ -49,107 +49,75 @@
           </div>
         </div>
       </div>
+    
     </section>
-    <!-- Counter section end -->
-+
-    <!-- Services section -->
-    <section class="service-section spad">
-      <div class=" services">
-        <div class="section-title text-center">
-          <h3>OUR SERVICES</h3>
-          <p>We provides the opportunity to prepare for life</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-sm-6 service-item">
-            <div class="service-icon">
-              <img :src="base_url+'images/services-icons/1.png'" alt="1" />
-            </div>
-            <div class="service-content">
-              <h4>Art Studio</h4>
-              <p>
-                Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
-                Vivamus interdum ultrices augue. Aenean dos cursus lania.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6 service-item">
-            <div class="service-icon">
-              <img :src="base_url+'images/services-icons/2.png'" alt="1" />
-            </div>
-            <div class="service-content">
-              <h4>Great Facility</h4>
-              <p>
-                Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
-                Vivamus interdum ultrices augue. Aenean dos cursus lania.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6 service-item">
-            <div class="service-icon">
-              <img :src="base_url+'images/services-icons/3.png'" alt="1" />
-            </div>
-            <div class="service-content">
-              <h4>Activity Hub</h4>
-              <p>
-                Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
-                Vivamus interdum ultrices augue. Aenean dos cursus lania.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6 service-item">
-            <div class="service-icon">
-              <img :src="base_url+'images/services-icons/4.png'" alt="1" />
-            </div>
-            <div class="service-content">
-              <h4>Fully Qualified</h4>
-              <p>
-                Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
-                Vivamus interdum ultrices augue. Aenean dos cursus lania.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6 service-item">
-            <div class="service-icon">
-              <img :src="base_url+'images/services-icons/5.png'" alt="1" />
-            </div>
-            <div class="service-content">
-              <h4>Flexible Schedule</h4>
-              <p>
-                Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
-                Vivamus interdum ultrices augue. Aenean dos cursus lania.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6 service-item">
-            <div class="service-icon">
-              <img :src="base_url+'images/services-icons/6.png'" alt="1" />
-            </div>
-            <div class="service-content">
-              <h4>Chemistry Lab</h4>
-              <p>
-                Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
-                Vivamus interdum ultrices augue. Aenean dos cursus lania.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Services section end -->
+   
+    <!-- Counter section end --> 
 
     <!-- Enroll section -->
     <section class="enroll-section spad set-bg" data-setbg="img/enroll-bg.jpg">
       <div class="container">
+            <div class="row service_row">
+
+          <div class="col-md-6 col-sm-12">
+            
+            <div class="service_container">
+              <div class="service_outer">
+              <div class="service_inner"> 
+               <i style="margin:10px" class="fa fa-american-sign-language-interpreting service_icon"></i>
+              </div>            
+             </div>
+            <p class="service_description1"> FREE LANGUAGE CLUB EVERY FRIDAY </p>
+           </div>
+       
+         
+           <div class="service_container">
+              <div class="service_outer">
+              <div class="service_inner"> 
+                  <i  class="fa fa-money service_icon"> </i>
+              </div>            
+             </div>
+            <p  class="service_description2">MONEY-BACK GURANTEE WITH-IN 7 DAYS</p>
+           </div>
+
+       </div>
+
+
+           <div class="col-md-6 col-sm-12 service_optional">
+
+             <div class="service_container">
+              <div class="service_outer">
+              <div class="service_inner"> 
+                  <i style="margin-left:15px" class="fa fa-thumbs-up service_icon"> </i>
+              </div>            
+             </div>
+            <p class="service_description3"> BEST QUALITY TRAINERS </p>
+           </div>
+       
+         
+           <div class="service_container">
+              <div class="service_outer">
+              <div class="service_inner"> 
+                  <i style="margin:14px;" class="fa fa-headphones service_icon"> </i> 
+              </div>            
+             </div>
+            <p class="service_description4"> DEDICATED ONLINE SUPPORT </p>
+           </div>
+            
+        </div>
+
+
+      </div>
         <div class="row">
           <div class="col-lg-5">
             <div class="section-title text-white">
-              <h3>ENROLLMENT</h3>
-              <p>Get started with us to explore the exciting</p>
+              <h3>ENROLLMENT SKILL</h3>
+              <p>Get started with us to explore english skill</p>
             </div>
             <div class="enroll-list text-white">
               <div class="enroll-list-item">
                 <span>1</span>
-                <h5>Contact</h5>
+                <h5>SPEAKING</h5>
                 <p>
                   Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
                   Vivamus interdum ultrices augue.
@@ -157,7 +125,7 @@
               </div>
               <div class="enroll-list-item">
                 <span>2</span>
-                <h5>Consulting</h5>
+                <h5>LISTENING</h5>
                 <p>
                   Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
                   Vivamus interdum ultrices augue.
@@ -165,7 +133,7 @@
               </div>
               <div class="enroll-list-item">
                 <span>3</span>
-                <h5>Register</h5>
+                <h5>WRITING</h5>
                 <p>
                   Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
                   Vivamus interdum ultrices augue.
@@ -193,7 +161,7 @@
           <div
             v-for="(course, index) in courses"
             :key="index"
-            class="col-lg-4 col-md-6 col-sm-12 course-item"
+            class="col-lg-4 col-md-6 col-sm-12 course-item "
           >
           <div class="course_container">
               <div class="course-thumb img-responsive">
@@ -214,7 +182,7 @@
               <i class="fa fa-clock-o"></i> {{ courseTimeFormater(course.start_date) }} 
               </div>
                 <router-link :to="{name:'course_details',params:{slug:course.slug}}" >
-                   <h4 style="padding:3px;">{{ course.name }}</h4>
+                   <h4>{{ course.name }}</h4>
                 </router-link>
               <h4 class="cource-price">{{ course.duration }}</h4>
             </div>
@@ -236,7 +204,7 @@
               <i class="ti-crown"></i>
             </div>
             <div class="fact-text">
-              <h2>50</h2>
+              <h2>3</h2>
               <p>YEARS</p>
             </div>
           </div>
@@ -245,7 +213,7 @@
               <i class="ti-briefcase"></i>
             </div>
             <div class="fact-text">
-              <h2>80</h2>
+              <h2>10</h2>
               <p>TEACHERS</p>
             </div>
           </div>
@@ -275,115 +243,33 @@
     <!-- Event section -->
     <section class="event-section spad">
       <div class="container-fluid">
-        <div class="section-title text-center">
-          <h3>OUR EVENTS</h3>
-          <p>Our department initiated a series of events</p>
-        </div>
-        <div class="row">
-          <div class="col-md-6 event-item">
-            <div class="event-thumb">
-              <img src="img/event/1.jpg" alt="" />
-              <div class="event-date">
-                <span>24 Mar 2018</span>
+            <div class="row">
+              
+              <div  class="parallax_background">
+                <div class="parallax_inside">
+                    <div class="parallax_content">
+                        <h4> Limited Time Offer </h4>
+                        <h1 class="parallax_offer"> 40% off </h1>
+                          <router-link :to="{name : 'landing_page' }" class="btn btn-read-more "> DISCOVER NOW </router-link>
+                    </div>
+                </div>
               </div>
+
+
             </div>
-            <div class="event-info">
-              <h4>
-                The dos and don'ts of writing a personal<br />statement for
-                languages
-              </h4>
-              <p>
-                <i class="fa fa-calendar-o"></i> 08:00 AM - 10:00 AM
-                <i class="fa fa-map-marker"></i> Center Building, Block A
-              </p>
-              <a href="" class="event-readmore"
-                >REGISTER <i class="fa fa-angle-double-right"></i
-              ></a>
-            </div>
-          </div>
-          <div class="col-md-6 event-item">
-            <div class="event-thumb">
-              <img src="img/event/2.jpg" alt="" />
-              <div class="event-date">
-                <span>22 Mar 2018</span>
-              </div>
-            </div>
-            <div class="event-info">
-              <h4>
-                University interview tips:<br />confidence won't make up for
-                flannel
-              </h4>
-              <p>
-                <i class="fa fa-calendar-o"></i> 08:00 AM - 10:00 AM
-                <i class="fa fa-map-marker"></i> Center Building, Block A
-              </p>
-              <a href="" class="event-readmore"
-                >REGISTER <i class="fa fa-angle-double-right"></i
-              ></a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
     <!-- Event section end -->
 
-    <!-- Gallery section -->
-    <div class="gallery-section">
-      <div class="gallery">
-        <div class="grid-sizer"></div>
-        <div class="gallery-item gi-big set-bg" data-setbg="img/gallery/1.jpg">
-          <a class="img-popup" href="img/gallery/1.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item set-bg" data-setbg="img/gallery/2.jpg">
-          <a class="img-popup" href="img/gallery/2.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item set-bg" data-setbg="img/gallery/3.jpg">
-          <a class="img-popup" href="img/gallery/3.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item gi-long set-bg" data-setbg="img/gallery/5.jpg">
-          <a class="img-popup" href="img/gallery/5.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item gi-big set-bg" data-setbg="img/gallery/8.jpg">
-          <a class="img-popup" href="img/gallery/8.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item gi-long set-bg" data-setbg="img/gallery/4.jpg">
-          <a class="img-popup" href="img/gallery/4.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item set-bg" data-setbg="img/gallery/6.jpg">
-          <a class="img-popup" href="img/gallery/6.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-        <div class="gallery-item set-bg" data-setbg="img/gallery/7.jpg">
-          <a class="img-popup" href="img/gallery/7.jpg"
-            ><i class="ti-plus"></i
-          ></a>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery section -->
-
     <!-- Blog section -->
     <section class="blog-section spad">
-      <div class="container-fluid">
+      <div class="container">
         <div class="section-title text-center">
           <h3>LATEST BLOG</h3>
           <p>Get latest article & top stories today</p>
         </div>
         <div class="row">
-          <div v-for="(post, index) in blogPosts" :key="index" class="col-xl-6 col-md-6 col-sm-12">
+          <div v-for="(post, index) in blogPosts" :key="index" class="col-xl-6 col-md-6 col-sm-12 ">
             <div class="blog-item">
               <div class="blog-thumb set-bg">
                <router-link :to="{name:'blog_post_details', params:{slug:post.slug} }" >
@@ -541,6 +427,11 @@ export default {
   width:530px;
   height: 365px !important;
 }
+
+.course_container{
+  box-shadow: 2px 1px 10px 1px #ddd;
+}
+
 .course_container:hover {
  
   box-shadow: 2px 1px 10px 1px #2e2e2e ;
@@ -563,11 +454,269 @@ export default {
 .btn-read-more{
   background:#f6783a;
   color:#fff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding-bottom:10px;
 }
 
 
 
+.btn-read-more:hover{
+    animation: fly 1s ease 1;   
+}
+
+@keyframes fly {
+    0% {
+      transform: translateY(0%);
+    }
+  
+    50% {
+      transform: translateY(100%);
+    }
+  
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+
+.parallax_background {
+
+    width: 100%;
+    height: 350px;
+    background-image: url(https://biniblog.localbini.com/wp-content/uploads/2019/02/green-1080x608.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+
+.parallax_inside {
+
+    margin: 60px;
+    position: absolute;
+    border: 2px solid #fff;
+    width: 40%;
+    height: 230px;
+}
+
+.parallax_content {
+
+    margin: 10px;
+    position: absolute;
+    background: #fff;
+    width: 96%;
+    height: 195px;
+    text-align:center;
+
+}
+
+.parallax_content h4 {
+  margin-top: 20px;
+}
+
+.parallax_offer {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+
+
+.service_row{
+
+    width: 100%;
+    height: 145px;
+    background:#2e2e2e;
+    margin-bottom:50px;
+    border: 2px dashed #fff;
+ 
+
+ }
+
+
+.service_container{
+
+  float:left;
+
+  }
+
+.service_outer {
+
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: dashed 1px #fff;
+    background: #222;
+    margin: 0px 94px;
+    margin-top: 20px;
+
+}
+
+.service_inner {
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 6.5px 6px;
+
+}
+
+
+.service_icon{
+    position: absolute;
+    margin: 11px;
+    font-size: 35px;
+}
+
+.service_outer:hover>.service_inner>.service_icon{
+  
+   -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+.service_description1 {
+
+    color:#fff;
+    padding:10px;
+    font-size:13px;
+
+}
+
+
+.service_description2 {
+
+    color:#fff;
+    padding:9px;
+    font-size:13px;
+
+}
+
+.service_description3 {
+
+    color:#fff;
+    padding:10px;
+    margin-left:45px;
+    font-size:13px;
+
+}
+
+
+.service_description4 {
+
+    color:#fff;
+    padding:10px;
+    margin-left:50px;
+    font-size:13px;
+
+}
+
+
+
+
+
+
+@media screen and (max-width: 400px) {
+
+  
+.parallax_inside {
+    width: 60%;
+}
+
+.parallax_content {
+  width: 91% ;
+} 
+
+
+.parallax_offer {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+} 
+
+
+  .service_row{
+
+    width: 100%;
+    height: 160px;
+    background: #2e2e2e;
+    margin-left: 0px;
+
+ }
+
+ .service_optional{
+   display: none;
+ }
+
+.service_container{
+  display:flex ;
+}
+.service_outer {
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: dashed 1px #fff;
+    background: #222;
+    margin-left: 23px;
+    margin-top: 26px;
+
+}
+
+.service_inner {
+
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 7px 6px;
+
+}
+
+.service_icon{
+    position: absolute;
+    margin: 7px;
+    font-size: 30px;
+}
+
+.service_outer:hover>.service_inner>.service_icon{
+  
+   -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+.service_description1 {
+
+    position: absolute;
+    font-size: 15px !important;
+    line-height: 22px !important;
+    margin-left: 95px;
+    padding-top: 15px;
+
+
+}
+
+.service_description2 {
+
+    position: absolute;
+    font-size: 15px !important;
+    line-height: 22px !important;
+    line-height: 22px !important;
+    margin-left: 95px;
+    padding-top: 27px;
+ 
+
+}
+
+
+}
 
 
 

@@ -186,10 +186,8 @@
                   <input
                     type="text"
                     name="transiction_id"
-                    placeholder="01xxx-xxxxx"
+                    placeholder="D18#HGIWDK1242"
                     class="form-control"
-                    
-                    maxlength="11"
                     :class="{ 'is-invalid': form.errors.has('transiction_id') }"
                     v-model="form.transiction_id"
                   />

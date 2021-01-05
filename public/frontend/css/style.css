@@ -571,8 +571,8 @@ ol {
 	height: 100%;
 	left: 0;
 	top: 0;
-	background: #000;
-	opacity: 0.8;
+	background: #2e2e2e;
+	
 }
 
 .enroll-section .container {
@@ -689,9 +689,10 @@ ol {
 }
 
 .course-item .course-info .cource-price {
-	padding-top: 10px;
+	padding-top:5px;
 	color: #f6783a;
 	margin-bottom:10px;
+	padding-bottom:20px;
 }
 
 .course-item .course-info .cource-price span {
@@ -904,12 +905,15 @@ ol {
 .blog-item {
 	margin-bottom: 60px;
 	overflow: hidden;
+	box-shadow: 2px 1px 10px 1px #ddd;
 }
 
 .blog-item .blog-thumb {
 	width: 230px;
 	height: 170px;
 	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
 }
 
 .blog-item .blog-content {
@@ -921,6 +925,8 @@ ol {
 	font-weight: 400;
 	margin-bottom: 8px;
 	line-height: 1.4;
+	padding-top:10px;
+	padding-right:10px;
 }
 
 .blog-item .blog-meta {
