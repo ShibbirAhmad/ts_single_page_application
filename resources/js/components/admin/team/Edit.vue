@@ -1,5 +1,6 @@
 <template>
   <div>
+     <navbar> </navbar>
     <div class="content-wrapper">
       <section class="content-header">
         <h1>

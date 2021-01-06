@@ -45,6 +45,19 @@
             <li class="active"><router-link :to="{ name : 'admin_list' }"><i class="fa fa-eye"></i>Menage</router-link></li>
           </ul>
         </li>
+
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-graduation-cap"></i> <span>Students</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><router-link :to="{ name : 'students' }"><i class="fa fa-eye"></i>Menage</router-link></li>
+          </ul>
+        </li>
+        
         
         <li class="treeview">
           <a href="#">

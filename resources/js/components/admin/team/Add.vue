@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navbar> </navbar>
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
@@ -174,10 +175,12 @@
 import Vue from "vue";
 import { Form, HasError, AlertError } from "vform";
 import datePicker from 'vue-bootstrap-datetimepicker';
+import Navbar from '../Navbar.vue';
 
 Vue.component(HasError.name, HasError);
 
 export default {
+  components: { Navbar },
   
   created() {
 

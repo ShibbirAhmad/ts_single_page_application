@@ -79,6 +79,13 @@ import ShowCarrier        from "./components/admin/carrier/Show.vue" ;
 import ApplicantCarrier   from "./components/admin/carrier/JobApplied.vue" ;
 
 
+import Students           from "./components/admin/students/Students.vue";
+import AddStudentResult   from "./components/admin/students/AddResult.vue";
+import StudentDetails     from "./components/admin/students/Details.vue";
+
+
+
+
 
 const Foo = { template: '<div>public </div>' }
 
@@ -518,6 +525,35 @@ const routes = [
     component: ApplicantCarrier,
     name : 'candidate_carrier',
     meta: {  title:'carrier applicant show',
+             authAdmin: true 
+           } 
+    },
+
+
+    
+    { 
+    path: '/backend/student/result/add/:id', 
+    component: AddStudentResult,
+    name : 'add_student_result',
+    meta: {  title:'student result add',
+             authAdmin: true 
+           } 
+    },
+
+    { 
+    path: '/backend/student/details/:id', 
+    component: StudentDetails,
+    name : 'student_details',
+    meta: {  title:'student details',
+             authAdmin: true 
+           } 
+    },
+
+    { 
+    path: '/backend/students/list/display', 
+    component: Students,
+    name : 'students',
+    meta: {  title:'students list',
              authAdmin: true 
            } 
     },

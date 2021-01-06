@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Unica - University Template</title>
+	<title>Talibs Institute</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="Unica University Template">
 	<meta name="keywords" content="event, unica, creative, html">

@@ -91,7 +91,7 @@
                   <i style="margin-left:15px" class="fa fa-thumbs-up service_icon"> </i>
               </div>            
              </div>
-            <p class="service_description3"> BEST QUALITY TRAINERS </p>
+            <p class="service_description3"> HIGH SKILL TRAINERS </p>
            </div>
        
          
@@ -134,6 +134,14 @@
               <div class="enroll-list-item">
                 <span>3</span>
                 <h5>WRITING</h5>
+                <p>
+                  Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
+                  Vivamus interdum ultrices augue.
+                </p>
+              </div>
+                <div class="enroll-list-item">
+                <span>4</span>
+                <h5>READING</h5>
                 <p>
                   Lorem ipsum dolor sitdo amet, consectetur dont adipis elit.
                   Vivamus interdum ultrices augue.
@@ -611,7 +619,7 @@ export default {
 
     color:#fff;
     padding:10px;
-    margin-left:50px;
+    margin-left:40px;
     font-size:13px;
 
 }

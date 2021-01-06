@@ -6,7 +6,7 @@
   
 	<!-- Blog page section  -->
 	<section style="margin-top:20px;" class="blog-page-section spad pt-0">
-		<div  class="container-fluid">
+		<div  class="container">
 			<div class="row">
 				<div class="col-md-8">
 					<div class="post-item post-details">
