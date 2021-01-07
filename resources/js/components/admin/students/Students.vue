@@ -91,7 +91,7 @@
                         <td>
                           <router-link
                             :to="{
-                              name: 'add_student_result',
+                              name: 'student_details',
                               params:{ id:student.id },
                             }"
                             class="btn btn-lg btn-success"

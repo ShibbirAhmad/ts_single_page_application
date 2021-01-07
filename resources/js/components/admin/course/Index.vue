@@ -51,7 +51,7 @@
                       <td>{{ course.category_name.name }}</td>
                       <td>{{ course.duration }}</td>
                       <td>{{ course.start_date }}</td>
-                      <td> 0 </td>
+                      <td>{{ course.registered_student.length }} </td>
                       <td>
                         <img
                           :src="course.image ? base_url + course.image : base_url+'images/no_image.jpg'"

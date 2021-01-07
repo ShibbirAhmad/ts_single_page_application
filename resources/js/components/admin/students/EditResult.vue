@@ -4,7 +4,7 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1>
-          <router-link :to="{ name: 'students' }" class="btn btn-primary"
+          <router-link :to="{ name: 'student_details' }" class="btn btn-primary"
             ><i class="fa fa-arrow-left"></i
           ></router-link>
         </h1>
@@ -12,7 +12,7 @@
           <li>
             <a href="#"><i class="fa fa-dashboard"></i>student Result</a>
           </li>
-          <li class="active">Add</li>
+          <li class="active">Edit</li>
         </ol>
       </section>
       <section class="content">
@@ -20,7 +20,7 @@
           <div class="col-lg-8 col-lg-offset-2">
             <div class="box box-primary">
               <div class="box-header text-center with-border">
-                <h3 class="box-title">Add Result</h3>
+                <h3 class="box-title">Edit Result</h3>
               </div>
               <div class="box-body">
 
@@ -28,10 +28,10 @@
                   <img :src="image?base_url+image : base_url+'images/no_image.jpg' " class="profile_image">
                     <h3> Student ID : {{ student_id }} </h3>
                     <h3> Student Name: {{ name }} </h3>
-                    <h3 v-show="total_score"> Brand Score: <b> {{ total_score }} </b>  </h3>
+                    <h3 v-show="total_score" > Brand Score: <b> {{ total_score }} </b>  </h3>
                 </div>
                 <form
-                  @submit.prevent="addResult"
+                  @submit.prevent="updateResult"
                   @keydown="form.onKeydown($event)"
                   enctype="multipart/form-data"
                 >
@@ -121,7 +121,7 @@
                       class="btn btn-primary"
                     >
                       <i class="fa fa-spin fa-spinner" v-if="form.busy"></i
-                      >PUBLISH
+                      >UPDATE
                     </button>
                   </div>
                 </form>
@@ -140,6 +140,7 @@ import Vue from "vue";
 import { Form, HasError, AlertError } from "vform";
 import datePicker from "vue-bootstrap-datetimepicker";
 
+
 Vue.component(HasError.name, HasError);
 
 export default {
@@ -149,8 +150,7 @@ export default {
   data() {
     return {
       form: new Form({
-        student_id:this.$route.params.id,
-        course_id:"",
+        result_id:"",
         reading: "",
         speaking: "",
         writing: "",
@@ -173,7 +173,12 @@ export default {
         .then(resp => {
           console.log(resp);
           if (resp.data.status == "OK") {
-            this.form.course_id = resp.data.student.course_id;
+            this.form.result_id = resp.data.student.student_result.id;
+            this.form.speaking = resp.data.student.student_result.speaking;
+            this.form.reading = resp.data.student.student_result.reading;
+            this.form.writing = resp.data.student.student_result.writing;
+            this.form.listening = resp.data.student.student_result.listening;
+            this.form.authority_comment = resp.data.student.student_result.authority_comment;
             this.name = resp.data.student.name;
             this.image = resp.data.student.image;
             this.student_id = resp.data.student.student_id;
@@ -181,9 +186,9 @@ export default {
         });
     },
 
-    addResult() {
+    updateResult() {
       this.form
-        .post("/api/publish/student/result", {
+        .post("/api/edit/student/result/"+this.form.result_id, {
           transformRequest: [
             function (data, headers) {
               return objectToFormData(data);

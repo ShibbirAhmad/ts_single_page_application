@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Result;
 
 class StudentController extends Controller
 {
@@ -25,13 +26,50 @@ class StudentController extends Controller
 
      public function students_to_add_result($id){
 
-             $student=Student::findOrFail($id);   
+             $student=Student::where('id',$id)->with(['course_name','student_result'])->first();   
              return  response()->json([ 
                  "status" => "OK",
                  "student" => $student,
              ]);
 
       }
+
+
+
+
+
+     public function edit_student_result(Request $request,$id){
+
+            $validatedData = $request->validate([
+                'speaking'  => 'required',
+                'reading'  => 'required',
+                'writing'  => 'required',
+                'listening'  => 'required',
+                'brand_score'  => 'required',
+                'authority_comment'  => 'required', 
+            ]);
+
+            $result=Result::findOrFail($id);
+            $result->speaking=$request->speaking ;
+            $result->reading=$request->reading ;
+            $result->writing=$request->writing ;
+            $result->listening=$request->listening ;
+            $result->brand_score=$request->brand_score ;
+            $result->authority_comment=$request->authority_comment ;
+
+            if ($result->save()) {
+                return response()->json([
+                    "status" => "OK",
+                    "message" => "Result updated successfully"
+                ]);
+            }else{
+                return response()->json([
+                    "status" => "FAIL",
+                    "message" => "Update Failed"
+                ]);
+            }
+
+     }  
 
 
 

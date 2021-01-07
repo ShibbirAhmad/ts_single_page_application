@@ -81,6 +81,7 @@ import ApplicantCarrier   from "./components/admin/carrier/JobApplied.vue" ;
 
 import Students           from "./components/admin/students/Students.vue";
 import AddStudentResult   from "./components/admin/students/AddResult.vue";
+import EditStudentResult  from "./components/admin/students/EditResult.vue";
 import StudentDetails     from "./components/admin/students/Details.vue";
 
 
@@ -536,6 +537,15 @@ const routes = [
     component: AddStudentResult,
     name : 'add_student_result',
     meta: {  title:'student result add',
+             authAdmin: true 
+           } 
+    },
+
+    { 
+    path: '/backend/student/result/edit/:id', 
+    component: EditStudentResult,
+    name : 'edit_student_result',
+    meta: {  title:'student result edit',
              authAdmin: true 
            } 
     },

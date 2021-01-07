@@ -15,13 +15,13 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
-            $table->integer('course_id');
-            $table->integer('speaking');
-            $table->integer('writing');
-            $table->integer('listening');
-            $table->integer('reading');
-            $table->integer('brand_score');
+            $table->float('student_id');
+            $table->float('course_id');
+            $table->float('speaking');
+            $table->float('writing');
+            $table->float('listening');
+            $table->float('reading');
+            $table->float('brand_score');
             $table->text('authority_comment');
             $table->timestamps();
         });

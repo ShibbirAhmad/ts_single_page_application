@@ -130,6 +130,8 @@ Route::get('api/check/session/admin','Admin\AdminController@sessionCheck');
       Route::get('api/our/student/list','StudentController@get_registered_students');
       Route::get('api/get/student/for/result/add/{id}','StudentController@students_to_add_result');
       Route::get('api/search/students/{data}','StudentController@get_searched_students');
+      Route::post('api/publish/student/result','StudentController@publish_student_result');
+      Route::post('api/edit/student/result/{id}','StudentController@edit_student_result');
 
 
 

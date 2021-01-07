@@ -16,7 +16,7 @@ class CourseController extends Controller
 
      public function get_course_list(){
 
-           $courses = Course::orderBy('id','desc')->with('category_name')->paginate(10);
+           $courses = Course::orderBy('id','desc')->with('category_name','registered_students')->paginate(10);
            return response()->json([
                   "status" => "OK",
                   "courses" => $courses ,
