@@ -543,7 +543,7 @@ const routes = [
 
     
     { 
-    path: '/backend/student/result/add/:id', 
+    path: '/backend/student/add/result/:id', 
     component: AddStudentResult,
     name : 'add_student_result',
     meta: {  title:'student result add',

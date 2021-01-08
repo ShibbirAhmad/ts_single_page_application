@@ -50,6 +50,48 @@ class StudentController extends Controller
 
 
 
+    
+     public function publish_student_result(Request $request){
+
+            $validatedData = $request->validate([
+                'student_id'  => 'required|unique:results',
+                'studentID'  => 'required|unique:results',
+                'course_id'  => 'required',
+                'speaking'  => 'required',
+                'reading'  => 'required',
+                'writing'  => 'required',
+                'listening'  => 'required',
+                'brand_score'  => 'required',
+                'authority_comment'  => 'required', 
+            ]);
+
+            $result= new Result();
+            $result->student_id=$request->student_id ;
+            $result->studentID=$request->studentID ;
+            $result->course_id=$request->course_id ;
+            $result->speaking=$request->speaking ;
+            $result->reading=$request->reading ;
+            $result->writing=$request->writing ;
+            $result->listening=$request->listening ;
+            $result->brand_score=$request->brand_score ;
+            $result->authority_comment=$request->authority_comment ;
+
+            if ($result->save()) {
+                return response()->json([
+                    "status" => "OK",
+                    "message" => "Result updated successfully"
+                ]);
+            }else{
+                return response()->json([
+                    "status" => "FAIL",
+                    "message" => "Update Failed"
+                ]);
+            }
+
+     }    
+
+
+
      public function edit_student_result(Request $request,$id){
 
             $validatedData = $request->validate([

@@ -15,7 +15,8 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->float('student_id');
+            $table->int('student_id');
+            $table->varchar('studentID');
             $table->float('course_id');
             $table->float('speaking');
             $table->float('writing');

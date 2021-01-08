@@ -26,7 +26,7 @@
 
                 <div class="form-group text-center">
                   <img :src="image?base_url+image : base_url+'images/no_image.jpg' " class="profile_image">
-                    <h3> Student ID : {{ student_id }} </h3>
+                    <h3> Student ID : {{ form.studentID }} </h3>
                     <h3> Student Name: {{ name }} </h3>
                     <h3 v-show="total_score"> Brand Score: <b> {{ total_score }} </b>  </h3>
                 </div>
@@ -150,6 +150,7 @@ export default {
     return {
       form: new Form({
         student_id:this.$route.params.id,
+        studentID:"",
         course_id:"",
         reading: "",
         speaking: "",
@@ -159,7 +160,6 @@ export default {
         authority_comment: "",
       }),
       name:"",
-      student_id:"",
       image:"",
       base_url: this.$store.state.storage,
       total_score:"",
@@ -173,10 +173,10 @@ export default {
         .then(resp => {
           console.log(resp);
           if (resp.data.status == "OK") {
+            this.form.studentID = resp.data.student.student_id;
             this.form.course_id = resp.data.student.course_id;
             this.name = resp.data.student.name;
             this.image = resp.data.student.image;
-            this.student_id = resp.data.student.student_id;
           }
         });
     },

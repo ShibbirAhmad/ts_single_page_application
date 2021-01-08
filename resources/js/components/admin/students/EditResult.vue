@@ -178,6 +178,7 @@ export default {
             this.form.reading = resp.data.student.student_result.reading;
             this.form.writing = resp.data.student.student_result.writing;
             this.form.listening = resp.data.student.student_result.listening;
+            this.form.brand_score = resp.data.student.student_result.brand_score;
             this.form.authority_comment = resp.data.student.student_result.authority_comment;
             this.name = resp.data.student.name;
             this.image = resp.data.student.image;

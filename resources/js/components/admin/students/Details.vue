@@ -29,8 +29,8 @@
                     <h4> Course Name : {{ course_name }} </h4>
                     <h4> Student ID : {{ student_id }} </h4>
                     <h4> Student Name: {{ name }} </h4>
-                    <h4 v-if="brand_score" > Result Brand Score: <b> {{ brand_score }}  </b>   ||  <router-link class="btn btn-success" :to="{name:'edit_student_result',params:{id:s_id}}"> <i class="fa fa-edit"> Edit Result</i> </router-link> </h4>
-                    <h4 v-else > <router-link :to="{name:'add_student_result',params:{id:s_id}}"></router-link>   </h4>
+                    <h4 v-if="brand_score" > Result Brand Score: <b> {{ brand_score }}  </b>   ||  <router-link class="btn btn-success" :to="{name:'edit_student_result',params:{id:this.$route.params.id}}"> <i class="fa fa-edit"> Edit Result</i> </router-link> </h4>
+                    <h4 v-else > <router-link :to="{name:'add_student_result',params:{id:this.$route.params.id}}"> Add Result</router-link>   </h4>
                 </div>
                 <div class="row">
                     <div class="col-md-4"> <p>  Father Name: {{ father_name }} </p> </div>
@@ -79,7 +79,6 @@ export default {
       mother_name:"",
       mother_name:"",
       student_id:"",
-      s_id:"",
       image:"",
       fee:"",
       discount:"",
@@ -102,7 +101,6 @@ export default {
         .then(resp => {
           console.log(resp);
           if (resp.data.status == "OK") {
-            this.s_id = resp.data.student.id;
             this.course_name = resp.data.student.course_name.name;
             this.brand_score = resp.data.student.student_result.brand_score;
             this.name = resp.data.student.name;
