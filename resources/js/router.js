@@ -48,6 +48,7 @@ import AddPermission     from "./components/admin/permission/Add.vue" ;
 import EditPermission    from "./components/admin/permission/Edit.vue" ;
 
 import courseList        from "./components/admin/course/Index.vue" ;
+import CourseRegisteredStudetns  from "./components/admin/course/RegisteredStudetns.vue" ;
 import AddCourse         from "./components/admin/course/Add.vue" ;
 import EditCourse        from "./components/admin/course/Edit.vue" ;
 
@@ -530,6 +531,15 @@ const routes = [
            } 
     },
 
+
+    { 
+    path: '/backend/student/registed/in/course/:id', 
+    component: CourseRegisteredStudetns,
+    name : 'course_registered_students',
+    meta: {  title:'course registered studetns ',
+             authAdmin: true 
+           } 
+    },
 
     
     { 

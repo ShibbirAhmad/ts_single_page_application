@@ -24,6 +24,18 @@ class StudentController extends Controller
 
 
 
+      public function registered_students_of_course($id){
+
+             $students=Student::where('course_id',$id)->orderBy('id','desc')->with('course_name')->paginate(20);   
+
+             return  response()->json([ 
+                 "status" => "OK",
+                 "students" => $students,
+             ]);
+      }
+
+
+      
      public function students_to_add_result($id){
 
              $student=Student::where('id',$id)->with(['course_name','student_result'])->first();   

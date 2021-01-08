@@ -132,6 +132,7 @@ Route::get('api/check/session/admin','Admin\AdminController@sessionCheck');
       Route::get('api/search/students/{data}','StudentController@get_searched_students');
       Route::post('api/publish/student/result','StudentController@publish_student_result');
       Route::post('api/edit/student/result/{id}','StudentController@edit_student_result');
+      Route::get('api/get/registered/student/of/course/{id}','StudentController@registered_students_of_course');
 
 
 

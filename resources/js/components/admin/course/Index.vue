@@ -51,7 +51,13 @@
                       <td>{{ course.category_name.name }}</td>
                       <td>{{ course.duration }}</td>
                       <td>{{ course.start_date }}</td>
-                      <td>{{ course.registered_student.length }} </td>
+                      <td>  
+                        
+                      <router-link style="width:70px;" class="btn btn-info" 
+                      :to="{name:'course_registered_students', params:{id:course.id}}">
+                       {{ course.registered_students.length }} </router-link>
+                        
+                     </td>
                       <td>
                         <img
                           :src="course.image ? base_url + course.image : base_url+'images/no_image.jpg'"

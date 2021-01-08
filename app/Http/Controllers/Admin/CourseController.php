@@ -110,8 +110,8 @@ class CourseController extends Controller
               $course->category_id=$request->category_id;
               $course->duration=$request->duration;
               $course->start_date=$request->start_date;
-              $course->offer=$request->fee;
-              $course->fee=$request->offer;
+              $course->offer=$request->offer;
+              $course->fee=$request->fee;
               $course->description=$request->description;
               $course->status=1;
 
