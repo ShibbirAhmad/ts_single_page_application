@@ -98,7 +98,7 @@ const store = new Vuex.Store({
    upcoming_course(context){
         axios.get('/api/get/upcoming/course/public')
         .then(resp =>{
-          console.log(resp);
+        //  console.log(resp);
         if (resp.data.status == "OK") {
           context.commit('upcoming_course',resp.data.upcoming_course);
         }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Student ;
+use App\Models\Result ;
 
 
 class StudentController extends Controller
@@ -28,6 +29,7 @@ class StudentController extends Controller
             'father_name' => 'required',
             'mother_name' => 'required',
             'address' => 'required',
+            'our_payment_number' => 'required|digits:11',
             'payment_type' => 'required',
             'phone' => 'required|unique:students|digits:11',
             'transiction_id' => 'required',
@@ -47,6 +49,7 @@ class StudentController extends Controller
         $student->dob = $request->dob;
         $student->email = $request->email;
         $student->phone = $request->phone;
+        $student->our_payment_number = $request->our_payment_number;
         $student->payment_type = $request->payment_type;
         $student->bkash_number = $request->bkash_number;
         $student->nogod_number = $request->nogod_number;
@@ -68,6 +71,26 @@ class StudentController extends Controller
         }
 
     }
+
+
+
+    public function check_student_result($student_id){
+
+           $result = Result::where('studentID',$student_id)->with(['student_info','course_name'])->first();
+          if ($result) {
+
+            return response()->json([
+                'status' => 'OK',
+                'result' => $result,
+            ]);
+          }else{
+            return response()->json([
+                'status' => 'FAIL',
+                'message' => 'Sorry! no result found in this id.',
+            ]); 
+          }
+     }
+
 
 
 

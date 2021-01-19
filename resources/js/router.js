@@ -8,26 +8,28 @@ import LandingPage        from "./components/frontend/Index.vue";
 import BlogPostDetail     from "./components/frontend/BlogPostDetails.vue";
 import CourseDetail       from "./components/frontend/CourseDetails.vue";
 import UserSearch         from "./components/frontend/Search.vue";
-import StudentRegister    from "./components/frontend/Register.vue";
-import StudentLogin       from "./components/frontend/Login.vue";
+import StudentRegister    from "./components/frontend/student/Register.vue";
+import CheckStudentResult from "./components/frontend/student/Result.vue";
+import CategoryWiseCourse from "./components/frontend/CategoryWiseCourse.vue";
 
 
-
-
-
+import UserRegister       from "./components/frontend/user/Signup.vue";
+import UserLogin          from "./components/frontend/user/Login.vue";
+import UserPasswordReset  from "./components/frontend/user/UserPasswordReset";
+import CodeVerified       from "./components/frontend/user/CodeVerified";
+import NewPasswordUser    from "./components/frontend/user/NewPassword";
 
 
 import AdminLogin        from "./components/admin/Login" ;
-
 import AdminDashboard    from "./components/admin/Dashboard" ;
 
 import Category          from "./components/admin/category/Index" ;
 import AddCategory       from "./components/admin/category/Add" ;
 import EditCategory      from "./components/admin/category/Edit" ;
 
-import Banner          from "./components/admin/banner/Index" ;
-import AddBanner       from "./components/admin/banner/Add" ;
-import EditBanner      from "./components/admin/banner/Edit" ;
+import Banner            from "./components/admin/banner/Index" ;
+import AddBanner         from "./components/admin/banner/Add" ;
+import EditBanner        from "./components/admin/banner/Edit" ;
 
 
 import AdminList         from "./components/admin/admin/Index" ;
@@ -120,6 +122,15 @@ const routes = [
          }
     }, 
 
+    { 
+    path: '/course/of/category/:id', 
+    component: CategoryWiseCourse,
+    name: 'category_wise_course',
+    meta:{
+       title: 'Course of category ',
+         }
+    }, 
+
    { 
     path: '/search/details', 
     component: UserSearch,
@@ -141,11 +152,57 @@ const routes = [
 
 
    { 
-    path: '/student/login', 
-    component: StudentLogin,
-    name: 'student_login',
+    path: '/user/login', 
+    component: UserLogin,
+    name: 'user_login',
     meta:{
-       title: 'Student Login ',
+       title: 'user Login ',
+         }
+    },
+
+    { 
+    path: '/user/register', 
+    component: UserRegister,
+    name: 'user_register',
+    meta:{
+       title: 'user register ',
+         }
+    },
+
+     {
+        path: '/public/user/password/reset',
+        component: UserPasswordReset,
+        name: 'UserPasswordReset',
+        meta: {
+            title: 'Password Reset'
+        }
+    },
+    {
+        path: '/public/user/code/verify/:email',
+        component: CodeVerified,
+        name: 'CodeVerified',
+        meta: {
+            title: 'Password Reset'
+        }
+    },
+
+    {
+        path: '/public/user/reset/password/:email',
+        component: NewPasswordUser,
+        name: 'NewPasswordUser',
+        meta: {
+            title: 'set new password'
+        }
+    },
+    
+
+    
+   { 
+    path: '/student/result/check', 
+    component: CheckStudentResult,
+    name: 'check_student_result',
+    meta:{
+       title: 'Student Result Check ',
          }
     },
 

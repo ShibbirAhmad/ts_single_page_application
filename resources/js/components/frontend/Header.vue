@@ -1,13 +1,15 @@
 <template>
   <div>
 
+
    	<!-- header section -->
 	<header class="header-section">
 		<div class="container">
 			<!-- logo -->
 			<router-link :to="{ name : 'home' }" class="site-logo"><img :src="base_url+'images/logo.png'" alt="LOGO"></router-link>
 			<div class="nav-switch">
-				<i class="fa fa-bars"></i>
+				<i  type="button" data-toggle="collapse" data-target="#navbarContent"
+         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"  class="fa fa-bars"></i>
 			</div>
 			<div class="header-info">
 				<div class="hf-item">
@@ -25,18 +27,19 @@
     <nav class="nav-section">
       <div class="container">
         <div class="nav-right">
-         <a href="" ><i class="fa fa-search"></i> </a> 
-          <router-link :to="{name:'student_register'}"><i class="fa fa-user"></i></router-link>
+         <a href="" ><i @click="showAndHide" class="fa fa-search"></i> </a> 
+          <router-link :to="{name:'user_login'}"><i class="fa fa-user"></i></router-link>
         </div>
-        <ul class="main-menu">
+        <ul id="navbarContent"  class="main-menu">
           <li
             v-for="(category, index) in categories"
             :key="index"
            
           >
-          <a href=""> {{ category.name }} </a>
+          <router-link :to="{name : 'category_wise_course',params:{id:category.id }}"> {{ category.name }} </router-link>
           </li>
-          <li> <a href="">Result</a> </li>
+          <li> <router-link :to="{ name:'check_student_result' }">Result</router-link> </li>
+          <li> <router-link :to="{ name:'student_register' }">Register</router-link> </li>
         </ul>
       </div>
     </nav>
@@ -59,7 +62,9 @@ export default {
   },
 
   methods: {
-    
+     showAndHide(){
+       
+     }
   },
 
   computed: {

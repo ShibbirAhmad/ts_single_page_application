@@ -23,7 +23,7 @@
 								<img class="pa-thumb set-bg" :src="blogDetails.admin_name.image? base_url+blogDetails.admin_name.image : base_url+'images/no_image.jpg'" alt="">
 							</div>
 							<div class="pa-content">
-								<h4 v-if="blogDetails.admin_name">Written by <bold> {{ blogDetails.admin_name.name }} </bold> </h4>
+								<h4 v-if="blogDetails.admin_name">Written by <b> {{ blogDetails.admin_name.name }} </b> </h4>
 								<p>Mauris lectus justo, tempor ac auctor at, congue id erat. Pellentesque et massa odio. Fusce vel fermentum tortor, nec gravida ligula. Vivamus at malesuada tortor, in posuere ex. Phasellus pretium turpis non ipsum vestibulum, a finibus quam rhoncus.</p>
 							</div>
 						</div>
@@ -92,12 +92,12 @@
 				<!-- sidebar -->
 				<div class="col-sm-8 col-md-5 col-lg-4 col-xl-3 offset-xl-1 offset-0 pl-xl-0 sidebar">
 					<!-- widget -->
-					<div class="widget">
+					<!-- <div class="widget">
 						<form class="search-widget">
 							<input type="text" placeholder="Search...">
 							<button><i class="ti-search"></i></button>
 						</form>
-					</div>
+					</div> -->
 					<!-- widget -->
 					<div class="widget">
 						<h5 class="widget-title">Related Article </h5>
@@ -105,11 +105,16 @@
 							
 							<!-- recent post -->
 							<div v-for="(related_blog,index) in related_blog_posts " :key="index" class="rp-item">
-								<div class="rp-thumb set-bg" >
-										<img :src="related_blog.image?base_url+related_blog.image : base_url+'images/no_image.jpg'"  >
-								</div>
+							<div class="rp-thumb set-bg" >
+								<router-link :to="{name:'blog_post_details', params:{slug:related_blog.slug} }" >
+									<img :src="related_blog.image?base_url+related_blog.image : base_url+'images/no_image.jpg'" >
+								</router-link>
+						 	 </div>
 								<div class="rp-content">
-									<h6> {{ related_blog.title }} </h6>
+									<h6> <router-link :to="{name:'blog_post_details', params:{slug:related_blog.slug} }" >
+										 {{ related_blog.title }}
+										 </router-link>
+									 </h6>
 									<p><i class="fa fa-clock-o"></i> {{ timeFormater(related_blog.created_at) }} </p>
 								</div>
 							</div>

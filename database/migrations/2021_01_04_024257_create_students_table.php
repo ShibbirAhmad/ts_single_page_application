@@ -26,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone');
             $table->text('address');
             $table->text('image');
+            $table->string('our_payment_number');
             $table->string('payment_type');
             $table->string('bkash_number')->nullable();
             $table->string('nogod_number')->nullable();

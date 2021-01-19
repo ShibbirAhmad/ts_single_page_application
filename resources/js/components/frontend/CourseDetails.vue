@@ -28,12 +28,12 @@
 				<!-- sidebar -->
 				<div class="col-sm-8 col-md-5 col-lg-4 col-xl-3 offset-xl-1 offset-0 pl-xl-0 sidebar">
 					<!-- widget -->
-					<div class="widget">
+					<!-- <div class="widget">
 						<form class="search-widget">
 							<input type="text" placeholder="Search...">
 							<button><i class="ti-search"></i></button>
 						</form>
-					</div>
+					</div> -->
 					<!-- widget -->
 					<div class="widget">
 						<h5 class="widget-title"> OTHER COURSES </h5>
@@ -42,10 +42,12 @@
 							<!-- recent post -->
 							<div v-for="(other_course,index) in other_course " :key="index" class="rp-item">
 								<div class="rp-thumb set-bg" >
-										<img :src="other_course.image?base_url+other_course.image : base_url+'images/no_image.jpg'"  >
+									    <router-link :to="{name:'course_details',params:{slug:other_course.slug}}" >
+											<img :src="other_course.image?base_url+other_course.image : base_url+'images/no_image.jpg'"  >
+											</router-link>
 								</div>
 								<div class="rp-content">
-									<h6> {{ other_course.name }} </h6>
+									<h6>    <router-link :to="{name:'course_details',params:{slug:other_course.slug}}" > {{ other_course.name }} </router-link> </h6>
 									<p>Start On <i class="fa fa-clock-o"></i> {{ timeFormater(other_course.created_at) }} </p>
 								</div>
 							</div>

@@ -97,9 +97,9 @@ class HomeController extends Controller
 
         }
       
-        public function get_upcoming_course(){
+    public function get_upcoming_course(){
 
-             $upcoming_course = Course::where('status',1)->latest()->take(1)->with('category_name')->first();
+             $upcoming_course = Course::where('status',1)->latest()->with('category_name')->first();
     
             return response()->json([
                         "status" => "OK",
@@ -107,7 +107,22 @@ class HomeController extends Controller
                         
                     ]);
 
-            }
+        }
+
+
+        
+    public function get_categorywise_course($id){
+
+         $category=Category::where('id',$id)->with('courses.category_name')->first();
+         return response()->json([
+             'status' => "OK",
+             'category'=> $category,
+         ]);
+
+    } 
+        
+
+
 
 
 }

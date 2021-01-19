@@ -3,8 +3,8 @@
     <!-- Footer section -->
     <footer class="footer-section text-white">
       <div class="footer-top">
-        <div style="margin: 10px" class="row">
-          <div class="contact col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div style="margin: 10px;" class="row">
+          <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <ul>
               <li class="address">
                 <p class="short_desc">
@@ -21,33 +21,33 @@
             </ul>
           </div>
 
-          <div class="column col-lg-2 col-md-2 col-sm-6 col-xs-6">
+          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
             <div class="quick_link">
               <h5>QUICK LINKS</h5>
               <div class="line"></div>
               <ul class="link_line">
                 <li>
-                  <router-link :to="{ name: 'student_login' }"
+                  <router-link :to="{ name: 'home' }"
                     >CARRIER</router-link
                   >
                 </li>
                 <li>
-                  <router-link :to="{ name: 'student_login' }"
+                  <router-link :to="{ name: 'home' }"
                     >HOME</router-link
                   >
                 </li>
                 <li>
-                  <router-link :to="{ name: 'student_login' }"
+                  <router-link :to="{ name: 'home' }"
                     >BLOG</router-link
                   >
                 </li>
                 <li>
-                  <router-link :to="{ name: 'student_login' }"
+                  <router-link :to="{ name: 'home' }"
                     >ABOUT US</router-link
                   >
                 </li>
                 <li>
-                  <router-link :to="{ name: 'student_login' }"
+                  <router-link :to="{ name: 'home' }"
                     >CONTACT US</router-link
                   >
                 </li>
@@ -55,39 +55,39 @@
             </div>
           </div>
 
-          <div class="column col-lg-2 col-md-2 col-sm-6 col-xs-6">
+          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
             <h5>INFORMATION</h5>
             <div class="line"></div>
             <ul class="link_line">
               <li>
-                <router-link :to="{ name: 'student_login' }"
+                <router-link :to="{ name: 'home' }"
                   >HOW TO ADMIT</router-link
                 >
               </li>
               <li>
-                <router-link :to="{ name: 'student_login' }"
+                <router-link :to="{ name: 'home' }"
                   >Return Policy</router-link
                 >
               </li>
               <li>
-                <router-link :to="{ name: 'student_login' }"
+                <router-link :to="{ name: 'home' }"
                   >RESULT
                 </router-link>
               </li>
               <li>
-                <router-link :to="{ name: 'student_login' }">
+                <router-link :to="{ name: 'home' }">
                   TEAM
                 </router-link>
               </li>
               <li>
-                <router-link :to="{ name: 'student_login' }"
+                <router-link :to="{ name: 'home' }"
                   >ABOUT TALIBS
                 </router-link>
               </li>
             </ul>
           </div>
 
-          <div class="column col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="news_letter">
               <h5>NEWSLETTER</h5>
               <div class="line"></div>
@@ -193,112 +193,3 @@ export default {
 };
 </script>
 
-
-<style>
-.site-btn{
-    float: right;
-	margin-right: 68px;
-}
-
-.subscribe_input {
-    width: 80%;
-    height: 49px;
-    position: absolute;
-    border-radius: 50px;
-}
-
-
-#footer .column a {
-  text-decoration: none;
-  display: block;
-  padding: 3px 3px;
-  line-height: 24px;
-  font-size: 12px;
-}
-.line {
-  width: 105px;
-  height: 2px;
-  background: #ff4d03;
-  margin-bottom: 12px;
-}
-
-.social-icon {
-  margin: 10px;
-}
-
-.social-wrape {
-  float: left;
-  width: 40px;
-  height: 40px;
-  border: 2px dashed;
-  border-radius: 50%;
-  margin-left: 10px;
-}
-
-.social-wrape:hover {
-  background: #ff4d03;
-}
-
-.f-icon {
-  margin: 10px;
-  cursor: pointer;
-  color: white;
-}
-
-#footer #powered {
-  border-bottom-color: #ff4d03;
-  margin-top: -20px;
-}
-
-#footer .powered_text p {
-  line-height: 18px;
-  margin: -19px;
-}
-
-.short_desc {
-  font-size: 18px;
-  line-height: 35px;
-}
-
-@media screen and (max-width: 400px) {
-  .quick_link {
-    margin-left: 25px;
-  }
-
-  .news_letter {
-    margin-left: 25px;
-  }
-
-  .subscribe_input {
-    width: 300px;
-    margin-left: 18px;
-  }
-
-  .email_icon_container {
-    margin-right: 40px;
-  }
-
-  .short_desc {
-    font-size: 14px;
-    line-height: 24px;
-    padding-right: 10px;
-  }
-
-  .end_footer {
-    background: #ff4d03;
-    height: 60px !important;
-    width: 100%;
-    margin-top: -10px;
-  }
-
-  .f_info_left {
-    font-size: 14px;
-  }
-
-  .f_info_right {
-    margin-top: 30px !important;
-    margin-left: -40px !important;
-    padding-right: 58px !important;
-  }
-}
-</style>
