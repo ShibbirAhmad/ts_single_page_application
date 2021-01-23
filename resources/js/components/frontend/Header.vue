@@ -26,9 +26,15 @@
 
     <nav class="nav-section">
       <div class="container">
+        
         <div class="nav-right">
-         <a href="" ><i @click="showAndHide" class="fa fa-search"></i> </a> 
           <router-link :to="{name:'user_login'}"><i class="fa fa-user"></i></router-link>
+           <a v-if="Object.keys(user).length" class="btn btn-secondary dropdown-toggle" type="button" id="dropDownBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           {{ user.name }}
+          </a>
+            <div class="dropdown-menu" aria-labelledby="dropDownBtn">
+            <button class="dropdown-item btn "  @click="Logout">Logout</button>
+           </div>
         </div>
         <ul id="navbarContent"  class="main-menu">
           <li
@@ -40,6 +46,7 @@
           </li>
           <li> <router-link :to="{ name:'check_student_result' }">Result</router-link> </li>
           <li> <router-link :to="{ name:'student_register' }">Register</router-link> </li>
+
         </ul>
       </div>
     </nav>
@@ -50,7 +57,7 @@
 <script>
 export default {
   mounted() {
-
+    this.$store.dispatch("user");
     this.$store.dispatch("categories");
     
   },
@@ -64,12 +71,26 @@ export default {
   methods: {
      showAndHide(){
        
+     },
+     Logout(){
+        this.$Progress.start()
+        axios.get("/api/logout/the/user")
+        .then((resp) => {
+            this.user = null;
+            localStorage.removeItem("user_token");
+            this.$Progress.finish();
+            location.reload(); 
+        })
      }
+
   },
 
   computed: {
     categories() {
     return  this.$store.getters.categories;
+    },
+    user() {
+      return this.$store.getters.user;
     },
   },
 };

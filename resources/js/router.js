@@ -152,13 +152,14 @@ const routes = [
 
 
    { 
-    path: '/user/login', 
+    path: '/public/user/login', 
     component: UserLogin,
     name: 'user_login',
     meta:{
-       title: 'user Login ',
+       title: 'user login ',
          }
     },
+    
 
     { 
     path: '/user/register', 

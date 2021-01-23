@@ -24,31 +24,38 @@
 							</div>
 							<div class="pa-content">
 								<h4 v-if="blogDetails.admin_name">Written by <b> {{ blogDetails.admin_name.name }} </b> </h4>
-								<p>Mauris lectus justo, tempor ac auctor at, congue id erat. Pellentesque et massa odio. Fusce vel fermentum tortor, nec gravida ligula. Vivamus at malesuada tortor, in posuere ex. Phasellus pretium turpis non ipsum vestibulum, a finibus quam rhoncus.</p>
+								<p>Mauris lectus justo, tempor ac auctor at, congue id erat.
+									 Pellentesque et massa odio. Fusce vel fermentum tortor, nec gravida ligula.
+									  Vivamus at malesuada tortor, in posuere ex. Phasellus pretium turpis non ipsum vestibulum, 
+									  a finibus quam rhoncus.</p>
 							</div>
 						</div>
 						<div class="comment-warp">
-							<h4 class="comment-title">3 Comments</h4>
+							<h4 class="comment-title">{{ blogDetails.comments.length }} Comments</h4>
 							<ul class="comment-list">
-								<li>
+								<li  v-for="(comment,index) in blogDetails.comments" :key="index">
 									<div class="comment">
-										<div class="comment-avator set-bg" data-setbg="img/blog/comment/1.jpg"></div>
+										<div class="set-bg" >
+											<img class="comment-avator" :src="base_url+comment.user.image" >
+										</div>
 										<div class="comment-content">
-											<span class="c-date">24 Mar 2018</span>
-											<h5>Kelly Richardson</h5>
-											<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.</p>
+											<span class="c-date">{{ timeFormater(comment.created_at) }}</span>
+											<h5>{{ comment.user.name }}</h5>
+											<p>{{ comment.comment }}</p>
 											<a href="" class="c-btn">Like</a>
 											<a href="" class="c-btn">Reply</a>
 										</div>
 									</div>
-									<ul class="replay-comment-list">
-										<li>
+									<ul v-if="comment.replies.length" class="replay-comment-list">
+										<li v-for="(comment_reply,index) in comment.replies " :key="index">
 											<div class="comment">
-												<div class="comment-avator set-bg" data-setbg="img/blog/comment/2.jpg"></div>
+												<div class="set-bg" >
+													<img :src="base_url+comment_reply.user.image" >
+												</div>
 												<div class="comment-content">
-													<span class="c-date">24 Mar 2018</span>
-													<h5>Gordon Browns</h5>
-													<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore.</p>
+													<span class="c-date">{{ timeFormater(comment_reply.created_at) }}</span>
+													<h5>{{ comment_reply.user.name }}</h5>
+													<p>{{ comment_reply.reply }}</p>
 													<a href="" class="c-btn">Like</a>
 													<a href="" class="c-btn">Reply</a>
 												</div>
@@ -56,35 +63,20 @@
 										</li>
 									</ul>
 								</li>
-								<li>
-									<div class="comment">
-										<div class="comment-avator set-bg" data-setbg="img/blog/comment/3.jpg"></div>
-										<div class="comment-content">
-											<span class="c-date">24 Mar 2018</span>
-											<h5>Scott Langton</h5>
-											<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.</p>
-											<a href="" class="c-btn">Like</a>
-											<a href="" class="c-btn">Reply</a>
-										</div>
-									</div>
-								</li>
+								
 							</ul>
-							<div class="comment-form-warp">
+							<div class="comment-form-warp text-center">
 								<h4 class="comment-title">Leave Your Comment</h4>
-								<form class="comment-form">
+								<form v-if="Object.keys(user).length"  @submit.prevent="userComment" class="comment-form">
 									<div class="row">
-										<div class="col-sm-6">
-											<input type="text" placeholder="Your Name">
-										</div>
-										<div class="col-sm-6">
-											<input type="email" placeholder="Your Email">
-										</div>
 										<div class="col-sm-12">
-											<textarea placeholder="Your Message"></textarea>
-											<button class="site-btn">SEND COMMENT</button>
+											<textarea v-model="form.comment" :class="{'has-invalid':form.errors.has('comment')}" class="form-control" required  name="comment"  rows="1"></textarea>
+											<has-error :form="form"  field="comment" ></has-error>
+											<button type="submit" class="site-btn">COMMENT</button>
 										</div>
 									</div>
 								</form>
+								<router-link v-else class="btn btn-info" :to="{name:'user_login'}">signin to comment</router-link>
 							</div>
 						</div>
 					</div>
@@ -135,21 +127,27 @@
 
 <script>
 
-
+import Vue from "vue";
+import { Form, HasError } from "vform";
+Vue.component(HasError.name, HasError);
 export default {
  
   created() {
 
     this.getPostDetails();
-   
+    this.$store.dispatch('user');
   },
 
   data() {
     return {
-      related_blog_posts: "",
-      blogDetails: "",
-	  base_url: this.$store.state.storage,
-	  
+       related_blog_posts: "",
+       blogDetails: "",
+	   base_url: this.$store.state.storage,
+	   form:new Form({
+	   post_id:"",	  
+       comment:"",
+	  }),
+	  reply:"",
     };
   },
 
@@ -175,16 +173,42 @@ export default {
         console.log(resp);
         if (resp.data.status == "OK") {
           this.blogDetails = resp.data.blog_post;
+          this.form.post_id = resp.data.blog_post.id;
 		  this.related_blog_posts = resp.data.related_blog_posts; 
         }
       });
-    },
-
-  
+	},
+	
+    userComment(){
+		 this.form.post('/api/user/comment',{
+			 transformRequest:[
+				 function(data,headers){
+                  return objectToFormData(data) ;
+				 }
+			 ]
+		 })
+		 .then((resp)=>{
+			 if (resp.data.status=="OK") {
+				 this.form.comment="";
+				 this.$toasted.show(resp.data.message,{
+					 type:'success',
+					 position:'top-center',
+					 duration:4000,
+				 })
+				 this.getPostDetails();
+			 }
+		 }) 
+	}
 	
   },
 
- 
+ computed:{
+
+	 user(){
+
+		 return this.$store.getters.user;
+	 }
+ }
 
 
 };

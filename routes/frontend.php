@@ -8,8 +8,9 @@
 
    //user authentication route
     Route::post('api/user/register','AuthController@register');
-    Route::post('api/user/login','AuthController@login');
-    Route::get('api/user/check','AuthController@chekAuthUser');
+    Route::post('api/login/to/user','AuthController@login');
+    Route::get('api/logout/the/user','AuthController@logout_user');
+    Route::get('api/check/user/session','AuthController@chekAuthUser');
     Route::post('api/user/password/reset/send/code','AuthController@resetCode');
     Route::post('api/user/password/verify/code/{email}','AuthController@codeVerify');
     Route::post('api/user/password/reset/{email}','AuthController@ResetPassword');
@@ -38,3 +39,12 @@
 
  });
 
+
+
+ Route::group(['namespace'=>'Frontend', 'middleware' => 'auth'],function(){
+      
+      Route::post('api/user/comment','HomeController@user_comment');
+      Route::post('api/user/like/to/comment/{comment_id}','HomeController@user_like_on_comment');
+      Route::post('api/user/reply/{comment_id}','HomeController@user_reply');
+      Route::post('api/user/like/to/reply/{reply_id}','HomeController@user_like_on_reply');
+ });

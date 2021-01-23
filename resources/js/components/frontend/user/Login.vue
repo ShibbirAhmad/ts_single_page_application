@@ -18,7 +18,7 @@
               <h4 style="padding-top: 10px; text-align: center">
                 User Login
               </h4>
-              <form @submit.prevent="Register">
+              <form @submit.prevent="LoginUser">
       
                 <div class="form-group">
                   <label for="email">Email</label>
@@ -104,9 +104,9 @@ export default {
   },
   methods: {
 
-    Register() {
+    LoginUser() {
       this.form
-        .post("/api/user/login", {
+        .post("/api/login/to/user", {
           transformRequest: [
             function (data, headers) {
               return objectToFormData(data);
@@ -123,6 +123,12 @@ export default {
             });
             this.$router.push({ name: "welcome" });
             location.reload();
+          }else{
+             this.$toasted.show(resp.data.message, {
+              type: "error",
+              position: "top-center",
+              duration: 3000,
+            });
           }
         })
        

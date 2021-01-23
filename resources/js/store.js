@@ -13,7 +13,8 @@ const store = new Vuex.Store({
 
     //store admin
     admin: {},
-
+    //store user 
+    user:{},
     //asign categories as a empty value
     categories : '',
 
@@ -37,19 +38,14 @@ const store = new Vuex.Store({
        //session check
       //every time this session check, for admin session running or expired
       admin(context) {
-          axios
-              .get("/api/check/session/admin")
-
+          axios.get("/api/check/session/admin")
               //if session status ruuning
               .then((resp) => {
                   if (resp.data.status == "RUNNING") {
                       context.commit('admin', resp.data.admin)
-
                   }
-
                   //if session is expired, admin redirect ot login again
                   if (resp.data.status == "EXPIRED") {
-
                       localStorage.removeItem("admin_token");
                       router.push({ name: "adminLogin" });
                       return;
@@ -60,7 +56,21 @@ const store = new Vuex.Store({
                   router.push({ name: "adminLogin" });
               });
       },
-
+      
+      user(context){
+        axios.get('/api/check/user/session')
+        .then((resp)=>{
+              if (resp.data.status=="AUTHORIZED") {
+            context.commit('user',resp.data.user);
+          }
+       
+          if (resp.data.status=="UNAUTHORIZED") {
+            localStorage.removeItem("user_token");
+           // router.push({name:"user_login" });
+            return ;
+          }
+        })
+      },
 
       categories(context){
             axios.get("/api/get/categories/to/display/frontend")
@@ -128,6 +138,9 @@ const store = new Vuex.Store({
        admin(state, payload){
          return state.admin= payload ;
        },
+      user(state, payload){
+         return state.user= payload ;
+       },
 
        categories(state,payload){
          return state.categories = payload ;
@@ -155,6 +168,10 @@ const store = new Vuex.Store({
 
        admin(state){
          return state.admin ;
+       },
+
+       user(state){
+         return state.user ;
        },
 
        categories(state){

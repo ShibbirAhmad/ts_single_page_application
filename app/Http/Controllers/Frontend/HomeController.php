@@ -10,6 +10,11 @@ use App\Models\Category;
 use App\Models\Slider;
 use App\Models\Banner;
 use App\Models\CategorySlider;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Models\Comment;
+use App\Models\CommentReply;
+
 
 class HomeController extends Controller
 {
@@ -21,6 +26,7 @@ class HomeController extends Controller
                     "status" => "OK",
                     "courses" => $courses,
                 ]);
+
           }
 
 
@@ -69,7 +75,7 @@ class HomeController extends Controller
         }
 
 
-
+        // to display category slider
         public function get_category_sliders(){
 
                 $category_sliders = CategorySlider::where('page_position',1)->where('status',1)->get();
@@ -78,7 +84,7 @@ class HomeController extends Controller
                     "category_sliders" => $category_sliders,
                 ]);
 
-           }
+        }
 
 
 
@@ -122,6 +128,27 @@ class HomeController extends Controller
     } 
         
 
+
+    public function user_comment(Request $request){
+
+          $validateData=$request->validate([
+              'comment' => 'required',
+              'post_id' => 'required',
+          ]);
+
+         $comment=new Comment();
+         $comment->blog_post_id=$request->post_id;
+         $comment->user_id=Auth::user()->id;
+         $comment->comment=$request->comment;
+         if ($comment->save()) {
+             return response()->json([
+                 'status'=>'OK',
+                 'message'=>'comment added successfully'
+             ]);
+         }
+
+
+    }
 
 
 

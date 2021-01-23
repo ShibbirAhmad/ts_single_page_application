@@ -43,7 +43,7 @@ class AuthController extends Controller
                 'status'=>'OK',
                 'message'=>'Thank you for join with us. Enjoy your learning',
                 'user'=>Auth::user(),
-                'token'=>$user->password
+                'user_token'=>$user->password
             ]);
 
         }
@@ -64,7 +64,13 @@ class AuthController extends Controller
               'status'=>'OK',
               'message'=>'Login successfully',
               'user'=>Auth::user(),
+              'user_token'=>Auth::user()->password ,
           ]);
+        }else{
+            return response()->json([
+                'status' => "FAIL",
+                 'message'=>'invalid login information'
+            ]);
         }
         
     }
@@ -89,14 +95,13 @@ class AuthController extends Controller
 
 
 
-    public function logout(){
-
+    public function logout_user(){
 
         if(Auth::logout()){
             
             return response()->json([
-                'status'=>'SUCCESS',
-                'message'=>'Log out was successfully'
+                'status'=>'OK',
+                'message'=>'Logout successfully'
             ]);
 
         }

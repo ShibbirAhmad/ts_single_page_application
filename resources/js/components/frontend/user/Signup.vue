@@ -156,12 +156,6 @@ export default {
         })  
     },
 
-     beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      console.log();
-      vm.pre_route = from.name;
-     });
-    },
      uploadImage(event) {
       const file = event.target.files[0];
       this.form.image = file;

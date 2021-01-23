@@ -1562,7 +1562,6 @@ ol {
 .post-item .post-thumb-full {
 	margin-bottom: 20px;
 	width: 100%;
-	box-shadow:1px 1px 5px 1px #2e2e2e;
 }
 
 .post-item .post-content h3 {
@@ -2347,6 +2346,7 @@ ol {
 	.comment-warp .comment .comment-avator {
 		float: none;
 		margin-bottom: 15px;
+		border-radius: 50%;
 	}
 	.post-item .post-author .pa-content,
 	.comment-warp .comment .comment-content {
