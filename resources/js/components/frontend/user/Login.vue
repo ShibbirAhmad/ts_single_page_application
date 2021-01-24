@@ -121,7 +121,7 @@ export default {
               position: "top-center",
               duration: 5000,
             });
-            this.$router.push({ name: "welcome" });
+            this.$router.push({ name: "home" });
             location.reload();
           }else{
              this.$toasted.show(resp.data.message, {

@@ -37,10 +37,10 @@
            </div>
         </div>
         <ul id="navbarContent"  class="main-menu">
+          <li> <router-link :to="{ name:'home' }">Home</router-link>  </li>
           <li
             v-for="(category, index) in categories"
             :key="index"
-           
           >
           <router-link :to="{name : 'category_wise_course',params:{id:category.id }}"> {{ category.name }} </router-link>
           </li>

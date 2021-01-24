@@ -43,8 +43,8 @@
 
  Route::group(['namespace'=>'Frontend', 'middleware' => 'auth'],function(){
       
-      Route::post('api/user/comment','HomeController@user_comment');
-      Route::post('api/user/like/to/comment/{comment_id}','HomeController@user_like_on_comment');
-      Route::post('api/user/reply/{comment_id}','HomeController@user_reply');
-      Route::post('api/user/like/to/reply/{reply_id}','HomeController@user_like_on_reply');
+      Route::post('api/user/comment','BlogPostController@user_comment');
+      Route::get('api/user/like/to/comment/{comment_id}','BlogPostController@user_like_dislike_on_comment');
+      Route::post('api/user/reply/{comment_id}','BlogPostController@user_reply');
+      Route::post('api/user/like/to/reply/{reply_id}','BlogPostController@user_like_dislike_on_reply');
  });

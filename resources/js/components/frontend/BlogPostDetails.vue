@@ -31,7 +31,7 @@
 							</div>
 						</div>
 						<div class="comment-warp">
-							<h4 class="comment-title">{{ blogDetails.comments.length }} Comments</h4>
+							<h4 class="comment-title">{{ blogDetails.comments.length }} <i class="fa fa-comments"></i></h4>
 							<ul class="comment-list">
 								<li  v-for="(comment,index) in blogDetails.comments" :key="index">
 									<div class="comment">
@@ -41,9 +41,18 @@
 										<div class="comment-content">
 											<span class="c-date">{{ timeFormater(comment.created_at) }}</span>
 											<h5>{{ comment.user.name }}</h5>
-											<p>{{ comment.comment }}</p>
-											<a href="" class="c-btn">Like</a>
-											<a href="" class="c-btn">Reply</a>
+											<p>{{ comment.comment }} <span v-if="comment.likes.length" class="like_display"><i class="fa fa-thumbs-up like_count"></i> {{ comment.likes.length }}</span> </p>
+											<a @click="addCommentLike(comment.id,index)"  v-bind:style="styleObject" class="c-btn"><i class="fa fa-thumbs-up  fa-lg "></i></a>
+											<a @click="addUserReply" class="c-btn">Reply</a>
+											<br/>
+										     <div  v-if="reply_input" class="comment-reply">
+												<form @submit.prevent="">
+													<div class="form-group text-center">
+														<textarea name="comment_reply" v-model="comment_reply"  rows="1" class="form-control"></textarea>
+												    	<button type="submit" class="btn ">Add</button>
+													</div>
+												</form>
+											 </div>
 										</div>
 									</div>
 									<ul v-if="comment.replies.length" class="replay-comment-list">
@@ -57,7 +66,7 @@
 													<h5>{{ comment_reply.user.name }}</h5>
 													<p>{{ comment_reply.reply }}</p>
 													<a href="" class="c-btn">Like</a>
-													<a href="" class="c-btn">Reply</a>
+													<a  class="c-btn">Reply</a>
 												</div>
 											</div>
 										</li>
@@ -147,7 +156,13 @@ export default {
 	   post_id:"",	  
        comment:"",
 	  }),
-	  reply:"",
+	  reply_input:false,
+	  comment_reply:"",
+	  styleObject: {  
+		background: '',
+		color:''
+	  }
+	  
     };
   },
 
@@ -198,9 +213,37 @@ export default {
 				 this.getPostDetails();
 			 }
 		 }) 
+	},
+	
+	addCommentLike($comment_id,index){
+	 
+	   axios.get('/api/user/like/to/comment/'+$comment_id)
+	   .then((resp)=>{
+		   console.log(resp);
+		   if (resp.data.status=="LIKE") {
+			 this.styleObject.background='#f6783a';
+			 this.styleObject.color='#fff';
+			 this.getPostDetails() ;
+		   }
+		   if(resp.data.status=="DISLIKE"){
+			 this.styleObject.background='';
+			 this.styleObject.color='';  
+			 this.getPostDetails();
+		   }
+	    })
+
+	  
+	},
+  	addUserReply(){
+	   this.reply_input=true;	  
+	  axios.get('/api/user/reply/on/comment/'+$comment_id)
+	   .then((resp)=>{
+		   console.log(resp);
+	
+	   })
 	}
 	
-  },
+	},
 
  computed:{
 
@@ -217,6 +260,14 @@ export default {
 
 <style scoped>
 
+.like_display{
+	background:#eee;
+	color:#000;
+	padding:1px 15px;
+	border-radius: 5px;
 
-
+}
+.like_count{
+	color:#f6783a;
+}
 </style>

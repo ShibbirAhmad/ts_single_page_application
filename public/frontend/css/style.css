@@ -1695,6 +1695,7 @@ ol {
 	border-color: #f6783a;
 	background: #f6783a;
 	color: #fff;
+	cursor: pointer;
 }
 
 .comment-form-warp {
@@ -2492,7 +2493,8 @@ ol {
 	    width:90px;
 	    text-align: center;
 	    border: none;
-	    cursor: pointer;
+		cursor: pointer;
+		margin-right: 30%;
 	}
 
    
