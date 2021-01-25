@@ -101,11 +101,14 @@
                     <input
                       type="email"
                       required
-                      placeholder="Email address"
-                      v-model="email"
+                      placeholder="example@gmail.com"
+                      v-model="form.email"
+                      name="email"
                       class="form-control subscribe_input"
+                      :class="{'is-invalid':form.errors.has('email')}"
                     />
-					<button type="submit" class="btn site-btn">subscirbe</button>
+				           	<button type="submit" class="btn site-btn">subscirbe</button>
+                        <has-error :form="form" field="email"> </has-error>
                   </div>
                   
                 </div>
@@ -154,40 +157,49 @@
 
 
 <script>
+import Vue from "vue";
+import { Form, HasError } from "vform";
+Vue.component(HasError.name, HasError);
 export default {
   mounted() {
     //  console.log("footer mounetd");
   },
   data() {
     return {
-      email: "",
+      form:new Form({
+        email:"",
+      }),
       base_url: this.$store.state.storage,
     };
   },
   methods: {
     subscribe() {
-      axios
-        .post("/_public/add/subscriber", {
-          email: this.email,
-        })
+     
+      this.form.post('/api/subscriber/add',{
+			 transformRequest:[
+				 function(data,headers){
+               return objectToFormData(data) ;
+				 }
+			 ]
+		    })
         .then((resp) => {
           if (resp.data.success == "OK") {
             this.email = "";
             Swal.fire({
-              type: "success",
+              icon: "success",
               text: resp.data.message,
-              duration: 2000,
+          
             });
           } else {
             this.email = "";
             Swal.fire({
-              type: "warning",
+              icon: "error",
               text: resp.data.message,
-              duration: 2000,
+        
             });
           }
         })
-        .catch();
+        
     },
   },
 };

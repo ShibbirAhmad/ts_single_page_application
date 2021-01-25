@@ -25,8 +25,8 @@
    Route::get('api/get/upcoming/course/public','HomeController@get_upcoming_course');
    Route::get('api/get/categorywise/course/{id}','HomeController@get_categorywise_course');
  
-   //user logon and register
-   Route::post('api/user/store','UserController@user_store');
+   //subscription
+   Route::post('api/subscriber/add','HomeController@add_subscription');
 
 
   //get post details 
@@ -45,6 +45,6 @@
       
       Route::post('api/user/comment','BlogPostController@user_comment');
       Route::get('api/user/like/to/comment/{comment_id}','BlogPostController@user_like_dislike_on_comment');
-      Route::post('api/user/reply/{comment_id}','BlogPostController@user_reply');
-      Route::post('api/user/like/to/reply/{reply_id}','BlogPostController@user_like_dislike_on_reply');
+      Route::post('api/user/reply/on/comment','BlogPostController@user_reply_on_comment');
+      Route::get('api/user/like/to/reply/{reply_id}','BlogPostController@user_like_dislike_on_reply');
  });

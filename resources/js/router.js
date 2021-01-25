@@ -4,110 +4,23 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-import LandingPage        from "./components/frontend/Index.vue";
-import BlogPostDetail     from "./components/frontend/BlogPostDetails.vue";
-import CourseDetail       from "./components/frontend/CourseDetails.vue";
-import UserSearch         from "./components/frontend/Search.vue";
-import StudentRegister    from "./components/frontend/student/Register.vue";
-import CheckStudentResult from "./components/frontend/student/Result.vue";
-import CategoryWiseCourse from "./components/frontend/CategoryWiseCourse.vue";
-
-
-import UserRegister       from "./components/frontend/user/Signup.vue";
-import UserLogin          from "./components/frontend/user/Login.vue";
-import UserPasswordReset  from "./components/frontend/user/UserPasswordReset";
-import CodeVerified       from "./components/frontend/user/CodeVerified";
-import NewPasswordUser    from "./components/frontend/user/NewPassword";
-
-
-import AdminLogin        from "./components/admin/Login" ;
-import AdminDashboard    from "./components/admin/Dashboard" ;
-
-import Category          from "./components/admin/category/Index" ;
-import AddCategory       from "./components/admin/category/Add" ;
-import EditCategory      from "./components/admin/category/Edit" ;
-
-import Banner            from "./components/admin/banner/Index" ;
-import AddBanner         from "./components/admin/banner/Add" ;
-import EditBanner        from "./components/admin/banner/Edit" ;
-
-
-import AdminList         from "./components/admin/admin/Index" ;
-import addAdmin          from "./components/admin/admin/Add" ;
-import editAdmin         from "./components/admin/admin/Edit" ;
-import editAdminPassword from "./components/admin/admin/Password" ;
-import adminProfile      from "./components/admin/admin/Profile" ;
-
-import roleList          from "./components/admin/role/Index.vue" ;
-import AddRole           from "./components/admin/role/Add.vue" ;
-import EditRole          from "./components/admin/role/Edit.vue" ;
-import ManageRole        from "./components/admin/role/ManageRole.vue" ;
-import AssignRole        from "./components/admin/admin/AssignRole.vue" ;
-import AssignPermission  from "./components/admin/admin/AssignPermissions.vue" ;
-
-import permissionList    from "./components/admin/permission/Index.vue" ;
-import AddPermission     from "./components/admin/permission/Add.vue" ;
-import EditPermission    from "./components/admin/permission/Edit.vue" ;
-
-import courseList        from "./components/admin/course/Index.vue" ;
-import CourseRegisteredStudetns  from "./components/admin/course/RegisteredStudetns.vue" ;
-import AddCourse         from "./components/admin/course/Add.vue" ;
-import EditCourse        from "./components/admin/course/Edit.vue" ;
-
-
-import postList          from "./components/admin/blog_post/Index.vue" ;
-import AddPost           from "./components/admin/blog_post/Add.vue" ;
-import EditPost          from "./components/admin/blog_post/Edit.vue" ;
-
-
-import TeamMember        from "./components/admin/team/Index.vue" ;
-import AddTeamMember     from "./components/admin/team/Add.vue" ;
-import EditTeamMember    from "./components/admin/team/Edit.vue" ;
-
-
-import sliderList        from "./components/admin/slider/Index.vue" ;
-import AddSlider         from "./components/admin/slider/Add.vue" ;
-import EditSlider        from "./components/admin/slider/Edit.vue" ;
-
-
-import CategorySliderList from "./components/admin/category_slider/Index.vue" ;
-import AddCategorySlider  from "./components/admin/category_slider/Add.vue" ;
-import EditCategorySlider from "./components/admin/category_slider/Edit.vue" ;
-
-
-import carrierList        from "./components/admin/carrier/Index.vue" ;
-import AddCarrier         from "./components/admin/carrier/Add.vue" ;
-import EditCarrier        from "./components/admin/carrier/Edit.vue" ;
-import ShowCarrier        from "./components/admin/carrier/Show.vue" ;
-import ApplicantCarrier   from "./components/admin/carrier/JobApplied.vue" ;
-
-
-import Students           from "./components/admin/students/Students.vue";
-import AddStudentResult   from "./components/admin/students/AddResult.vue";
-import EditStudentResult  from "./components/admin/students/EditResult.vue";
-import StudentDetails     from "./components/admin/students/Details.vue";
-
-
-
-
-
-const Foo = { template: '<div>public </div>' }
-
-
 const routes = [
-
   
-    { path: '/', 
-      component: LandingPage,
+    { 
+      
+      path: '/', 
       name: 'home',
+      component: () => import('./components/frontend/Index.vue'),
       meta:{
         title: 'welecome ',
           }
     },
 
-   { path: '/blog/details/:slug', 
-    component: BlogPostDetail,
+   { 
+    
+    path: '/blog/details/:slug', 
     name: 'blog_post_details',
+    component: () => import('./components/frontend/BlogPostDetails.vue'),
     meta:{
        title: 'Blog Details ',
          }
@@ -115,8 +28,8 @@ const routes = [
 
    { 
     path: '/course/details/:slug', 
-    component: CourseDetail,
     name: 'course_details',
+    component: () => import('./components/frontend/CourseDetails.vue'),
     meta:{
        title: 'Course Details ',
          }
@@ -124,8 +37,8 @@ const routes = [
 
     { 
     path: '/course/of/category/:id', 
-    component: CategoryWiseCourse,
     name: 'category_wise_course',
+    component: () => import('./components/frontend/CategoryWiseCourse.vue'),
     meta:{
        title: 'Course of category ',
          }
@@ -133,8 +46,8 @@ const routes = [
 
    { 
     path: '/search/details', 
-    component: UserSearch,
     name: 'search',
+    component: () => import('./components/frontend/Search.vue'),
     meta:{
        title: 'Search Details ',
          }
@@ -143,8 +56,8 @@ const routes = [
 
    { 
     path: '/student/register', 
-    component: StudentRegister,
     name: 'student_register',
+    component: () => import('./components/frontend/student/Register.vue'),
     meta:{
        title: 'Student Registration ',
          }
@@ -153,8 +66,8 @@ const routes = [
 
    { 
     path: '/public/user/login', 
-    component: UserLogin,
     name: 'user_login',
+    component: () => import('./components/frontend/user/Login.vue'),
     meta:{
        title: 'user login ',
          }
@@ -163,8 +76,8 @@ const routes = [
 
     { 
     path: '/user/register', 
-    component: UserRegister,
     name: 'user_register',
+    component: () => import('./components/frontend/user/Signup.vue'),
     meta:{
        title: 'user register ',
          }
@@ -172,16 +85,16 @@ const routes = [
 
      {
         path: '/public/user/password/reset',
-        component: UserPasswordReset,
         name: 'UserPasswordReset',
+        component: () => import('./components/frontend/user/UserPasswordReset.vue'),
         meta: {
             title: 'Password Reset'
         }
     },
     {
         path: '/public/user/code/verify/:email',
-        component: CodeVerified,
         name: 'CodeVerified',
+        component: () => import('./components/frontend/user/CodeVerified.vue'),
         meta: {
             title: 'Password Reset'
         }
@@ -189,19 +102,18 @@ const routes = [
 
     {
         path: '/public/user/reset/password/:email',
-        component: NewPasswordUser,
         name: 'NewPasswordUser',
+        component: () => import('./components/frontend/user/NewPassword.vue'),
         meta: {
             title: 'set new password'
         }
     },
     
-
     
    { 
     path: '/student/result/check', 
-    component: CheckStudentResult,
     name: 'check_student_result',
+    component: () => import('./components/frontend/student/Result.vue'),
     meta:{
        title: 'Student Result Check ',
          }
@@ -209,31 +121,31 @@ const routes = [
 
     { 
     path: '/backend/category/admin/login', 
-    component: AdminLogin,
     name : 'admin_login',
+    component: () => import('./components/admin/Login.vue'),
     meta: {  title:'Admin Login' } 
     },
 
     { 
     path: '/backend/admin/add', 
-    component: addAdmin,
     name : 'add_admin',
+    component: () => import('./components/admin/admin/Add.vue'),
     meta: {  title:'Admin Register',
              authAdmin: true  } 
     },
     
     { 
     path: '/backend/admin/edit/:id', 
-    component: editAdmin,
     name : 'edit_admin',
+    component: () => import('./components/admin/admin/Edit.vue'),
     meta: {  title:'Admin Edit',
              authAdmin: true  } 
     },
 
      { 
     path: '/backend/admin/password/edit/', 
-    component: editAdminPassword,
     name : 'edit_admin_password',
+    component: () => import('./components/admin/admin/Password.vue'),
     meta: {  title:'Admin Password Edit',
              authAdmin: true  } 
     },
@@ -241,32 +153,32 @@ const routes = [
     
      { 
     path: '/backend/admin/profile', 
-    component: adminProfile,
     name : 'admin_profile',
+    component: () => import('./components/admin/admin/Profile.vue'),
     meta: {  title:'Admin Profile Info',
              authAdmin: true  } 
     },
 
     { 
     path: '/backend/admin/list', 
-    component: AdminList,
     name : 'admin_list',
+    component: () => import('./components/admin/admin/Index.vue'),
     meta: {  title:'Admin List',
              authAdmin: true  } 
     },
 
   { 
     path: '/backend/admin/dashboard', 
-    component: AdminDashboard,
     name : 'admin_dashboard',
+    component: () => import('./components/admin/Dashboard.vue'),
     meta: {  title:'Admin Dashboard',
              authAdmin: true  } 
    },
 
     { 
     path: '/backend/category/list', 
-    component: Category,
     name : 'category',
+    component: () => import('./components/admin/category/Index.vue'),
     meta: {  title:'category list' ,
              authAdmin: true 
           } 
@@ -274,25 +186,25 @@ const routes = [
     
     { 
     path: '/backend/category/add', 
-    component: AddCategory,
     name : 'add_category',
+    component : () => import('./components/admin/category/Add.vue'),
     meta: {  title:'category add',
              authAdmin: true ,
           } 
     },
     { 
     path: '/backend/category/edit/:id', 
-    component: EditCategory,
     name : 'edit_category',
+    component: () => import('./components/admin/category/Edit.vue'),
     meta: {  title:'category edit',
              authAdmin: true 
            } 
     },
 
-      { 
+    { 
     path: '/backend/banner/list', 
-    component: Banner,
     name : 'banner',
+    component: () => import('./components/admin/banner/Index.vue'),
     meta: {  title:'banner list' ,
              authAdmin: true 
           } 
@@ -300,16 +212,17 @@ const routes = [
     
     { 
     path: '/backend/banner/add', 
-    component: AddBanner,
     name : 'add_banner',
+    component: () => import('./components/admin/banner/Add.vue'),
     meta: {  title:'banner add',
              authAdmin: true ,
           } 
     },
+
     { 
     path: '/backend/banner/edit/:id', 
-    component: EditBanner,
     name : 'edit_banner',
+    component: () => import('./components/admin/banner/Edit.vue'),
     meta: {  title:'banner edit',
              authAdmin: true 
            } 
@@ -318,8 +231,8 @@ const routes = [
 
     { 
     path: '/backend/role/list', 
-    component: roleList,
     name : 'role_list',
+    component: () => import('./components/admin/role/Index.vue'),
     meta: {  title:'role',
              authAdmin: true 
            } 
@@ -327,8 +240,8 @@ const routes = [
 
    { 
     path: '/backend/role/add', 
-    component: AddRole,
     name : 'add_role',
+    component: () => import('./components/admin/role/Add.vue'),
     meta: {  title:'role add',
              authAdmin: true 
            } 
@@ -336,8 +249,8 @@ const routes = [
 
     { 
     path: '/backend/role/edit/:id', 
-    component: EditRole,
     name : 'edit_role',
+    component: () => import('./components/admin/role/Edit.vue'),
     meta: {  title:'role edit',
              authAdmin: true 
            } 
@@ -345,8 +258,8 @@ const routes = [
 
     { 
     path: '/backend/manage/role/edit/:id', 
-    component: ManageRole,
     name : 'manage_role',
+    component: () => import('./components/admin/role/ManageRole.vue'),
     meta: {  title:'role management',
              authAdmin: true 
            } 
@@ -354,8 +267,8 @@ const routes = [
 
      { 
     path: '/backend/model/assign/role/:id', 
-    component: AssignRole,
     name : 'assign_role',
+    component: () => import('./components/admin/admin/AssignRole.vue'),
     meta: {  title:'admin giving role ',
              authAdmin: true 
            } 
@@ -363,8 +276,8 @@ const routes = [
 
    { 
     path: '/backend/role/assign/permissions/:id', 
-    component: AssignPermission,
     name : 'assign_permission',
+    component: () => import('./components/admin/admin/AssignPermissions.vue'),
     meta: {  title:'role giving permission ',
              authAdmin: true 
            } 
@@ -373,8 +286,8 @@ const routes = [
 
    { 
     path: '/backend/permission/list', 
-    component: permissionList,
     name : 'permission_list',
+    component: () => import('./components/admin/permission/Index.vue'),
     meta: {  title:'permission',
              authAdmin: true 
            } 
@@ -382,8 +295,8 @@ const routes = [
 
    { 
     path: '/backend/permission/add', 
-    component: AddPermission,
     name : 'add_permission',
+    component: () => import('./components/admin/permission/Add.vue'),
     meta: {  title:'permission add',
              authAdmin: true 
            } 
@@ -391,8 +304,8 @@ const routes = [
 
     { 
     path: '/backend/permission/edit/:id', 
-    component: EditPermission,
     name : 'edit_permission',
+    component: () => import('./components/admin/permission/Edit.vue'),
     meta: {  title:'permission edit',
              authAdmin: true 
            } 
@@ -402,8 +315,8 @@ const routes = [
     
    { 
     path: '/backend/course/list', 
-    component: courseList,
     name : 'course_list',
+    component: () => import('./components/admin/course/Index.vue'),
     meta: {  title:'courses',
              authAdmin: true 
            } 
@@ -411,8 +324,8 @@ const routes = [
 
    { 
     path: '/backend/course/add', 
-    component: AddCourse,
     name : 'add_course',
+    component: () => import('./components/admin/course/Add.vue'),
     meta: {  title:'course add',
              authAdmin: true 
            } 
@@ -420,19 +333,17 @@ const routes = [
 
     { 
     path: '/backend/course/edit/:id', 
-    component: EditCourse,
     name : 'edit_course',
+    component: () => import('./components/admin/course/Edit.vue'),
     meta: {  title:'course edit',
              authAdmin: true 
            } 
     },
-
-
       
    { 
     path: '/backend/blog/post/list', 
-    component: postList,
     name : 'post_list',
+    component: () => import('./components/admin/blog_post/Index.vue'),
     meta: {  title:'posts',
              authAdmin: true 
            } 
@@ -440,8 +351,8 @@ const routes = [
 
    { 
     path: '/backend/blog/post/add', 
-    component: AddPost,
     name : 'add_post',
+    component: () => import('./components/admin/blog_post/Add.vue'),
     meta: {  title:'post add',
              authAdmin: true 
            } 
@@ -449,8 +360,8 @@ const routes = [
 
     { 
     path: '/backend/blog/post/edit/:id', 
-    component: EditPost,
     name : 'edit_post',
+    component: () => import('./components/admin/blog_post/Edit.vue'),
     meta: {  title:'post edit',
              authAdmin: true 
            } 
@@ -459,8 +370,8 @@ const routes = [
       
    { 
     path: '/backend/employee/list', 
-    component: TeamMember,
     name : 'team_member',
+    component: () => import('./components/admin/team/Index.vue'),
     meta: {  title:'teams',
              authAdmin: true 
            } 
@@ -468,8 +379,8 @@ const routes = [
 
    { 
     path: '/backend/employee/add', 
-    component: AddTeamMember,
     name : 'add_team_member',
+    component: () => import('./components/admin/team/Add.vue'),
     meta: {  title:'team member add',
              authAdmin: true 
            } 
@@ -477,8 +388,8 @@ const routes = [
 
     { 
     path: '/backend/employee/edit/:id', 
-    component: EditTeamMember,
     name : 'edit_team_member',
+    component: () => import('./components/admin/team/Edit.vue'),
     meta: {  title:'team member edit',
              authAdmin: true 
            } 
@@ -488,8 +399,8 @@ const routes = [
 
       { 
     path: '/backend/slider/list', 
-    component: sliderList,
     name : 'slider_list',
+    component: () => import('./components/admin/slider/Index.vue'),
     meta: {  title:'sliders',
              authAdmin: true 
            } 
@@ -497,8 +408,8 @@ const routes = [
 
    { 
     path: '/backend/slider/add', 
-    component: AddSlider,
     name : 'add_slider',
+    component: () => import('./components/admin/slider/Add.vue'),
     meta: {  title:'slider add',
              authAdmin: true 
            } 
@@ -506,20 +417,18 @@ const routes = [
 
     { 
     path: '/backend/slider/edit/:id', 
-    component: EditSlider,
     name : 'edit_slider',
+    component: () => import('./components/admin/slider/Edit.vue'),
     meta: {  title:'slider edit',
              authAdmin: true 
            } 
     },
 
-
-
-    
+  
       { 
     path: '/backend/for/category/slider/list', 
-    component: CategorySliderList,
     name : 'category_slider_list',
+    component: () => import('./components/admin/category_slider/Index.vue'),
     meta: {  title:'category sliders',
              authAdmin: true 
            } 
@@ -527,8 +436,8 @@ const routes = [
 
    { 
     path: '/backend/for/category/slider/add', 
-    component: AddCategorySlider,
     name : 'add_category_slider',
+    component: () => import('./components/admin/category_slider/Add.vue'),
     meta: {  title:'category slider add',
              authAdmin: true 
            } 
@@ -536,8 +445,8 @@ const routes = [
 
     { 
     path: '/backend/for/category/slider/edit/:id', 
-    component: EditCategorySlider,
     name : 'edit_category_slider',
+    component: () => import('./components/admin/category_slider/Edit.vue'),
     meta: {  title:'category slider edit',
              authAdmin: true 
            } 
@@ -546,8 +455,8 @@ const routes = [
 
      { 
     path: '/backend/carrier/post/list', 
-    component: carrierList,
     name : 'carrier_list',
+    component: () => import('./components/admin/carrier/Index.vue'),
     meta: {  title:'carriers',
              authAdmin: true 
            } 
@@ -555,8 +464,8 @@ const routes = [
 
    { 
     path: '/backend/carrier/post/add', 
-    component: AddCarrier,
     name : 'add_carrier',
+    component: () => import('./components/admin/carrier/Add.vue'),
     meta: {  title:'carrier add',
              authAdmin: true 
            } 
@@ -564,8 +473,8 @@ const routes = [
 
     { 
     path: '/backend/carrier/post/edit/:id', 
-    component: EditCarrier,
     name : 'edit_carrier',
+    component: () => import('./components/admin/carrier/Edit.vue'),
     meta: {  title:'carrier edit',
              authAdmin: true 
            } 
@@ -573,8 +482,8 @@ const routes = [
  
     { 
     path: '/backend/carrier/post/show/:id', 
-    component: ShowCarrier,
     name : 'show_carrier',
+    component: () => import('./components/admin/carrier/Show.vue'),
     meta: {  title:'carrier show',
              authAdmin: true 
            } 
@@ -582,8 +491,8 @@ const routes = [
 
     { 
     path: '/backend/applicant/carrier/post/:id', 
-    component: ApplicantCarrier,
     name : 'candidate_carrier',
+    component: () => import('./components/admin/carrier/JobApplied.vue'),
     meta: {  title:'carrier applicant show',
              authAdmin: true 
            } 
@@ -592,8 +501,8 @@ const routes = [
 
     { 
     path: '/backend/student/registed/in/course/:id', 
-    component: CourseRegisteredStudetns,
     name : 'course_registered_students',
+    component: () => import('./components/admin/course/RegisteredStudetns.vue'),
     meta: {  title:'course registered studetns ',
              authAdmin: true 
            } 
@@ -602,8 +511,8 @@ const routes = [
     
     { 
     path: '/backend/student/add/result/:id', 
-    component: AddStudentResult,
     name : 'add_student_result',
+    component: () => import('./components/admin/students/AddResult.vue'),
     meta: {  title:'student result add',
              authAdmin: true 
            } 
@@ -611,8 +520,8 @@ const routes = [
 
     { 
     path: '/backend/student/result/edit/:id', 
-    component: EditStudentResult,
     name : 'edit_student_result',
+    component: () => import('./components/admin/students/EditResult.vue'),
     meta: {  title:'student result edit',
              authAdmin: true 
            } 
@@ -620,8 +529,8 @@ const routes = [
 
     { 
     path: '/backend/student/details/:id', 
-    component: StudentDetails,
     name : 'student_details',
+    component: () => import('./components/admin/students/Details.vue'),
     meta: {  title:'student details',
              authAdmin: true 
            } 
@@ -629,8 +538,8 @@ const routes = [
 
     { 
     path: '/backend/students/list/display', 
-    component: Students,
     name : 'students',
+    component: () => import('./components/admin/students/Students.vue'),
     meta: {  title:'students list',
              authAdmin: true 
            } 

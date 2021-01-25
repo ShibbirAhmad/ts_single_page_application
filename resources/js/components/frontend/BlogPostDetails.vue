@@ -36,20 +36,19 @@
 								<li  v-for="(comment,index) in blogDetails.comments" :key="index">
 									<div class="comment">
 										<div class="set-bg" >
-											<img class="comment-avator" :src="base_url+comment.user.image" >
+											<img class="comment-avator" :src="comment.user.image?base_url+comment.user.image:base_url+'images/no_image.jpg'" >
 										</div>
 										<div class="comment-content">
 											<span class="c-date">{{ timeFormater(comment.created_at) }}</span>
 											<h5>{{ comment.user.name }}</h5>
 											<p>{{ comment.comment }} <span v-if="comment.likes.length" class="like_display"><i class="fa fa-thumbs-up like_count"></i> {{ comment.likes.length }}</span> </p>
-											<a @click="addCommentLike(comment.id,index)"  v-bind:style="styleObject" class="c-btn"><i class="fa fa-thumbs-up  fa-lg "></i></a>
-											<a @click="addUserReply" class="c-btn">Reply</a>
-											<br/>
-										     <div  v-if="reply_input" class="comment-reply">
-												<form @submit.prevent="">
+											<a  v-if="Object.keys(user).length" @click="addCommentLike(comment.id,index)"  class="c-btn"><i class="fa fa-thumbs-up  fa-lg "></i></a>
+											<a  v-if="Object.keys(user).length" @click="ReplyFormDiplayer" class="c-btn">Reply</a>
+											
+										     <div class="commentReply">
+												<form @submit.prevent="addUserReply(comment.id)">
 													<div class="form-group text-center">
-														<textarea name="comment_reply" v-model="comment_reply"  rows="1" class="form-control"></textarea>
-												    	<button type="submit" class="btn ">Add</button>
+														<input type="text"  v-model="comment_reply" required class="form-control">
 													</div>
 												</form>
 											 </div>
@@ -59,14 +58,14 @@
 										<li v-for="(comment_reply,index) in comment.replies " :key="index">
 											<div class="comment">
 												<div class="set-bg" >
-													<img :src="base_url+comment_reply.user.image" >
+													<img class="comment-avator" :src="comment_reply.user.image?base_url+comment_reply.user.image:base_url+'images/no_image.jpg'" >
 												</div>
 												<div class="comment-content">
 													<span class="c-date">{{ timeFormater(comment_reply.created_at) }}</span>
 													<h5>{{ comment_reply.user.name }}</h5>
 													<p>{{ comment_reply.reply }}</p>
-													<a href="" class="c-btn">Like</a>
-													<a  class="c-btn">Reply</a>
+													<a @click="addReplyLike(comment_reply.id,index)" class="c-btn">Like </a>  <span v-if="comment_reply.likes.length" class="like_display"><i class="fa fa-thumbs-up like_count"></i> {{ comment_reply.likes.length }}</span> 
+													
 												</div>
 											</div>
 										</li>
@@ -158,10 +157,6 @@ export default {
 	  }),
 	  reply_input:false,
 	  comment_reply:"",
-	  styleObject: {  
-		background: '',
-		color:''
-	  }
 	  
     };
   },
@@ -215,33 +210,59 @@ export default {
 		 }) 
 	},
 	
-	addCommentLike($comment_id,index){
+	addCommentLike($comment_id,index,evt){
 	 
 	   axios.get('/api/user/like/to/comment/'+$comment_id)
 	   .then((resp)=>{
 		   console.log(resp);
 		   if (resp.data.status=="LIKE") {
-			 this.styleObject.background='#f6783a';
-			 this.styleObject.color='#fff';
 			 this.getPostDetails() ;
+			 evt.target.classList.toggle('highlight');
 		   }
-		   if(resp.data.status=="DISLIKE"){
-			 this.styleObject.background='';
-			 this.styleObject.color='';  
+		   if(resp.data.status=="DISLIKE"){ 
 			 this.getPostDetails();
 		   }
 	    })
-
-	  
 	},
-  	addUserReply(){
-	   this.reply_input=true;	  
-	  axios.get('/api/user/reply/on/comment/'+$comment_id)
+	
+	addReplyLike($reply_id,index){
+	 
+	   axios.get('/api/user/like/to/reply/'+$reply_id)
 	   .then((resp)=>{
 		   console.log(resp);
-	
+		   if (resp.data.status=="LIKE") {
+			 this.getPostDetails() ;
+			  e.target.classList.toggle('highlight');
+		   }
+		   if(resp.data.status=="DISLIKE"){ 
+			 this.getPostDetails();
+		   }
+	    })
+	},
+
+  	addUserReply($comment_id){
+	  
+	  axios.post('/api/user/reply/on/comment',{
+		 
+			  comment_reply:this.comment_reply ,
+              comment_id:$comment_id ,
+		  
+	  })
+	   .then((resp)=>{
+		   console.log(resp);
+	       if (resp.data.status=="OK") {
+			   this.getPostDetails();
+		   }
 	   })
-	}
+	},
+
+	ReplyFormDiplayer(e){
+
+		let target_element=e.target.nextSibling;
+         target_element.nextElementSibling.classList.toggle('block')
+			
+		
+      }
 	
 	},
 
@@ -255,6 +276,8 @@ export default {
 
 
 };
+
+
 </script>
 
 
@@ -269,5 +292,17 @@ export default {
 }
 .like_count{
 	color:#f6783a;
+}
+
+.commentReply{
+	display: none;
+	margin-top:10px;
+	padding:5px;
+}
+.block{
+	display: block;
+}
+.highlight{
+  background:#f6783a ;
 }
 </style>

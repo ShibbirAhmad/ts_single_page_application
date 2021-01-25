@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Slider;
 use App\Models\Banner;
 use App\Models\CategorySlider;
+use App\Models\Subscriber;
 
 
 
@@ -123,9 +124,31 @@ class HomeController extends Controller
          ]);
 
     } 
-        
+       
+    
+    public function add_subscription(Request $request){
 
+           $validateData=  $request->validate([
+                'email'=>'required|email|unique:subscribers'
+            ]);
+            $subscriber=new Subscriber();
+            $subscriber->email=$request->email;
+            if ($subscriber->save()) {
+                    return response()->json([
+                    'status' => "OK",
+                    'message'=>"Thanks for subscribe us",
+                ]);
+            }else{
+                    return response()->json([
+                        'status' => "FAIL",
+                        'message'=>":) try again",
+                    ]);
+            }
+            
 
+        } 
+   
+     
 
 
 }

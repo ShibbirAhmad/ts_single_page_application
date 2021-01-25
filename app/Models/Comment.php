@@ -8,7 +8,7 @@ class Comment extends Model
 {
       public function replies(){
 
-          return $this->hasMany('App\Models\CommentReply','comment_id');
+          return $this->hasMany('App\Models\CommentReply','comment_id')->orderBy('id','desc');
       }
      
 

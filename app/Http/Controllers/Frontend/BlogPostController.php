@@ -19,7 +19,7 @@ class BlogPostController extends Controller
     
     public function get_blog_post_details($slug){
 
-          $blog_post = BlogPost::where('slug',$slug)->with(['admin_name','comments.likes','comments.replies','comments.user'])->first();
+          $blog_post = BlogPost::where('slug',$slug)->with(['admin_name','comments.likes','comments.replies.user','comments.replies.likes','comments.user'])->first();
           $related_blog_posts = BlogPost::where('status',1)->where('category_id',$blog_post->category_id)->latest()->take(10)->with('category_name','admin_name')->get();
   
          return response()->json([
@@ -54,7 +54,28 @@ class BlogPostController extends Controller
          }
 
     }
+      
 
+
+    public function user_reply_on_comment(Request $request){
+
+          $validateData=$request->validate([
+              'comment_id' => 'required',
+              'comment_reply' => 'required',
+          ]);
+
+         $reply=new CommentReply();
+         $reply->comment_id=$request->comment_id;
+         $reply->user_id=Auth::user()->id;
+         $reply->reply=$request->comment_reply;
+         if ($reply->save()) {
+             return response()->json([
+                 'status'=>'OK',
+                 'message'=>'reply added successfully'
+             ]);
+         }
+
+    }
 
 
     public function user_like_dislike_on_comment($comment_id){
@@ -85,6 +106,30 @@ class BlogPostController extends Controller
 
 
 
+   public function user_like_dislike_on_reply($reply_id){
+
+         $user_id=Auth::user()->id;
+         $checkLike=ReplyLike::where('reply_id',$reply_id)->where('user_id',$user_id)->first();
+         if (!$checkLike) {
+            $comment_like=new ReplyLike();
+            $comment_like->reply_id=$reply_id;
+            $comment_like->user_id=$user_id;
+            $comment_like->like=1;
+            if ($comment_like->save()) {
+                return response()->json([
+                    'status'=>'LIKE',
+                ]);
+            }  
+         }else{   
+            if ($checkLike->delete()) {
+                  return response()->json([
+                    'status'=>'DISLIKE',
+                ]);
+            } 
+         }
+        
+
+    }
 
 
 
