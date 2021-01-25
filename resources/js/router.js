@@ -170,9 +170,11 @@ const routes = [
   { 
     path: '/backend/admin/dashboard', 
     name : 'admin_dashboard',
-    component: () => import('./components/admin/Dashboard.vue'),
-    meta: {  title:'Admin Dashboard',
-             authAdmin: true  } 
+    component : () => import('./components/admin/Dashboard.vue'),
+    meta: { 
+       title:'Admin Dashboard',
+      authAdmin: true
+              } 
    },
 
     { 
@@ -545,7 +547,32 @@ const routes = [
            } 
     },
 
+   {
+        path: '/backend/general/setting',
+        name: 'general_setting',
+        component: () => import('./components/admin/general_setting/General.vue'),
+        meta: {
+            authAdmin: true
+        }
+    },
 
+    {
+        path: '/backend/footer/info',
+        name: 'footer_setting',
+         component: () => import('./components/admin/footer_setting/Index.vue'),
+        meta: {
+            authAdmin: true
+        }
+    },
+    
+    {
+        path: '/backend/theme/setting',
+        name: 'theme_setting',
+         component: () => import('./components/admin/background_and_color/Index.vue'),
+        meta: {
+            authAdmin: true
+          }
+    },
 
 
 

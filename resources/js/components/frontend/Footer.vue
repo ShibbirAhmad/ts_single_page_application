@@ -7,15 +7,8 @@
           <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <ul>
               <li class="address">
-                <p class="short_desc">
-                  <span
-                    style="font-size: 24px; color: #ff4d03; font-weight: 700"
-                    >Talibs Institute</span
-                  >
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut
-                  voluptatum alias amet aspernatur fugit eius ea, sunt totam qui
-                  molestiae autem expedita itaque, dolorum repellendus soluta
-                  possimus omnis non odit.
+                <p v-html="footer_setting.footer_description "  class="short_desc">
+                  
                 </p>
               </li>
             </ul>
@@ -60,7 +53,7 @@
             <div class="line"></div>
             <ul class="link_line">
               <li>
-                <router-link :to="{ name: 'home' }"
+                <router-link :to="{ name: 'student_register' }"
                   >HOW TO ADMIT</router-link
                 >
               </li>
@@ -70,7 +63,7 @@
                 >
               </li>
               <li>
-                <router-link :to="{ name: 'home' }"
+                <router-link :to="{ name: 'check_student_result' }"
                   >RESULT
                 </router-link>
               </li>
@@ -102,32 +95,31 @@
                       type="email"
                       required
                       placeholder="example@gmail.com"
-                      v-model="form.email"
+                      v-model="email"
                       name="email"
                       class="form-control subscribe_input"
-                      :class="{'is-invalid':form.errors.has('email')}"
+                      
                     />
-				           	<button type="submit" class="btn site-btn">subscirbe</button>
-                        <has-error :form="form" field="email"> </has-error>
+				           	<button type="submit" class="btn subcribe-btn">subscirbe</button>
                   </div>
                   
                 </div>
               </form>
 
               <div class="social-icon">
-                <a href="" target="_blank" class="social-wrape">
+                <a :href="footer_setting.facebook_url" target="_blank" class="social-wrape">
                   <i class="fa fa-lg fa-facebook f-icon"></i>
                 </a>
 
-                <a href="" class="social-wrape" target="_blank">
+                <a :href="footer_setting.youtube_url" class="social-wrape" target="_blank">
                   <i class="fa fa-lg fa-youtube f-icon"></i>
                 </a>
 
-                <a href="#" class="social-wrape" target="_blank">
+                <a :href="footer_setting.twitter_url" class="social-wrape" target="_blank">
                   <i class="fa fa-lg fa-twitter f-icon"></i>
                 </a>
 
-                <a href="#" class="social-wrape" target="_blank">
+                <a :href="footer_setting.linkedin_url" class="social-wrape" target="_blank">
                   <i class="fa fa-lg fa-linkedin f-icon"></i>
                 </a>
 
@@ -143,7 +135,7 @@
       <div class="copyright">
         <div class="container">
           <p>
-            Copyright All Rights Reserved Talibs Institute
+            {{ footer_setting.copyright_info  }}
             <i class="fa fa-heart-o" aria-hidden="true"></i> Developed By
             <a href="https://shibbirit.com" target="_blank">CODER SHIBBIR</a>
           </p>
@@ -157,43 +149,34 @@
 
 
 <script>
-import Vue from "vue";
-import { Form, HasError } from "vform";
-Vue.component(HasError.name, HasError);
+
 export default {
   mounted() {
-    //  console.log("footer mounetd");
+     this.$store.dispatch('footer_setting');
   },
   data() {
     return {
-      form:new Form({
-        email:"",
-      }),
-      base_url: this.$store.state.storage,
+     email:"",
     };
   },
   methods: {
     subscribe() {
      
-      this.form.post('/api/subscriber/add',{
-			 transformRequest:[
-				 function(data,headers){
-               return objectToFormData(data) ;
-				 }
-			 ]
+      axios.post('/api/subscriber/add',{
+			     email:this.email 
 		    })
         .then((resp) => {
           if (resp.data.success == "OK") {
             this.email = "";
             Swal.fire({
-              icon: "success",
+              type: "success",
               text: resp.data.message,
           
             });
-          } else {
+          }else{
             this.email = "";
             Swal.fire({
-              icon: "error",
+              type: "error",
               text: resp.data.message,
         
             });
@@ -202,6 +185,11 @@ export default {
         
     },
   },
+  computed:{
+    footer_setting(){
+      return this.$store.getters.footer_setting ;
+    }
+  }
 };
 </script>
 

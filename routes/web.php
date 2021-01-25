@@ -32,7 +32,3 @@ Route::get('/{any}', function () {
 })->where('any', '^(?!api\/)[\/\w\.\,-]*');
 
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

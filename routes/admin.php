@@ -7,7 +7,7 @@ Route::get('api/check/session/admin','Admin\AdminController@sessionCheck');
 
  Route::group([
       'namespace' => 'Admin',
-      'middleware' => 'admin'
+      'middleware' => 'admin',
             ],function(){
       // admin route is here      
       Route::get('api/logout/admin','AdminController@logout');
@@ -134,6 +134,18 @@ Route::get('api/check/session/admin','Admin\AdminController@sessionCheck');
       Route::post('api/edit/student/result/{id}','StudentController@edit_student_result');
       Route::get('api/get/registered/student/of/course/{id}','StudentController@registered_students_of_course');
 
+  
+      // general setting route is start from here
+      Route::get('api/get/site/info','GeneralSettingController@get_site_info');
+      Route::post('api/edit/site/info/{id}','GeneralSettingController@edit_site_info');
+
+      //footer setting route is start form here
+      Route::get('api/get/site/footer/info','FooterSettingController@get_footer_info');
+      Route::post('api/edit/site/footer/info/{id}','FooterSettingController@edit_footer_info');
+
+      //theme setting route is start form here
+      Route::get('api/get/site/theme/info','ThemeSettingController@get_theme_info');
+      Route::post('api/edit/site/theme/info/{id}','ThemeSettingController@edit_theme_info');
 
 
 
@@ -142,15 +154,6 @@ Route::get('api/check/session/admin','Admin\AdminController@sessionCheck');
 
 
 
-
-
-
-
-
-
-
-
-      
 
      
  });

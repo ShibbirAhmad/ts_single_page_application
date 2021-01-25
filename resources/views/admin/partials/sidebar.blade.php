@@ -161,6 +161,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li class="active"><router-link :to="{ name : 'general_setting' }"><i class="fa fa-cog"></i>General Setting </router-link></li>
+            <li class="active"><router-link :to="{ name : 'footer_setting' }"><i class="fa fa-cog"></i> Footer Setting </router-link></li>
+            <li class="active"><router-link :to="{ name : 'theme_setting' }"><i class="fa fa-cog"></i>Theme Setting </router-link></li>
             <li class="active"><router-link :to="{ name : 'role_list' }"><i class="fa fa-cog"></i> Role </router-link></li>
             <li class="active"><router-link :to="{ name : 'permission_list' }"><i class="fa fa-check-square-o" aria-hidden="true"></i>Permission </router-link></li>
           </ul>

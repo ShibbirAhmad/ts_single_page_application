@@ -70,7 +70,6 @@ export default {
      body.classList.remove('skin-blue');
      body.style.backgroundColor='#ecf0f5'
      console.log(body)
-     console.log('created')
   },
 
   data() {
@@ -104,7 +103,9 @@ export default {
               localStorage.setItem("admin_token", resp.data.token);
               this.$store.commit("admin", resp.data.admin);
               this.$router.push({ name : 'admin_dashboard'});
-              location.reload();
+             setTimeout(()=>{
+                location.reload();
+             },1500)
               this.$Progress.finish()
           }else{
               this.$toasted.show(resp.data.message,{
@@ -125,7 +126,7 @@ export default {
     
      $('#navBar').hide();
     
-      document.getElementsByTagName('body')[0].background="#ddd";
+      document.getElementsByTagName('body')[0].backgroundColor="#ddd";
 
 });
 

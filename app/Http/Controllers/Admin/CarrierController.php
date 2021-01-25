@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Carrier;
-use App\Models\JobApply ;
+use App\Models\Job_apply ;
 
 class CarrierController extends Controller
 {
@@ -28,7 +28,7 @@ class CarrierController extends Controller
 
     public  function job_applied($id){
         
-        $appliers= JobApply::where('job_id',$id)->orderBy('id','DESC')->with('job')->paginate(10);
+        $appliers= Job_apply::where('job_id',$id)->orderBy('id','DESC')->with('job')->paginate(10);
 
         return response()->json([
             "status" => "OK",
@@ -39,10 +39,13 @@ class CarrierController extends Controller
 
     public function download_applied_user_resume($id){
 
-           $applier = JobApply::findOrFail($id);
+           $applier = Job_apply::findOrFail($id);
            $resume=$applier->file ;
            return response()->download(public_path('storage/'.$resume));
-      
+        //    return response()->json([
+        //          "status" => "OK",
+        //          "resume" => $resume ,
+        //    ]);
     }
 
     
@@ -115,9 +118,9 @@ class CarrierController extends Controller
          $carrier->status=1;
          if ($request->hasFile('image')) {
 
-            //  if($carrier->image){
-            //     unlink('storage/'.$carrier->image);
-            //  }
+             if($carrier->image){
+                unlink('storage/'.$carrier->image);
+             }
              
              $file_path=$request->file('image')->store('images/carrier','public');
              $carrier->image=$file_path ;

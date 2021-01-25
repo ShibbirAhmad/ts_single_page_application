@@ -24,6 +24,11 @@
    Route::get('api/get/category/sliders/public','HomeController@get_category_sliders');
    Route::get('api/get/upcoming/course/public','HomeController@get_upcoming_course');
    Route::get('api/get/categorywise/course/{id}','HomeController@get_categorywise_course');
+
+      //setting route is here
+    Route::get('api/get/footer/setting','HomeController@get_footer_setting');
+    Route::get('api/get/general/setting','HomeController@get_general_setting');
+    Route::get('api/get/theme/setting','HomeController@get_theme_setting');
  
    //subscription
    Route::post('api/subscriber/add','HomeController@add_subscription');

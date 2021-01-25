@@ -56,7 +56,7 @@
                           :class="{ 'is-invalid': form.errors.has('page_postion') }"
                         >
                           <option value="1">Category Slider</option>
-                          <option value="2">subCategory Slider </option>
+                  
                         </select>
                         <has-error :form="form" field="image"></has-error>
                       </div>
@@ -132,7 +132,7 @@ export default {
       image_width: 1184,
       image_height: 250,
       imagae_size:550,
-      image_size_text: "Image size must be 1184*350px",
+      image_size_text: "Image size must be 1184*250px",
       base_url:this.$store.state.storage,
 
     };

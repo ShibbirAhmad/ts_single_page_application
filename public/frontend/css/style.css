@@ -144,6 +144,25 @@ ol {
 	cursor: pointer;
 }
 
+
+.subcribe-btn {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    background: #f6783a;
+	color: #fff;
+	cursor: pointer;
+    padding: 18px 30px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 50px;
+    width: 125px;
+	border: none;
+	float: right;
+   
+}
+
 /* Image Popup */
 
 .img-popup-warp .mfp-content,
@@ -1815,6 +1834,24 @@ ol {
 	margin-bottom: 10px;
 }
 
+.subcribe-btn {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    background: #f6783a;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px 30px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 50px;
+    width: 170px;
+    border: none;
+    text-align: center;
+
+}
+
 .widget .tags a {
 	min-width: 80px;
 	text-transform: uppercase;
@@ -1892,6 +1929,11 @@ ol {
 .slider_container {
     margin: 5px;
     margin-right: 0px;
+    box-shadow: 1px 2px 1px #ddd;
+}
+
+.category_slider_container {
+    margin:5px;
     box-shadow: 1px 2px 1px #ddd;
 }
 

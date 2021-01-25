@@ -15,7 +15,7 @@
             <section class="content">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div style="margin-left:200px;" class="col-lg-10 col-lg-offset-1">
+                        <div style="margin-left:80px;" class="col-lg-10 col-lg-offset-1">
                             <div class="box box-primary">
                                 <div class="box-header with-border text-center">
                                  <h3 class="box-title"> Category Slider table</h3>

@@ -2228,10 +2228,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2382,51 +2378,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MODULE_1__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["HasError"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {//  console.log("footer mounetd");
+  mounted: function mounted() {
+    this.$store.dispatch('footer_setting');
   },
   data: function data() {
     return {
-      form: new vform__WEBPACK_IMPORTED_MODULE_1__["Form"]({
-        email: ""
-      }),
-      base_url: this.$store.state.storage
+      email: ""
     };
   },
   methods: {
     subscribe: function subscribe() {
       var _this = this;
 
-      this.form.post('/api/subscriber/add', {
-        transformRequest: [function (data, headers) {
-          return objectToFormData(data);
-        }]
+      axios.post('/api/subscriber/add', {
+        email: this.email
       }).then(function (resp) {
         if (resp.data.success == "OK") {
           _this.email = "";
           Swal.fire({
-            icon: "success",
+            type: "success",
             text: resp.data.message
           });
         } else {
           _this.email = "";
           Swal.fire({
-            icon: "error",
+            type: "error",
             text: resp.data.message
           });
         }
       });
+    }
+  },
+  computed: {
+    footer_setting: function footer_setting() {
+      return this.$store.getters.footer_setting;
     }
   }
 });
@@ -63587,1028 +63573,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vform/dist/vform.common.js":
-/*!*************************************************!*\
-  !*** ./node_modules/vform/dist/vform.common.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports =
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "fb15");
-/******/ })
-/************************************************************************/
-/******/ ({
-
-/***/ "1eb2":
-/***/ (function(module, exports, __webpack_require__) {
-
-// This file is imported into lib/wc client bundles.
-
-if (typeof window !== 'undefined') {
-  var i
-  if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js$/))) {
-    __webpack_require__.p = i[1] // eslint-disable-line
-  }
-}
-
-
-/***/ }),
-
-/***/ "cebe":
-/***/ (function(module, exports) {
-
-module.exports = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-/***/ }),
-
-/***/ "fb15":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
-var setPublicPath = __webpack_require__("1eb2");
-
-// EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__("cebe");
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
-
-// CONCATENATED MODULE: ./src/util.js
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-/**
- * Deep copy the given object.
- *
- * @param  {Object} obj
- * @return {Object}
- */
-function deepCopy(obj) {
-  if (obj === null || _typeof(obj) !== 'object') {
-    return obj;
-  }
-
-  var copy = Array.isArray(obj) ? [] : {};
-  Object.keys(obj).forEach(function (key) {
-    copy[key] = deepCopy(obj[key]);
-  });
-  return copy;
-}
-/**
- * If the given value is not an array, wrap it in one.
- *
- * @param  {Any} value
- * @return {Array}
- */
-
-function arrayWrap(value) {
-  return Array.isArray(value) ? value : [value];
-}
-// CONCATENATED MODULE: ./src/Errors.js
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function Errors_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Errors_typeof = function _typeof(obj) { return typeof obj; }; } else { Errors_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Errors_typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var Errors_Errors =
-/*#__PURE__*/
-function () {
-  /**
-   * Create a new error bag instance.
-   */
-  function Errors() {
-    _classCallCheck(this, Errors);
-
-    this.errors = {};
-  }
-  /**
-   * Set the errors object or field error messages.
-   *
-   * @param {Object|String} field
-   * @param {Array|String|undefined} messages
-   */
-
-
-  _createClass(Errors, [{
-    key: "set",
-    value: function set(field, messages) {
-      if (Errors_typeof(field) === 'object') {
-        this.errors = field;
-      } else {
-        this.set(_objectSpread({}, this.errors, _defineProperty({}, field, arrayWrap(messages))));
-      }
-    }
-    /**
-     * Get all the errors.
-     *
-     * @return {Object}
-     */
-
-  }, {
-    key: "all",
-    value: function all() {
-      return this.errors;
-    }
-    /**
-     * Determine if there is an error for the given field.
-     *
-     * @param  {String} field
-     * @return {Boolean}
-     */
-
-  }, {
-    key: "has",
-    value: function has(field) {
-      return this.errors.hasOwnProperty(field);
-    }
-    /**
-     * Determine if there are any errors for the given fields.
-     *
-     * @param  {...String} fields
-     * @return {Boolean}
-     */
-
-  }, {
-    key: "hasAny",
-    value: function hasAny() {
-      var _this = this;
-
-      for (var _len = arguments.length, fields = new Array(_len), _key = 0; _key < _len; _key++) {
-        fields[_key] = arguments[_key];
-      }
-
-      return fields.some(function (field) {
-        return _this.has(field);
-      });
-    }
-    /**
-     * Determine if there are any errors.
-     *
-     * @return {Boolean}
-     */
-
-  }, {
-    key: "any",
-    value: function any() {
-      return Object.keys(this.errors).length > 0;
-    }
-    /**
-     * Get the first error message for the given field.
-     *
-     * @param  String} field
-     * @return {String|undefined}
-     */
-
-  }, {
-    key: "get",
-    value: function get(field) {
-      if (this.has(field)) {
-        return this.getAll(field)[0];
-      }
-    }
-    /**
-     * Get all the error messages for the given field.
-     *
-     * @param  {String} field
-     * @return {Array}
-     */
-
-  }, {
-    key: "getAll",
-    value: function getAll(field) {
-      return arrayWrap(this.errors[field] || []);
-    }
-    /**
-     * Get the error message for the given fields.
-     *
-     * @param  {...String} fields
-     * @return {Array}
-     */
-
-  }, {
-    key: "only",
-    value: function only() {
-      var _this2 = this;
-
-      var messages = [];
-
-      for (var _len2 = arguments.length, fields = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        fields[_key2] = arguments[_key2];
-      }
-
-      fields.forEach(function (field) {
-        var message = _this2.get(field);
-
-        if (message) {
-          messages.push(message);
-        }
-      });
-      return messages;
-    }
-    /**
-     * Get all the errors in a flat array.
-     *
-     * @return {Array}
-     */
-
-  }, {
-    key: "flatten",
-    value: function flatten() {
-      return Object.values(this.errors).reduce(function (a, b) {
-        return a.concat(b);
-      }, []);
-    }
-    /**
-     * Clear one or all error fields.
-     *
-     * @param {String|undefined} field
-     */
-
-  }, {
-    key: "clear",
-    value: function clear(field) {
-      var _this3 = this;
-
-      var errors = {};
-
-      if (field) {
-        Object.keys(this.errors).forEach(function (key) {
-          if (key !== field) {
-            errors[key] = _this3.errors[key];
-          }
-        });
-      }
-
-      this.set(errors);
-    }
-  }]);
-
-  return Errors;
-}();
-
-
-// CONCATENATED MODULE: ./src/Form.js
-function Form_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Form_typeof = function _typeof(obj) { return typeof obj; }; } else { Form_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Form_typeof(obj); }
-
-function Form_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { Form_defineProperty(target, key, source[key]); }); } return target; }
-
-function Form_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function Form_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Form_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Form_createClass(Constructor, protoProps, staticProps) { if (protoProps) Form_defineProperties(Constructor.prototype, protoProps); if (staticProps) Form_defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-var Form_Form =
-/*#__PURE__*/
-function () {
-  /**
-   * Create a new form instance.
-   *
-   * @param {Object} data
-   */
-  function Form() {
-    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    Form_classCallCheck(this, Form);
-
-    this.busy = false;
-    this.successful = false;
-    this.errors = new Errors_Errors();
-    this.originalData = deepCopy(data);
-    Object.assign(this, data);
-  }
-  /**
-   * Fill form data.
-   *
-   * @param {Object} data
-   */
-
-
-  Form_createClass(Form, [{
-    key: "fill",
-    value: function fill(data) {
-      var _this = this;
-
-      this.keys().forEach(function (key) {
-        _this[key] = data[key];
-      });
-    }
-    /**
-     * Get the form data.
-     *
-     * @return {Object}
-     */
-
-  }, {
-    key: "data",
-    value: function data() {
-      var _this2 = this;
-
-      return this.keys().reduce(function (data, key) {
-        return Form_objectSpread({}, data, Form_defineProperty({}, key, _this2[key]));
-      }, {});
-    }
-    /**
-     * Get the form data keys.
-     *
-     * @return {Array}
-     */
-
-  }, {
-    key: "keys",
-    value: function keys() {
-      return Object.keys(this).filter(function (key) {
-        return !Form.ignore.includes(key);
-      });
-    }
-    /**
-     * Start processing the form.
-     */
-
-  }, {
-    key: "startProcessing",
-    value: function startProcessing() {
-      this.errors.clear();
-      this.busy = true;
-      this.successful = false;
-    }
-    /**
-     * Finish processing the form.
-     */
-
-  }, {
-    key: "finishProcessing",
-    value: function finishProcessing() {
-      this.busy = false;
-      this.successful = true;
-    }
-    /**
-     * Clear the form errors.
-     */
-
-  }, {
-    key: "clear",
-    value: function clear() {
-      this.errors.clear();
-      this.successful = false;
-    }
-    /**
-     * Reset the form fields.
-     */
-
-  }, {
-    key: "reset",
-    value: function reset() {
-      var _this3 = this;
-
-      Object.keys(this).filter(function (key) {
-        return !Form.ignore.includes(key);
-      }).forEach(function (key) {
-        _this3[key] = deepCopy(_this3.originalData[key]);
-      });
-    }
-    /**
-     * Submit the form via a GET request.
-     *
-     * @param  {String} url
-     * @param  {Object} config (axios config)
-     * @return {Promise}
-     */
-
-  }, {
-    key: "get",
-    value: function get(url) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.submit('get', url, config);
-    }
-    /**
-     * Submit the form via a POST request.
-     *
-     * @param  {String} url
-     * @param  {Object} config (axios config)
-     * @return {Promise}
-     */
-
-  }, {
-    key: "post",
-    value: function post(url) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.submit('post', url, config);
-    }
-    /**
-     * Submit the form via a PATCH request.
-     *
-     * @param  {String} url
-     * @param  {Object} config (axios config)
-     * @return {Promise}
-     */
-
-  }, {
-    key: "patch",
-    value: function patch(url) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.submit('patch', url, config);
-    }
-    /**
-     * Submit the form via a PUT request.
-     *
-     * @param  {String} url
-     * @param  {Object} config (axios config)
-     * @return {Promise}
-     */
-
-  }, {
-    key: "put",
-    value: function put(url) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.submit('put', url, config);
-    }
-    /**
-     * Submit the form via a DELETE request.
-     *
-     * @param  {String} url
-     * @param  {Object} config (axios config)
-     * @return {Promise}
-     */
-
-  }, {
-    key: "delete",
-    value: function _delete(url) {
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.submit('delete', url, config);
-    }
-    /**
-     * Submit the form data via an HTTP request.
-     *
-     * @param  {String} method (get, post, patch, put)
-     * @param  {String} url
-     * @param  {Object} config (axios config)
-     * @return {Promise}
-     */
-
-  }, {
-    key: "submit",
-    value: function submit(method, url) {
-      var _this4 = this;
-
-      var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      this.startProcessing();
-      var data = method === 'get' ? {
-        params: this.data()
-      } : this.data();
-      return new Promise(function (resolve, reject) {
-        (Form.axios || external_axios_default.a).request(Form_objectSpread({
-          url: _this4.route(url),
-          method: method,
-          data: data
-        }, config)).then(function (response) {
-          _this4.finishProcessing();
-
-          resolve(response);
-        }).catch(function (error) {
-          _this4.busy = false;
-
-          if (error.response) {
-            _this4.errors.set(_this4.extractErrors(error.response));
-          }
-
-          reject(error);
-        });
-      });
-    }
-    /**
-     * Extract the errors from the response object.
-     *
-     * @param  {Object} response
-     * @return {Object}
-     */
-
-  }, {
-    key: "extractErrors",
-    value: function extractErrors(response) {
-      if (!response.data || Form_typeof(response.data) !== 'object') {
-        return {
-          error: Form.errorMessage
-        };
-      }
-
-      if (response.data.errors) {
-        return Form_objectSpread({}, response.data.errors);
-      }
-
-      if (response.data.message) {
-        return {
-          error: response.data.message
-        };
-      }
-
-      return Form_objectSpread({}, response.data);
-    }
-    /**
-     * Get a named route.
-     *
-     * @param  {String} name
-     * @return {Object} parameters
-     * @return {String}
-     */
-
-  }, {
-    key: "route",
-    value: function route(name) {
-      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var url = name;
-
-      if (Form.routes.hasOwnProperty(name)) {
-        url = decodeURI(Form.routes[name]);
-      }
-
-      if (Form_typeof(parameters) !== 'object') {
-        parameters = {
-          id: parameters
-        };
-      }
-
-      Object.keys(parameters).forEach(function (key) {
-        url = url.replace("{".concat(key, "}"), parameters[key]);
-      });
-      return url;
-    }
-    /**
-     * Clear errors on keydown.
-     *
-     * @param {KeyboardEvent} event
-     */
-
-  }, {
-    key: "onKeydown",
-    value: function onKeydown(event) {
-      if (event.target.name) {
-        this.errors.clear(event.target.name);
-      }
-    }
-  }]);
-
-  return Form;
-}();
-
-Form_Form.routes = {};
-Form_Form.errorMessage = 'Something went wrong. Please try again.';
-Form_Form.ignore = ['busy', 'successful', 'errors', 'originalData'];
-/* harmony default export */ var src_Form = (Form_Form);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"d2817be2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/HasError.vue?vue&type=template&id=fcc9e406&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.form.errors.has(_vm.field))?_c('div',{staticClass:"help-block invalid-feedback",domProps:{"innerHTML":_vm._s(_vm.form.errors.get(_vm.field))}}):_vm._e()}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/HasError.vue?vue&type=template&id=fcc9e406&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/HasError.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-/* harmony default export */ var HasErrorvue_type_script_lang_js_ = ({
-  name: 'has-error',
-  props: {
-    form: {
-      type: Object,
-      required: true
-    },
-    field: {
-      type: String,
-      required: true
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/HasError.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_HasErrorvue_type_script_lang_js_ = (HasErrorvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-// CONCATENATED MODULE: ./src/components/HasError.vue
-
-
-
-
-
-/* normalize component */
-
-var component = normalizeComponent(
-  components_HasErrorvue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-component.options.__file = "HasError.vue"
-/* harmony default export */ var HasError = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"d2817be2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AlertError.vue?vue&type=template&id=5610eddd&
-var AlertErrorvue_type_template_id_5610eddd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.form.errors.any())?_c('div',{staticClass:"alert alert-danger alert-dismissible",attrs:{"role":"alert"}},[(_vm.dismissible)?_c('button',{staticClass:"close",attrs:{"type":"button","aria-label":"Close"},on:{"click":_vm.dismiss}},[_c('span',{attrs:{"aria-hidden":"true"}},[_vm._v("×")])]):_vm._e(),_vm._t("default",[(_vm.form.errors.has('error'))?_c('div',{domProps:{"innerHTML":_vm._s(_vm.form.errors.get('error'))}}):_c('div',{domProps:{"innerHTML":_vm._s(_vm.message)}})])],2):_vm._e()}
-var AlertErrorvue_type_template_id_5610eddd_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/AlertError.vue?vue&type=template&id=5610eddd&
-
-// CONCATENATED MODULE: ./src/components/Alert.js
-/* harmony default export */ var Alert = ({
-  props: {
-    form: {
-      type: Object,
-      required: true
-    },
-    dismissible: {
-      type: Boolean,
-      default: true
-    }
-  },
-  methods: {
-    dismiss: function dismiss() {
-      if (this.dismissible) {
-        this.form.clear();
-      }
-    }
-  }
-});
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AlertError.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var AlertErrorvue_type_script_lang_js_ = ({
-  name: 'alert-error',
-  extends: Alert,
-  props: {
-    message: {
-      type: String,
-      default: 'There were some problems with your input.'
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/AlertError.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AlertErrorvue_type_script_lang_js_ = (AlertErrorvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/AlertError.vue
-
-
-
-
-
-/* normalize component */
-
-var AlertError_component = normalizeComponent(
-  components_AlertErrorvue_type_script_lang_js_,
-  AlertErrorvue_type_template_id_5610eddd_render,
-  AlertErrorvue_type_template_id_5610eddd_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-AlertError_component.options.__file = "AlertError.vue"
-/* harmony default export */ var AlertError = (AlertError_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"d2817be2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AlertErrors.vue?vue&type=template&id=40d77fd7&
-var AlertErrorsvue_type_template_id_40d77fd7_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.form.errors.any())?_c('div',{staticClass:"alert alert-danger alert-dismissible",attrs:{"role":"alert"}},[(_vm.dismissible)?_c('button',{staticClass:"close",attrs:{"type":"button","aria-label":"Close"},on:{"click":_vm.dismiss}},[_c('span',{attrs:{"aria-hidden":"true"}},[_vm._v("×")])]):_vm._e(),(_vm.message)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.message)}}):_vm._e(),_c('ul',_vm._l((_vm.form.errors.flatten()),function(error){return _c('li',{domProps:{"innerHTML":_vm._s(error)}})}))]):_vm._e()}
-var AlertErrorsvue_type_template_id_40d77fd7_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/AlertErrors.vue?vue&type=template&id=40d77fd7&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AlertErrors.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var AlertErrorsvue_type_script_lang_js_ = ({
-  name: 'alert-errors',
-  extends: Alert,
-  props: {
-    message: {
-      type: String,
-      default: 'There were some problems with your input.'
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/AlertErrors.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AlertErrorsvue_type_script_lang_js_ = (AlertErrorsvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/AlertErrors.vue
-
-
-
-
-
-/* normalize component */
-
-var AlertErrors_component = normalizeComponent(
-  components_AlertErrorsvue_type_script_lang_js_,
-  AlertErrorsvue_type_template_id_40d77fd7_render,
-  AlertErrorsvue_type_template_id_40d77fd7_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-AlertErrors_component.options.__file = "AlertErrors.vue"
-/* harmony default export */ var AlertErrors = (AlertErrors_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"d2817be2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AlertSuccess.vue?vue&type=template&id=fd18e236&
-var AlertSuccessvue_type_template_id_fd18e236_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.form.successful)?_c('div',{staticClass:"alert alert-success alert-dismissible",attrs:{"role":"alert"}},[(_vm.dismissible)?_c('button',{staticClass:"close",attrs:{"type":"button","aria-label":"Close"},on:{"click":_vm.dismiss}},[_c('span',{attrs:{"aria-hidden":"true"}},[_vm._v("×")])]):_vm._e(),_vm._t("default",[_c('div',{domProps:{"innerHTML":_vm._s(_vm.message)}})])],2):_vm._e()}
-var AlertSuccessvue_type_template_id_fd18e236_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/AlertSuccess.vue?vue&type=template&id=fd18e236&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AlertSuccess.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var AlertSuccessvue_type_script_lang_js_ = ({
-  name: 'alert-success',
-  extends: Alert,
-  props: {
-    message: {
-      type: String,
-      default: ''
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/AlertSuccess.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AlertSuccessvue_type_script_lang_js_ = (AlertSuccessvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/AlertSuccess.vue
-
-
-
-
-
-/* normalize component */
-
-var AlertSuccess_component = normalizeComponent(
-  components_AlertSuccessvue_type_script_lang_js_,
-  AlertSuccessvue_type_template_id_fd18e236_render,
-  AlertSuccessvue_type_template_id_fd18e236_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-AlertSuccess_component.options.__file = "AlertSuccess.vue"
-/* harmony default export */ var AlertSuccess = (AlertSuccess_component.exports);
-// CONCATENATED MODULE: ./src/index.js
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
-/* concated harmony reexport Form */__webpack_require__.d(__webpack_exports__, "Form", function() { return src_Form; });
-/* concated harmony reexport Errors */__webpack_require__.d(__webpack_exports__, "Errors", function() { return Errors_Errors; });
-/* concated harmony reexport HasError */__webpack_require__.d(__webpack_exports__, "HasError", function() { return HasError; });
-/* concated harmony reexport AlertError */__webpack_require__.d(__webpack_exports__, "AlertError", function() { return AlertError; });
-/* concated harmony reexport AlertErrors */__webpack_require__.d(__webpack_exports__, "AlertErrors", function() { return AlertErrors; });
-/* concated harmony reexport AlertSuccess */__webpack_require__.d(__webpack_exports__, "AlertSuccess", function() { return AlertSuccess; });
-
-
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_Form);
-
-
-
-/***/ })
-
-/******/ });
-
-/***/ }),
-
 /***/ "./node_modules/vue-bootstrap-datetimepicker/dist/vue-bootstrap-datetimepicker.js":
 /*!****************************************************************************************!*\
   !*** ./node_modules/vue-bootstrap-datetimepicker/dist/vue-bootstrap-datetimepicker.js ***!
@@ -65263,7 +64227,22 @@ var render = function() {
     _c("footer", { staticClass: "footer-section text-white" }, [
       _c("div", { staticClass: "footer-top" }, [
         _c("div", { staticClass: "row", staticStyle: { margin: "10px" } }, [
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "contact col-lg-4 col-md-4 col-sm-12 col-xs-12" },
+            [
+              _c("ul", [
+                _c("li", { staticClass: "address" }, [
+                  _c("p", {
+                    staticClass: "short_desc",
+                    domProps: {
+                      innerHTML: _vm._s(_vm.footer_setting.footer_description)
+                    }
+                  })
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-2 col-md-2 col-sm-6 col-xs-6" }, [
             _c("div", { staticClass: "quick_link" }, [
@@ -65334,9 +64313,11 @@ var render = function() {
               _c(
                 "li",
                 [
-                  _c("router-link", { attrs: { to: { name: "home" } } }, [
-                    _vm._v("HOW TO ADMIT")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "student_register" } } },
+                    [_vm._v("HOW TO ADMIT")]
+                  )
                 ],
                 1
               ),
@@ -65354,9 +64335,11 @@ var render = function() {
               _c(
                 "li",
                 [
-                  _c("router-link", { attrs: { to: { name: "home" } } }, [
-                    _vm._v("RESULT\n                ")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "check_student_result" } } },
+                    [_vm._v("RESULT\n                ")]
+                  )
                 ],
                 1
               ),
@@ -65401,70 +64384,130 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "row " }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", [
-                          _vm._v(
-                            "Subscribe to get the latest useful tips, advice and best\n                      offer."
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.email,
-                              expression: "form.email"
-                            }
-                          ],
-                          staticClass: "form-control subscribe_input",
-                          class: { "is-invalid": _vm.form.errors.has("email") },
-                          attrs: {
-                            type: "email",
-                            required: "",
-                            placeholder: "example@gmail.com",
-                            name: "email"
-                          },
-                          domProps: { value: _vm.form.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "email", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "button",
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [
+                        _vm._v(
+                          "Subscribe to get the latest useful tips, advice and best\n                      offer."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
                           {
-                            staticClass: "btn site-btn",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("subscirbe")]
-                        ),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "email" }
-                        })
-                      ],
-                      1
-                    )
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        staticClass: "form-control subscribe_input",
+                        attrs: {
+                          type: "email",
+                          required: "",
+                          placeholder: "example@gmail.com",
+                          name: "email"
+                        },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn subcribe-btn",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("subscirbe")]
+                      )
+                    ])
                   ])
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1)
+              _c("div", { staticClass: "social-icon" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-wrape",
+                    attrs: {
+                      href: _vm.footer_setting.facebook_url,
+                      target: "_blank"
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-lg fa-facebook f-icon" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-wrape",
+                    attrs: {
+                      href: _vm.footer_setting.youtube_url,
+                      target: "_blank"
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-lg fa-youtube f-icon" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-wrape",
+                    attrs: {
+                      href: _vm.footer_setting.twitter_url,
+                      target: "_blank"
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-lg fa-twitter f-icon" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "social-wrape",
+                    attrs: {
+                      href: _vm.footer_setting.linkedin_url,
+                      target: "_blank"
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-lg fa-linkedin f-icon" })]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
             ])
           ])
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "copyright" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("p", [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.footer_setting.copyright_info) +
+                "\n            "
+            ),
+            _c("i", {
+              staticClass: "fa fa-heart-o",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(" Developed By\n            "),
+            _c(
+              "a",
+              { attrs: { href: "https://shibbirit.com", target: "_blank" } },
+              [_vm._v("CODER SHIBBIR")]
+            )
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -65474,91 +64517,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "contact col-lg-4 col-md-4 col-sm-12 col-xs-12" },
-      [
-        _c("ul", [
-          _c("li", { staticClass: "address" }, [
-            _c("p", { staticClass: "short_desc" }, [
-              _c(
-                "span",
-                {
-                  staticStyle: {
-                    "font-size": "24px",
-                    color: "#ff4d03",
-                    "font-weight": "700"
-                  }
-                },
-                [_vm._v("Talibs Institute")]
-              ),
-              _vm._v(
-                "\n                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut\n                  voluptatum alias amet aspernatur fugit eius ea, sunt totam qui\n                  molestiae autem expedita itaque, dolorum repellendus soluta\n                  possimus omnis non odit.\n                "
-              )
-            ])
-          ])
-        ])
-      ]
+      "a",
+      { staticClass: "social-wrape", attrs: { href: "#", target: "_blank" } },
+      [_c("i", { staticClass: "fa fa-lg fa-instagram f-icon" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "social-icon" }, [
-      _c(
-        "a",
-        { staticClass: "social-wrape", attrs: { href: "", target: "_blank" } },
-        [_c("i", { staticClass: "fa fa-lg fa-facebook f-icon" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "social-wrape", attrs: { href: "", target: "_blank" } },
-        [_c("i", { staticClass: "fa fa-lg fa-youtube f-icon" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "social-wrape", attrs: { href: "#", target: "_blank" } },
-        [_c("i", { staticClass: "fa fa-lg fa-twitter f-icon" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "social-wrape", attrs: { href: "#", target: "_blank" } },
-        [_c("i", { staticClass: "fa fa-lg fa-linkedin f-icon" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "social-wrape", attrs: { href: "#", target: "_blank" } },
-        [_c("i", { staticClass: "fa fa-lg fa-instagram f-icon" })]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "copyright" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("p", [
-          _vm._v(
-            "\n            Copyright All Rights Reserved Talibs Institute\n            "
-          ),
-          _c("i", {
-            staticClass: "fa fa-heart-o",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(" Developed By\n            "),
-          _c(
-            "a",
-            { attrs: { href: "https://shibbirit.com", target: "_blank" } },
-            [_vm._v("CODER SHIBBIR")]
-          )
-        ])
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -82717,7 +81679,7 @@ var routes = [{
   path: '/',
   name: 'home',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(60), __webpack_require__.e(54)]).then(__webpack_require__.bind(null, /*! ./components/frontend/Index.vue */ "./resources/js/components/frontend/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(63), __webpack_require__.e(57), __webpack_require__.e(66)]).then(__webpack_require__.bind(null, /*! ./components/frontend/Index.vue */ "./resources/js/components/frontend/Index.vue"));
   },
   meta: {
     title: 'welecome '
@@ -82726,7 +81688,7 @@ var routes = [{
   path: '/blog/details/:slug',
   name: 'blog_post_details',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./components/frontend/BlogPostDetails.vue */ "./resources/js/components/frontend/BlogPostDetails.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(97)]).then(__webpack_require__.bind(null, /*! ./components/frontend/BlogPostDetails.vue */ "./resources/js/components/frontend/BlogPostDetails.vue"));
   },
   meta: {
     title: 'Blog Details '
@@ -82735,7 +81697,7 @@ var routes = [{
   path: '/course/details/:slug',
   name: 'course_details',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 38).then(__webpack_require__.bind(null, /*! ./components/frontend/CourseDetails.vue */ "./resources/js/components/frontend/CourseDetails.vue"));
+    return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./components/frontend/CourseDetails.vue */ "./resources/js/components/frontend/CourseDetails.vue"));
   },
   meta: {
     title: 'Course Details '
@@ -82744,7 +81706,7 @@ var routes = [{
   path: '/course/of/category/:id',
   name: 'category_wise_course',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./components/frontend/CategoryWiseCourse.vue */ "./resources/js/components/frontend/CategoryWiseCourse.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(63), __webpack_require__.e(65)]).then(__webpack_require__.bind(null, /*! ./components/frontend/CategoryWiseCourse.vue */ "./resources/js/components/frontend/CategoryWiseCourse.vue"));
   },
   meta: {
     title: 'Course of category '
@@ -82753,7 +81715,7 @@ var routes = [{
   path: '/search/details',
   name: 'search',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! ./components/frontend/Search.vue */ "./resources/js/components/frontend/Search.vue"));
+    return __webpack_require__.e(/*! import() */ 64).then(__webpack_require__.bind(null, /*! ./components/frontend/Search.vue */ "./resources/js/components/frontend/Search.vue"));
   },
   meta: {
     title: 'Search Details '
@@ -82762,7 +81724,7 @@ var routes = [{
   path: '/student/register',
   name: 'student_register',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(59), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Register.vue */ "./resources/js/components/frontend/student/Register.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(41), __webpack_require__.e(98)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Register.vue */ "./resources/js/components/frontend/student/Register.vue"));
   },
   meta: {
     title: 'Student Registration '
@@ -82771,7 +81733,7 @@ var routes = [{
   path: '/public/user/login',
   name: 'user_login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Login.vue */ "./resources/js/components/frontend/user/Login.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(99)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Login.vue */ "./resources/js/components/frontend/user/Login.vue"));
   },
   meta: {
     title: 'user login '
@@ -82780,7 +81742,7 @@ var routes = [{
   path: '/user/register',
   name: 'user_register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Signup.vue */ "./resources/js/components/frontend/user/Signup.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(100)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Signup.vue */ "./resources/js/components/frontend/user/Signup.vue"));
   },
   meta: {
     title: 'user register '
@@ -82789,7 +81751,7 @@ var routes = [{
   path: '/public/user/password/reset',
   name: 'UserPasswordReset',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 58).then(__webpack_require__.bind(null, /*! ./components/frontend/user/UserPasswordReset.vue */ "./resources/js/components/frontend/user/UserPasswordReset.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(113)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/UserPasswordReset.vue */ "./resources/js/components/frontend/user/UserPasswordReset.vue"));
   },
   meta: {
     title: 'Password Reset'
@@ -82798,7 +81760,7 @@ var routes = [{
   path: '/public/user/code/verify/:email',
   name: 'CodeVerified',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! ./components/frontend/user/CodeVerified.vue */ "./resources/js/components/frontend/user/CodeVerified.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(111)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/CodeVerified.vue */ "./resources/js/components/frontend/user/CodeVerified.vue"));
   },
   meta: {
     title: 'Password Reset'
@@ -82807,7 +81769,7 @@ var routes = [{
   path: '/public/user/reset/password/:email',
   name: 'NewPasswordUser',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 57).then(__webpack_require__.bind(null, /*! ./components/frontend/user/NewPassword.vue */ "./resources/js/components/frontend/user/NewPassword.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(112)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/NewPassword.vue */ "./resources/js/components/frontend/user/NewPassword.vue"));
   },
   meta: {
     title: 'set new password'
@@ -82816,7 +81778,7 @@ var routes = [{
   path: '/student/result/check',
   name: 'check_student_result',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 55).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Result.vue */ "./resources/js/components/frontend/student/Result.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(110)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Result.vue */ "./resources/js/components/frontend/student/Result.vue"));
   },
   meta: {
     title: 'Student Result Check '
@@ -82825,7 +81787,7 @@ var routes = [{
   path: '/backend/category/admin/login',
   name: 'admin_login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/admin/Login.vue */ "./resources/js/components/admin/Login.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./components/admin/Login.vue */ "./resources/js/components/admin/Login.vue"));
   },
   meta: {
     title: 'Admin Login'
@@ -82834,7 +81796,7 @@ var routes = [{
   path: '/backend/admin/add',
   name: 'add_admin',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Add.vue */ "./resources/js/components/admin/admin/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(67)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Add.vue */ "./resources/js/components/admin/admin/Add.vue"));
   },
   meta: {
     title: 'Admin Register',
@@ -82844,7 +81806,7 @@ var routes = [{
   path: '/backend/admin/edit/:id',
   name: 'edit_admin',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Edit.vue */ "./resources/js/components/admin/admin/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(70)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Edit.vue */ "./resources/js/components/admin/admin/Edit.vue"));
   },
   meta: {
     title: 'Admin Edit',
@@ -82854,7 +81816,7 @@ var routes = [{
   path: '/backend/admin/password/edit/',
   name: 'edit_admin_password',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Password.vue */ "./resources/js/components/admin/admin/Password.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(71)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Password.vue */ "./resources/js/components/admin/admin/Password.vue"));
   },
   meta: {
     title: 'Admin Password Edit',
@@ -82864,7 +81826,7 @@ var routes = [{
   path: '/backend/admin/profile',
   name: 'admin_profile',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Profile.vue */ "./resources/js/components/admin/admin/Profile.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(72)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Profile.vue */ "./resources/js/components/admin/admin/Profile.vue"));
   },
   meta: {
     title: 'Admin Profile Info',
@@ -82874,7 +81836,7 @@ var routes = [{
   path: '/backend/admin/list',
   name: 'admin_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 43).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Index.vue */ "./resources/js/components/admin/admin/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Index.vue */ "./resources/js/components/admin/admin/Index.vue"));
   },
   meta: {
     title: 'Admin List',
@@ -82884,7 +81846,7 @@ var routes = [{
   path: '/backend/admin/dashboard',
   name: 'admin_dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
+    return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
   },
   meta: {
     title: 'Admin Dashboard',
@@ -82894,7 +81856,7 @@ var routes = [{
   path: '/backend/category/list',
   name: 'category',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./components/admin/category/Index.vue */ "./resources/js/components/admin/category/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(81)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Index.vue */ "./resources/js/components/admin/category/Index.vue"));
   },
   meta: {
     title: 'category list',
@@ -82904,7 +81866,7 @@ var routes = [{
   path: '/backend/category/add',
   name: 'add_category',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./components/admin/category/Add.vue */ "./resources/js/components/admin/category/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(103)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Add.vue */ "./resources/js/components/admin/category/Add.vue"));
   },
   meta: {
     title: 'category add',
@@ -82914,7 +81876,7 @@ var routes = [{
   path: '/backend/category/edit/:id',
   name: 'edit_category',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./components/admin/category/Edit.vue */ "./resources/js/components/admin/category/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(104)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Edit.vue */ "./resources/js/components/admin/category/Edit.vue"));
   },
   meta: {
     title: 'category edit',
@@ -82924,7 +81886,7 @@ var routes = [{
   path: '/backend/banner/list',
   name: 'banner',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Index.vue */ "./resources/js/components/admin/banner/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Index.vue */ "./resources/js/components/admin/banner/Index.vue"));
   },
   meta: {
     title: 'banner list',
@@ -82934,7 +81896,7 @@ var routes = [{
   path: '/backend/banner/add',
   name: 'add_banner',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Add.vue */ "./resources/js/components/admin/banner/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(101)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Add.vue */ "./resources/js/components/admin/banner/Add.vue"));
   },
   meta: {
     title: 'banner add',
@@ -82944,7 +81906,7 @@ var routes = [{
   path: '/backend/banner/edit/:id',
   name: 'edit_banner',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Edit.vue */ "./resources/js/components/admin/banner/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(102)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Edit.vue */ "./resources/js/components/admin/banner/Edit.vue"));
   },
   meta: {
     title: 'banner edit',
@@ -82954,7 +81916,7 @@ var routes = [{
   path: '/backend/role/list',
   name: 'role_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./components/admin/role/Index.vue */ "./resources/js/components/admin/role/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(89)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Index.vue */ "./resources/js/components/admin/role/Index.vue"));
   },
   meta: {
     title: 'role',
@@ -82964,7 +81926,7 @@ var routes = [{
   path: '/backend/role/add',
   name: 'add_role',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 51).then(__webpack_require__.bind(null, /*! ./components/admin/role/Add.vue */ "./resources/js/components/admin/role/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(108)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Add.vue */ "./resources/js/components/admin/role/Add.vue"));
   },
   meta: {
     title: 'role add',
@@ -82974,7 +81936,7 @@ var routes = [{
   path: '/backend/role/edit/:id',
   name: 'edit_role',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ./components/admin/role/Edit.vue */ "./resources/js/components/admin/role/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(109)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Edit.vue */ "./resources/js/components/admin/role/Edit.vue"));
   },
   meta: {
     title: 'role edit',
@@ -82984,7 +81946,7 @@ var routes = [{
   path: '/backend/manage/role/edit/:id',
   name: 'manage_role',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./components/admin/role/ManageRole.vue */ "./resources/js/components/admin/role/ManageRole.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(90)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/ManageRole.vue */ "./resources/js/components/admin/role/ManageRole.vue"));
   },
   meta: {
     title: 'role management',
@@ -82994,7 +81956,7 @@ var routes = [{
   path: '/backend/model/assign/role/:id',
   name: 'assign_role',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignRole.vue */ "./resources/js/components/admin/admin/AssignRole.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(69)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignRole.vue */ "./resources/js/components/admin/admin/AssignRole.vue"));
   },
   meta: {
     title: 'admin giving role ',
@@ -83004,7 +81966,7 @@ var routes = [{
   path: '/backend/role/assign/permissions/:id',
   name: 'assign_permission',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignPermissions.vue */ "./resources/js/components/admin/admin/AssignPermissions.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(68)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignPermissions.vue */ "./resources/js/components/admin/admin/AssignPermissions.vue"));
   },
   meta: {
     title: 'role giving permission ',
@@ -83014,7 +81976,7 @@ var routes = [{
   path: '/backend/permission/list',
   name: 'permission_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Index.vue */ "./resources/js/components/admin/permission/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(88)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Index.vue */ "./resources/js/components/admin/permission/Index.vue"));
   },
   meta: {
     title: 'permission',
@@ -83024,7 +81986,7 @@ var routes = [{
   path: '/backend/permission/add',
   name: 'add_permission',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 49).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Add.vue */ "./resources/js/components/admin/permission/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(106)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Add.vue */ "./resources/js/components/admin/permission/Add.vue"));
   },
   meta: {
     title: 'permission add',
@@ -83034,7 +81996,7 @@ var routes = [{
   path: '/backend/permission/edit/:id',
   name: 'edit_permission',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 50).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Edit.vue */ "./resources/js/components/admin/permission/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(107)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Edit.vue */ "./resources/js/components/admin/permission/Edit.vue"));
   },
   meta: {
     title: 'permission edit',
@@ -83044,7 +82006,7 @@ var routes = [{
   path: '/backend/course/list',
   name: 'course_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./components/admin/course/Index.vue */ "./resources/js/components/admin/course/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(86)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Index.vue */ "./resources/js/components/admin/course/Index.vue"));
   },
   meta: {
     title: 'courses',
@@ -83054,7 +82016,7 @@ var routes = [{
   path: '/backend/course/add',
   name: 'add_course',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Add.vue */ "./resources/js/components/admin/course/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(84)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Add.vue */ "./resources/js/components/admin/course/Add.vue"));
   },
   meta: {
     title: 'course add',
@@ -83064,7 +82026,7 @@ var routes = [{
   path: '/backend/course/edit/:id',
   name: 'edit_course',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Edit.vue */ "./resources/js/components/admin/course/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(85)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Edit.vue */ "./resources/js/components/admin/course/Edit.vue"));
   },
   meta: {
     title: 'course edit',
@@ -83074,7 +82036,7 @@ var routes = [{
   path: '/backend/blog/post/list',
   name: 'post_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Index.vue */ "./resources/js/components/admin/blog_post/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(77)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Index.vue */ "./resources/js/components/admin/blog_post/Index.vue"));
   },
   meta: {
     title: 'posts',
@@ -83084,7 +82046,7 @@ var routes = [{
   path: '/backend/blog/post/add',
   name: 'add_post',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Add.vue */ "./resources/js/components/admin/blog_post/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(75)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Add.vue */ "./resources/js/components/admin/blog_post/Add.vue"));
   },
   meta: {
     title: 'post add',
@@ -83094,7 +82056,7 @@ var routes = [{
   path: '/backend/blog/post/edit/:id',
   name: 'edit_post',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Edit.vue */ "./resources/js/components/admin/blog_post/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(76)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Edit.vue */ "./resources/js/components/admin/blog_post/Edit.vue"));
   },
   meta: {
     title: 'post edit',
@@ -83104,7 +82066,7 @@ var routes = [{
   path: '/backend/employee/list',
   name: 'team_member',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./components/admin/team/Index.vue */ "./resources/js/components/admin/team/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./components/admin/team/Index.vue */ "./resources/js/components/admin/team/Index.vue"));
   },
   meta: {
     title: 'teams',
@@ -83114,7 +82076,7 @@ var routes = [{
   path: '/backend/employee/add',
   name: 'add_team_member',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./components/admin/team/Add.vue */ "./resources/js/components/admin/team/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(95)]).then(__webpack_require__.bind(null, /*! ./components/admin/team/Add.vue */ "./resources/js/components/admin/team/Add.vue"));
   },
   meta: {
     title: 'team member add',
@@ -83124,7 +82086,7 @@ var routes = [{
   path: '/backend/employee/edit/:id',
   name: 'edit_team_member',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./components/admin/team/Edit.vue */ "./resources/js/components/admin/team/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(96)]).then(__webpack_require__.bind(null, /*! ./components/admin/team/Edit.vue */ "./resources/js/components/admin/team/Edit.vue"));
   },
   meta: {
     title: 'team member edit',
@@ -83134,7 +82096,7 @@ var routes = [{
   path: '/backend/slider/list',
   name: 'slider_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 53).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Index.vue */ "./resources/js/components/admin/slider/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Index.vue */ "./resources/js/components/admin/slider/Index.vue"));
   },
   meta: {
     title: 'sliders',
@@ -83144,7 +82106,7 @@ var routes = [{
   path: '/backend/slider/add',
   name: 'add_slider',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Add.vue */ "./resources/js/components/admin/slider/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(91)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Add.vue */ "./resources/js/components/admin/slider/Add.vue"));
   },
   meta: {
     title: 'slider add',
@@ -83154,7 +82116,7 @@ var routes = [{
   path: '/backend/slider/edit/:id',
   name: 'edit_slider',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Edit.vue */ "./resources/js/components/admin/slider/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(92)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Edit.vue */ "./resources/js/components/admin/slider/Edit.vue"));
   },
   meta: {
     title: 'slider edit',
@@ -83164,7 +82126,7 @@ var routes = [{
   path: '/backend/for/category/slider/list',
   name: 'category_slider_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 48).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Index.vue */ "./resources/js/components/admin/category_slider/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 50).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Index.vue */ "./resources/js/components/admin/category_slider/Index.vue"));
   },
   meta: {
     title: 'category sliders',
@@ -83174,7 +82136,7 @@ var routes = [{
   path: '/backend/for/category/slider/add',
   name: 'add_category_slider',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Add.vue */ "./resources/js/components/admin/category_slider/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(82)]).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Add.vue */ "./resources/js/components/admin/category_slider/Add.vue"));
   },
   meta: {
     title: 'category slider add',
@@ -83184,7 +82146,7 @@ var routes = [{
   path: '/backend/for/category/slider/edit/:id',
   name: 'edit_category_slider',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Edit.vue */ "./resources/js/components/admin/category_slider/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(83)]).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Edit.vue */ "./resources/js/components/admin/category_slider/Edit.vue"));
   },
   meta: {
     title: 'category slider edit',
@@ -83194,7 +82156,7 @@ var routes = [{
   path: '/backend/carrier/post/list',
   name: 'carrier_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Index.vue */ "./resources/js/components/admin/carrier/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Index.vue */ "./resources/js/components/admin/carrier/Index.vue"));
   },
   meta: {
     title: 'carriers',
@@ -83204,7 +82166,7 @@ var routes = [{
   path: '/backend/carrier/post/add',
   name: 'add_carrier',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Add.vue */ "./resources/js/components/admin/carrier/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(78)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Add.vue */ "./resources/js/components/admin/carrier/Add.vue"));
   },
   meta: {
     title: 'carrier add',
@@ -83214,7 +82176,7 @@ var routes = [{
   path: '/backend/carrier/post/edit/:id',
   name: 'edit_carrier',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Edit.vue */ "./resources/js/components/admin/carrier/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(79)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Edit.vue */ "./resources/js/components/admin/carrier/Edit.vue"));
   },
   meta: {
     title: 'carrier edit',
@@ -83224,7 +82186,7 @@ var routes = [{
   path: '/backend/carrier/post/show/:id',
   name: 'show_carrier',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Show.vue */ "./resources/js/components/admin/carrier/Show.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(80)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Show.vue */ "./resources/js/components/admin/carrier/Show.vue"));
   },
   meta: {
     title: 'carrier show',
@@ -83234,7 +82196,7 @@ var routes = [{
   path: '/backend/applicant/carrier/post/:id',
   name: 'candidate_carrier',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/JobApplied.vue */ "./resources/js/components/admin/carrier/JobApplied.vue"));
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/JobApplied.vue */ "./resources/js/components/admin/carrier/JobApplied.vue"));
   },
   meta: {
     title: 'carrier applicant show',
@@ -83244,7 +82206,7 @@ var routes = [{
   path: '/backend/student/registed/in/course/:id',
   name: 'course_registered_students',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./components/admin/course/RegisteredStudetns.vue */ "./resources/js/components/admin/course/RegisteredStudetns.vue"));
+    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./components/admin/course/RegisteredStudetns.vue */ "./resources/js/components/admin/course/RegisteredStudetns.vue"));
   },
   meta: {
     title: 'course registered studetns ',
@@ -83254,7 +82216,7 @@ var routes = [{
   path: '/backend/student/add/result/:id',
   name: 'add_student_result',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./components/admin/students/AddResult.vue */ "./resources/js/components/admin/students/AddResult.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(93)]).then(__webpack_require__.bind(null, /*! ./components/admin/students/AddResult.vue */ "./resources/js/components/admin/students/AddResult.vue"));
   },
   meta: {
     title: 'student result add',
@@ -83264,7 +82226,7 @@ var routes = [{
   path: '/backend/student/result/edit/:id',
   name: 'edit_student_result',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./components/admin/students/EditResult.vue */ "./resources/js/components/admin/students/EditResult.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(94)]).then(__webpack_require__.bind(null, /*! ./components/admin/students/EditResult.vue */ "./resources/js/components/admin/students/EditResult.vue"));
   },
   meta: {
     title: 'student result edit',
@@ -83274,7 +82236,7 @@ var routes = [{
   path: '/backend/student/details/:id',
   name: 'student_details',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./components/admin/students/Details.vue */ "./resources/js/components/admin/students/Details.vue"));
+    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./components/admin/students/Details.vue */ "./resources/js/components/admin/students/Details.vue"));
   },
   meta: {
     title: 'student details',
@@ -83284,10 +82246,37 @@ var routes = [{
   path: '/backend/students/list/display',
   name: 'students',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./components/admin/students/Students.vue */ "./resources/js/components/admin/students/Students.vue"));
+    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./components/admin/students/Students.vue */ "./resources/js/components/admin/students/Students.vue"));
   },
   meta: {
     title: 'students list',
+    authAdmin: true
+  }
+}, {
+  path: '/backend/general/setting',
+  name: 'general_setting',
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(87)]).then(__webpack_require__.bind(null, /*! ./components/admin/general_setting/General.vue */ "./resources/js/components/admin/general_setting/General.vue"));
+  },
+  meta: {
+    authAdmin: true
+  }
+}, {
+  path: '/backend/footer/info',
+  name: 'footer_setting',
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(105)]).then(__webpack_require__.bind(null, /*! ./components/admin/footer_setting/Index.vue */ "./resources/js/components/admin/footer_setting/Index.vue"));
+  },
+  meta: {
+    authAdmin: true
+  }
+}, {
+  path: '/backend/theme/setting',
+  name: 'theme_setting',
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(73)]).then(__webpack_require__.bind(null, /*! ./components/admin/background_and_color/Index.vue */ "./resources/js/components/admin/background_and_color/Index.vue"));
+  },
+  meta: {
     authAdmin: true
   }
 }];
@@ -83346,7 +82335,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     //asign category slider
     category_sliders: '',
     //asign for upcoming course
-    upcoming_course: ''
+    upcoming_course: '',
+    //general setting
+    general_setting: "",
+    //footer setting
+    footer_setting: "",
+    //theme setting
+    theme_setting: ""
   },
   actions: {
     //session check
@@ -83423,6 +82418,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
           context.commit('category_sliders', resp.data.category_sliders);
         }
       });
+    },
+    general_setting: function general_setting(context) {
+      axios.get("/api/get/general/setting").then(function (resp) {
+        // console.log(resp);
+        context.commit('general_setting', resp.data.general_setting);
+      });
+    },
+    footer_setting: function footer_setting(context) {
+      axios.get("/api/get/footer/setting").then(function (resp) {
+        // console.log(resp);
+        context.commit('footer_setting', resp.data.footer_setting);
+      });
+    },
+    theme_setting: function theme_setting(context) {
+      axios.get("/api/get/theme/setting").then(function (resp) {
+        // console.log(resp);
+        context.commit('theme_setting', resp.data.theme_setting);
+      });
     }
   },
   mutations: {
@@ -83446,6 +82459,15 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     category_sliders: function category_sliders(state, payload) {
       return state.category_sliders = payload;
+    },
+    general_setting: function general_setting(state, payload) {
+      return state.general_setting = payload;
+    },
+    footer_setting: function footer_setting(state, payload) {
+      return state.footer_setting = payload;
+    },
+    theme_setting: function theme_setting(state, payload) {
+      return state.theme_setting = payload;
     }
   },
   getters: {
@@ -83469,6 +82491,15 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     upcoming_course: function upcoming_course(state) {
       return state.upcoming_course;
+    },
+    general_setting: function general_setting(state) {
+      return state.general_setting;
+    },
+    footer_setting: function footer_setting(state) {
+      return state.footer_setting;
+    },
+    theme_setting: function theme_setting(state) {
+      return state.theme_setting;
     }
   }
 });

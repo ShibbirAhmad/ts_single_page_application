@@ -30,6 +30,16 @@ const store = new Vuex.Store({
     //asign for upcoming course
     upcoming_course:'',
 
+    //general setting
+    general_setting:"",
+
+    //footer setting
+    footer_setting:"",
+
+    //theme setting
+     theme_setting:"",
+
+
   },
 
 
@@ -128,6 +138,29 @@ const store = new Vuex.Store({
 
     },
 
+    
+    general_setting(context){
+        axios.get("/api/get/general/setting")
+        .then(resp => {
+            // console.log(resp);
+            context.commit('general_setting', resp.data.general_setting);
+        })       
+    },
+
+    footer_setting(context){
+        axios.get("/api/get/footer/setting")
+        .then(resp => {
+            // console.log(resp);
+            context.commit('footer_setting', resp.data.footer_setting) ;
+        })  
+    },
+    theme_setting(context){
+        axios.get("/api/get/theme/setting")
+        .then(resp => {
+            // console.log(resp);
+            context.commit('theme_setting', resp.data.theme_setting);
+        })  
+    },
 
 
   },
@@ -160,7 +193,21 @@ const store = new Vuex.Store({
 
       category_sliders(state,payload){
         return state.category_sliders=payload ;
-      }
+      },
+              
+      general_setting(state,payload){
+        return state.general_setting=payload ;
+      },
+
+      
+      footer_setting(state,payload){
+          return state.footer_setting=payload ;
+      },
+  
+
+      theme_setting(state,payload){
+          return state.theme_setting=payload ;
+      },
 
   },
 
@@ -192,7 +239,19 @@ const store = new Vuex.Store({
 
        upcoming_course(state){
          return state.upcoming_course;
-       }
+       },
+
+       general_setting(state){
+        return state.general_setting ;
+       },
+
+        footer_setting(state){
+            return state.footer_setting ;
+        },
+
+        theme_setting(state){
+            return state.theme_setting ;
+        }
 
   },
 

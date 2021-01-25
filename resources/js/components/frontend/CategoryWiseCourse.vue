@@ -2,11 +2,26 @@
   <div>
 	  
     <header-section></header-section>
+	   <div class="category_slider_container">
+           <carousel
+              v-if="category_sliders"
+              :items="1"
+              :nav="false"
+              :autoplay="true"
+              :autoplayTimeout="2000"
+            >
+              <a v-for="slider in category_sliders" :href="slider.url" :key="slider.id">
+                <img  :src="slider.image? base_url + slider.image : base_url+'images/no_image.jpg'" />
+              </a>
+            </carousel>
+		       </div>
 
   
     <!-- Courses section -->
     <section class="courses-section spad">
       <div class="container">
+
+      
         <div class="section-title text-center">
           <h3 class="heading"> {{ category.name }}  </h3>
         </div>
@@ -56,12 +71,13 @@
 
 <script>
 
-
+import carousel from "vue-owl-carousel";
 export default {
  
   created() {
 
     this.getCoureseOfCategory();
+    this.$store.dispatch("category_sliders");
    
   },
 
@@ -98,11 +114,16 @@ export default {
         }
       });
     },
-
-  
 	
   },
-
+  computed:{
+     category_sliders() {
+      return this.$store.getters.category_sliders;
+    },
+  },
+   components: { 
+      carousel ,
+	  },
  
 
 

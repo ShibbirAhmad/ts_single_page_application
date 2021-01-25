@@ -11,7 +11,10 @@ use App\Models\Slider;
 use App\Models\Banner;
 use App\Models\CategorySlider;
 use App\Models\Subscriber;
-
+use App\Models\BackgroundAndColor;
+use App\Models\GeneralSetting;
+use App\Models\FooterSetting;
+use Illuminate\Support\Facades\Validator;
 
 
 class HomeController extends Controller
@@ -127,28 +130,61 @@ class HomeController extends Controller
        
     
     public function add_subscription(Request $request){
-
-           $validateData=  $request->validate([
-                'email'=>'required|email|unique:subscribers'
+  
+            $validator= Validator::make($request->all(),[      
+                  'email' => 'required|email|unique:subscribers',
             ]);
-            $subscriber=new Subscriber();
-            $subscriber->email=$request->email;
-            if ($subscriber->save()) {
-                    return response()->json([
-                    'status' => "OK",
-                    'message'=>"Thanks for subscribe us",
-                ]);
-            }else{
-                    return response()->json([
-                        'status' => "FAIL",
-                        'message'=>":) try again",
-                    ]);
-            }
-            
 
-        } 
+            if (!$validator->fails()) {   
+                $subscriber = new Subscriber() ;
+                $subscriber->email = $request->email ;
+                $subscriber->save();
+                return response()->json([
+                    "success" => "OK",
+                    "message" => 'Thanks for subscibed us' ,
+                    ]);   
+            }else{
+                return response()->json([
+                    "success" => "Fail",
+                    "message" => 'this email  already exists',
+                ]);
+            }
+      } 
    
      
+
+
+      
+    public function get_general_setting(){
+
+          $general_setting = GeneralSetting::latest()->first();
+          return response()->json([
+               'general_setting' => $general_setting,
+          ]);
+
+      }
+
+
+    public function get_footer_setting(){
+
+        $footer_setting = FooterSetting::latest()->first();
+        return response()->json([
+             'footer_setting' => $footer_setting,
+        ]);
+
+
+      }
+
+
+    public function get_theme_setting(){
+
+        $theme_setting = BackgroundAndColor::latest()->first();
+        return response()->json([
+             'theme_setting' => $theme_setting,
+        ]);
+
+
+     }
 
 
 }
