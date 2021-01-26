@@ -52,6 +52,25 @@ const routes = [
        title: 'Search Details ',
          }
     },
+  
+    { 
+    path: '/talibs/team/members', 
+    name: 'talibs_team',
+    component: () => import('./components/frontend/Team.vue'),
+    meta:{
+       title: 'our team',
+         }
+    },
+
+    { 
+    path: '/blog/post', 
+    name: 'blog',
+    component: () => import('./components/frontend/PostAll.vue'),
+    meta:{
+       title: 'blog',
+         }
+    },
+
 
 
    { 

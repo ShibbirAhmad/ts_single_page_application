@@ -42,6 +42,10 @@
   Route::post('api/student/register','StudentController@register_student');
   Route::get('api/check/student/result/{student_id}','StudentController@check_student_result');
 
+
+  Route::get('api/publish/team','HomeController@get_team_members');
+  Route::get('api/get/all/bolg/post','HomeController@get_all_blog_posts');
+
  });
 
 

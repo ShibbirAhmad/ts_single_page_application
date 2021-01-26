@@ -121,8 +121,11 @@ export default {
               position: "top-center",
               duration: 5000,
             });
-            this.$router.push({ name: "home" });
-            location.reload();
+         
+           this.$router.push({ name: "home" });
+            setTimeout( ()=>{
+              location.reload();},1500
+               );
           }else{
              this.$toasted.show(resp.data.message, {
               type: "error",

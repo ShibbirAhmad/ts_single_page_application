@@ -14,6 +14,7 @@ use App\Models\Subscriber;
 use App\Models\BackgroundAndColor;
 use App\Models\GeneralSetting;
 use App\Models\FooterSetting;
+use App\Models\Team;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -185,6 +186,26 @@ class HomeController extends Controller
 
 
      }
+
+
+    public function  get_team_members(){
+            $team = Team::where('status',1)->orderBy('position','ASC')->get();
+            return response()->json([
+                'status' => "OK",
+                'team'  => $team ,
+        ]);
+    }
+
+
+    
+    public function  get_all_blog_posts(){
+                $blog_posts = BlogPost::where('status',1)->orderBy('id','desc')->with('category_name','admin_name')->paginate(9);
+                return response()->json([
+                    'status' => "OK",
+                    'blog_posts'  => $blog_posts ,
+            ]);
+        }
+
 
 
 }

@@ -145,24 +145,6 @@ ol {
 }
 
 
-.subcribe-btn {
-    position: relative;
-    display: inline-block;
-    text-transform: uppercase;
-    background: #f6783a;
-	color: #fff;
-	cursor: pointer;
-    padding: 18px 30px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 14px;
-    border-radius: 50px;
-    width: 125px;
-	border: none;
-	float: right;
-   
-}
-
 /* Image Popup */
 
 .img-popup-warp .mfp-content,
@@ -1140,11 +1122,7 @@ ol {
 /*---------------------
 	Footer Section
 -----------------------*/
-.site-btn {
-    float: right;
-	margin-right: 20px;
 
-}
 
 .subscribe_input {
     width: 80%;
@@ -1834,7 +1812,8 @@ ol {
 	margin-bottom: 10px;
 }
 
-.subcribe-btn {
+.subscribe-btn {
+	float: right;
     position: relative;
     display: inline-block;
     text-transform: uppercase;
@@ -1848,7 +1827,8 @@ ol {
     border-radius: 50px;
     width: 170px;
     border: none;
-    text-align: center;
+	text-align: center;
+	margin-right: 10%;
 
 }
 
@@ -2376,6 +2356,21 @@ ol {
 	.newsletter-section .newsletter {
 		text-align: center;
 	}
+   
+	.subscribe-btn {
+	    float:right;
+	    padding: 18px 15px;
+	    font-size: 12px;
+	    font-weight: 400;
+	    line-height: 14px;
+	    border-radius: 50px;
+	    width: 100px;
+	    margin-right:0%;
+
+
+	}
+
+
 	.newsletter-section .newsletter input {
 		padding-right: 30px;
 		margin-bottom: 20px;
@@ -2536,7 +2531,7 @@ ol {
 	    text-align: center;
 	    border: none;
 		cursor: pointer;
-		margin-right: 30%;
+	
 	}
 
    

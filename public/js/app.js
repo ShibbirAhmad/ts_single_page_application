@@ -2374,10 +2374,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('footer_setting');
@@ -2488,6 +2484,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$store.dispatch("user");
     this.$store.dispatch("categories");
+    this.$store.dispatch("general_setting");
   },
   data: function data() {
     return {
@@ -2511,6 +2508,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    general_setting: function general_setting() {
+      return this.$store.getters.general_setting;
+    },
     categories: function categories() {
       return this.$store.getters.categories;
     },
@@ -64255,16 +64255,6 @@ var render = function() {
                   "li",
                   [
                     _c("router-link", { attrs: { to: { name: "home" } } }, [
-                      _vm._v("CARRIER")
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  [
-                    _c("router-link", { attrs: { to: { name: "home" } } }, [
                       _vm._v("HOME")
                     ])
                   ],
@@ -64275,6 +64265,16 @@ var render = function() {
                   "li",
                   [
                     _c("router-link", { attrs: { to: { name: "home" } } }, [
+                      _vm._v("CARRIER")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: { name: "blog" } } }, [
                       _vm._v("BLOG")
                     ])
                   ],
@@ -64347,19 +64347,11 @@ var render = function() {
               _c(
                 "li",
                 [
-                  _c("router-link", { attrs: { to: { name: "home" } } }, [
-                    _vm._v("\n                  TEAM\n                ")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: { name: "home" } } }, [
-                    _vm._v("ABOUT TALIBS\n                ")
-                  ])
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "talibs_team" } } },
+                    [_vm._v("\n                  TEAM\n                ")]
+                  )
                 ],
                 1
               )
@@ -64421,7 +64413,7 @@ var render = function() {
                       _c(
                         "button",
                         {
-                          staticClass: "btn subcribe-btn",
+                          staticClass: "btn subscribe-btn",
                           attrs: { type: "submit" }
                         },
                         [_vm._v("subscirbe")]
@@ -64555,7 +64547,11 @@ var render = function() {
             { staticClass: "site-logo", attrs: { to: { name: "home" } } },
             [
               _c("img", {
-                attrs: { src: _vm.base_url + "images/logo.png", alt: "LOGO" }
+                attrs: {
+                  src: _vm.general_setting.logo
+                    ? _vm.base_url + _vm.general_setting.logo
+                    : _vm.base_url + "images/logo.png"
+                }
               })
             ]
           ),
@@ -64575,7 +64571,7 @@ var render = function() {
           { staticClass: "nav-right" },
           [
             _c("router-link", { attrs: { to: { name: "user_login" } } }, [
-              _c("i", { staticClass: "fa fa-user" })
+              _vm._v("SIGN-IN/SIGN-UP")
             ]),
             _vm._v(" "),
             Object.keys(_vm.user).length
@@ -81679,7 +81675,7 @@ var routes = [{
   path: '/',
   name: 'home',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(63), __webpack_require__.e(57), __webpack_require__.e(66)]).then(__webpack_require__.bind(null, /*! ./components/frontend/Index.vue */ "./resources/js/components/frontend/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(69), __webpack_require__.e(66), __webpack_require__.e(59)]).then(__webpack_require__.bind(null, /*! ./components/frontend/Index.vue */ "./resources/js/components/frontend/Index.vue"));
   },
   meta: {
     title: 'welecome '
@@ -81688,7 +81684,7 @@ var routes = [{
   path: '/blog/details/:slug',
   name: 'blog_post_details',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(97)]).then(__webpack_require__.bind(null, /*! ./components/frontend/BlogPostDetails.vue */ "./resources/js/components/frontend/BlogPostDetails.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(40)]).then(__webpack_require__.bind(null, /*! ./components/frontend/BlogPostDetails.vue */ "./resources/js/components/frontend/BlogPostDetails.vue"));
   },
   meta: {
     title: 'Blog Details '
@@ -81697,7 +81693,7 @@ var routes = [{
   path: '/course/details/:slug',
   name: 'course_details',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./components/frontend/CourseDetails.vue */ "./resources/js/components/frontend/CourseDetails.vue"));
+    return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ./components/frontend/CourseDetails.vue */ "./resources/js/components/frontend/CourseDetails.vue"));
   },
   meta: {
     title: 'Course Details '
@@ -81706,7 +81702,7 @@ var routes = [{
   path: '/course/of/category/:id',
   name: 'category_wise_course',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(63), __webpack_require__.e(65)]).then(__webpack_require__.bind(null, /*! ./components/frontend/CategoryWiseCourse.vue */ "./resources/js/components/frontend/CategoryWiseCourse.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(69), __webpack_require__.e(41)]).then(__webpack_require__.bind(null, /*! ./components/frontend/CategoryWiseCourse.vue */ "./resources/js/components/frontend/CategoryWiseCourse.vue"));
   },
   meta: {
     title: 'Course of category '
@@ -81715,16 +81711,34 @@ var routes = [{
   path: '/search/details',
   name: 'search',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 64).then(__webpack_require__.bind(null, /*! ./components/frontend/Search.vue */ "./resources/js/components/frontend/Search.vue"));
+    return __webpack_require__.e(/*! import() */ 65).then(__webpack_require__.bind(null, /*! ./components/frontend/Search.vue */ "./resources/js/components/frontend/Search.vue"));
   },
   meta: {
     title: 'Search Details '
   }
 }, {
+  path: '/talibs/team/members',
+  name: 'talibs_team',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 67).then(__webpack_require__.bind(null, /*! ./components/frontend/Team.vue */ "./resources/js/components/frontend/Team.vue"));
+  },
+  meta: {
+    title: 'our team'
+  }
+}, {
+  path: '/blog/post',
+  name: 'blog',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 68).then(__webpack_require__.bind(null, /*! ./components/frontend/PostAll.vue */ "./resources/js/components/frontend/PostAll.vue"));
+  },
+  meta: {
+    title: 'blog'
+  }
+}, {
   path: '/student/register',
   name: 'student_register',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(41), __webpack_require__.e(98)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Register.vue */ "./resources/js/components/frontend/student/Register.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(64), __webpack_require__.e(43)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Register.vue */ "./resources/js/components/frontend/student/Register.vue"));
   },
   meta: {
     title: 'Student Registration '
@@ -81733,7 +81747,7 @@ var routes = [{
   path: '/public/user/login',
   name: 'user_login',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(99)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Login.vue */ "./resources/js/components/frontend/user/Login.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(44)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Login.vue */ "./resources/js/components/frontend/user/Login.vue"));
   },
   meta: {
     title: 'user login '
@@ -81742,7 +81756,7 @@ var routes = [{
   path: '/user/register',
   name: 'user_register',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(100)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Signup.vue */ "./resources/js/components/frontend/user/Signup.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(45)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/Signup.vue */ "./resources/js/components/frontend/user/Signup.vue"));
   },
   meta: {
     title: 'user register '
@@ -81751,7 +81765,7 @@ var routes = [{
   path: '/public/user/password/reset',
   name: 'UserPasswordReset',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(113)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/UserPasswordReset.vue */ "./resources/js/components/frontend/user/UserPasswordReset.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(63)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/UserPasswordReset.vue */ "./resources/js/components/frontend/user/UserPasswordReset.vue"));
   },
   meta: {
     title: 'Password Reset'
@@ -81760,7 +81774,7 @@ var routes = [{
   path: '/public/user/code/verify/:email',
   name: 'CodeVerified',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(111)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/CodeVerified.vue */ "./resources/js/components/frontend/user/CodeVerified.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(61)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/CodeVerified.vue */ "./resources/js/components/frontend/user/CodeVerified.vue"));
   },
   meta: {
     title: 'Password Reset'
@@ -81769,7 +81783,7 @@ var routes = [{
   path: '/public/user/reset/password/:email',
   name: 'NewPasswordUser',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(112)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/NewPassword.vue */ "./resources/js/components/frontend/user/NewPassword.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(62)]).then(__webpack_require__.bind(null, /*! ./components/frontend/user/NewPassword.vue */ "./resources/js/components/frontend/user/NewPassword.vue"));
   },
   meta: {
     title: 'set new password'
@@ -81778,7 +81792,7 @@ var routes = [{
   path: '/student/result/check',
   name: 'check_student_result',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(110)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Result.vue */ "./resources/js/components/frontend/student/Result.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(60)]).then(__webpack_require__.bind(null, /*! ./components/frontend/student/Result.vue */ "./resources/js/components/frontend/student/Result.vue"));
   },
   meta: {
     title: 'Student Result Check '
@@ -81787,7 +81801,7 @@ var routes = [{
   path: '/backend/category/admin/login',
   name: 'admin_login',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./components/admin/Login.vue */ "./resources/js/components/admin/Login.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./components/admin/Login.vue */ "./resources/js/components/admin/Login.vue"));
   },
   meta: {
     title: 'Admin Login'
@@ -81796,7 +81810,7 @@ var routes = [{
   path: '/backend/admin/add',
   name: 'add_admin',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(67)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Add.vue */ "./resources/js/components/admin/admin/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Add.vue */ "./resources/js/components/admin/admin/Add.vue"));
   },
   meta: {
     title: 'Admin Register',
@@ -81806,7 +81820,7 @@ var routes = [{
   path: '/backend/admin/edit/:id',
   name: 'edit_admin',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(70)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Edit.vue */ "./resources/js/components/admin/admin/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Edit.vue */ "./resources/js/components/admin/admin/Edit.vue"));
   },
   meta: {
     title: 'Admin Edit',
@@ -81816,7 +81830,7 @@ var routes = [{
   path: '/backend/admin/password/edit/',
   name: 'edit_admin_password',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(71)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Password.vue */ "./resources/js/components/admin/admin/Password.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Password.vue */ "./resources/js/components/admin/admin/Password.vue"));
   },
   meta: {
     title: 'Admin Password Edit',
@@ -81826,7 +81840,7 @@ var routes = [{
   path: '/backend/admin/profile',
   name: 'admin_profile',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(72)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Profile.vue */ "./resources/js/components/admin/admin/Profile.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Profile.vue */ "./resources/js/components/admin/admin/Profile.vue"));
   },
   meta: {
     title: 'Admin Profile Info',
@@ -81836,7 +81850,7 @@ var routes = [{
   path: '/backend/admin/list',
   name: 'admin_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Index.vue */ "./resources/js/components/admin/admin/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./components/admin/admin/Index.vue */ "./resources/js/components/admin/admin/Index.vue"));
   },
   meta: {
     title: 'Admin List',
@@ -81846,7 +81860,7 @@ var routes = [{
   path: '/backend/admin/dashboard',
   name: 'admin_dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
+    return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./components/admin/Dashboard.vue */ "./resources/js/components/admin/Dashboard.vue"));
   },
   meta: {
     title: 'Admin Dashboard',
@@ -81856,7 +81870,7 @@ var routes = [{
   path: '/backend/category/list',
   name: 'category',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(81)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Index.vue */ "./resources/js/components/admin/category/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Index.vue */ "./resources/js/components/admin/category/Index.vue"));
   },
   meta: {
     title: 'category list',
@@ -81866,7 +81880,7 @@ var routes = [{
   path: '/backend/category/add',
   name: 'add_category',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(103)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Add.vue */ "./resources/js/components/admin/category/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(50)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Add.vue */ "./resources/js/components/admin/category/Add.vue"));
   },
   meta: {
     title: 'category add',
@@ -81876,7 +81890,7 @@ var routes = [{
   path: '/backend/category/edit/:id',
   name: 'edit_category',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(104)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Edit.vue */ "./resources/js/components/admin/category/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(51)]).then(__webpack_require__.bind(null, /*! ./components/admin/category/Edit.vue */ "./resources/js/components/admin/category/Edit.vue"));
   },
   meta: {
     title: 'category edit',
@@ -81886,7 +81900,7 @@ var routes = [{
   path: '/backend/banner/list',
   name: 'banner',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Index.vue */ "./resources/js/components/admin/banner/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Index.vue */ "./resources/js/components/admin/banner/Index.vue"));
   },
   meta: {
     title: 'banner list',
@@ -81896,7 +81910,7 @@ var routes = [{
   path: '/backend/banner/add',
   name: 'add_banner',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(101)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Add.vue */ "./resources/js/components/admin/banner/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(48)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Add.vue */ "./resources/js/components/admin/banner/Add.vue"));
   },
   meta: {
     title: 'banner add',
@@ -81906,7 +81920,7 @@ var routes = [{
   path: '/backend/banner/edit/:id',
   name: 'edit_banner',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(102)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Edit.vue */ "./resources/js/components/admin/banner/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(49)]).then(__webpack_require__.bind(null, /*! ./components/admin/banner/Edit.vue */ "./resources/js/components/admin/banner/Edit.vue"));
   },
   meta: {
     title: 'banner edit',
@@ -81916,7 +81930,7 @@ var routes = [{
   path: '/backend/role/list',
   name: 'role_list',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(89)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Index.vue */ "./resources/js/components/admin/role/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(29)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Index.vue */ "./resources/js/components/admin/role/Index.vue"));
   },
   meta: {
     title: 'role',
@@ -81926,7 +81940,7 @@ var routes = [{
   path: '/backend/role/add',
   name: 'add_role',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(108)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Add.vue */ "./resources/js/components/admin/role/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(56)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Add.vue */ "./resources/js/components/admin/role/Add.vue"));
   },
   meta: {
     title: 'role add',
@@ -81936,7 +81950,7 @@ var routes = [{
   path: '/backend/role/edit/:id',
   name: 'edit_role',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(109)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Edit.vue */ "./resources/js/components/admin/role/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(57)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/Edit.vue */ "./resources/js/components/admin/role/Edit.vue"));
   },
   meta: {
     title: 'role edit',
@@ -81946,7 +81960,7 @@ var routes = [{
   path: '/backend/manage/role/edit/:id',
   name: 'manage_role',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(90)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/ManageRole.vue */ "./resources/js/components/admin/role/ManageRole.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(30)]).then(__webpack_require__.bind(null, /*! ./components/admin/role/ManageRole.vue */ "./resources/js/components/admin/role/ManageRole.vue"));
   },
   meta: {
     title: 'role management',
@@ -81956,7 +81970,7 @@ var routes = [{
   path: '/backend/model/assign/role/:id',
   name: 'assign_role',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(69)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignRole.vue */ "./resources/js/components/admin/admin/AssignRole.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignRole.vue */ "./resources/js/components/admin/admin/AssignRole.vue"));
   },
   meta: {
     title: 'admin giving role ',
@@ -81966,7 +81980,7 @@ var routes = [{
   path: '/backend/role/assign/permissions/:id',
   name: 'assign_permission',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(68)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignPermissions.vue */ "./resources/js/components/admin/admin/AssignPermissions.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/admin/admin/AssignPermissions.vue */ "./resources/js/components/admin/admin/AssignPermissions.vue"));
   },
   meta: {
     title: 'role giving permission ',
@@ -81976,7 +81990,7 @@ var routes = [{
   path: '/backend/permission/list',
   name: 'permission_list',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(88)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Index.vue */ "./resources/js/components/admin/permission/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(28)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Index.vue */ "./resources/js/components/admin/permission/Index.vue"));
   },
   meta: {
     title: 'permission',
@@ -81986,7 +82000,7 @@ var routes = [{
   path: '/backend/permission/add',
   name: 'add_permission',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(106)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Add.vue */ "./resources/js/components/admin/permission/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(54)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Add.vue */ "./resources/js/components/admin/permission/Add.vue"));
   },
   meta: {
     title: 'permission add',
@@ -81996,7 +82010,7 @@ var routes = [{
   path: '/backend/permission/edit/:id',
   name: 'edit_permission',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(107)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Edit.vue */ "./resources/js/components/admin/permission/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(55)]).then(__webpack_require__.bind(null, /*! ./components/admin/permission/Edit.vue */ "./resources/js/components/admin/permission/Edit.vue"));
   },
   meta: {
     title: 'permission edit',
@@ -82006,7 +82020,7 @@ var routes = [{
   path: '/backend/course/list',
   name: 'course_list',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(86)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Index.vue */ "./resources/js/components/admin/course/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Index.vue */ "./resources/js/components/admin/course/Index.vue"));
   },
   meta: {
     title: 'courses',
@@ -82016,7 +82030,7 @@ var routes = [{
   path: '/backend/course/add',
   name: 'add_course',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(84)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Add.vue */ "./resources/js/components/admin/course/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Add.vue */ "./resources/js/components/admin/course/Add.vue"));
   },
   meta: {
     title: 'course add',
@@ -82026,7 +82040,7 @@ var routes = [{
   path: '/backend/course/edit/:id',
   name: 'edit_course',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(85)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Edit.vue */ "./resources/js/components/admin/course/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./components/admin/course/Edit.vue */ "./resources/js/components/admin/course/Edit.vue"));
   },
   meta: {
     title: 'course edit',
@@ -82036,7 +82050,7 @@ var routes = [{
   path: '/backend/blog/post/list',
   name: 'post_list',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(77)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Index.vue */ "./resources/js/components/admin/blog_post/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Index.vue */ "./resources/js/components/admin/blog_post/Index.vue"));
   },
   meta: {
     title: 'posts',
@@ -82046,7 +82060,7 @@ var routes = [{
   path: '/backend/blog/post/add',
   name: 'add_post',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(75)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Add.vue */ "./resources/js/components/admin/blog_post/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Add.vue */ "./resources/js/components/admin/blog_post/Add.vue"));
   },
   meta: {
     title: 'post add',
@@ -82056,7 +82070,7 @@ var routes = [{
   path: '/backend/blog/post/edit/:id',
   name: 'edit_post',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(76)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Edit.vue */ "./resources/js/components/admin/blog_post/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./components/admin/blog_post/Edit.vue */ "./resources/js/components/admin/blog_post/Edit.vue"));
   },
   meta: {
     title: 'post edit',
@@ -82066,7 +82080,7 @@ var routes = [{
   path: '/backend/employee/list',
   name: 'team_member',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./components/admin/team/Index.vue */ "./resources/js/components/admin/team/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 39).then(__webpack_require__.bind(null, /*! ./components/admin/team/Index.vue */ "./resources/js/components/admin/team/Index.vue"));
   },
   meta: {
     title: 'teams',
@@ -82076,7 +82090,7 @@ var routes = [{
   path: '/backend/employee/add',
   name: 'add_team_member',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(95)]).then(__webpack_require__.bind(null, /*! ./components/admin/team/Add.vue */ "./resources/js/components/admin/team/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(37)]).then(__webpack_require__.bind(null, /*! ./components/admin/team/Add.vue */ "./resources/js/components/admin/team/Add.vue"));
   },
   meta: {
     title: 'team member add',
@@ -82086,7 +82100,7 @@ var routes = [{
   path: '/backend/employee/edit/:id',
   name: 'edit_team_member',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(96)]).then(__webpack_require__.bind(null, /*! ./components/admin/team/Edit.vue */ "./resources/js/components/admin/team/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(38)]).then(__webpack_require__.bind(null, /*! ./components/admin/team/Edit.vue */ "./resources/js/components/admin/team/Edit.vue"));
   },
   meta: {
     title: 'team member edit',
@@ -82096,7 +82110,7 @@ var routes = [{
   path: '/backend/slider/list',
   name: 'slider_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Index.vue */ "./resources/js/components/admin/slider/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 58).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Index.vue */ "./resources/js/components/admin/slider/Index.vue"));
   },
   meta: {
     title: 'sliders',
@@ -82106,7 +82120,7 @@ var routes = [{
   path: '/backend/slider/add',
   name: 'add_slider',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(91)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Add.vue */ "./resources/js/components/admin/slider/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(31)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Add.vue */ "./resources/js/components/admin/slider/Add.vue"));
   },
   meta: {
     title: 'slider add',
@@ -82116,7 +82130,7 @@ var routes = [{
   path: '/backend/slider/edit/:id',
   name: 'edit_slider',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(92)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Edit.vue */ "./resources/js/components/admin/slider/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Edit.vue */ "./resources/js/components/admin/slider/Edit.vue"));
   },
   meta: {
     title: 'slider edit',
@@ -82126,7 +82140,7 @@ var routes = [{
   path: '/backend/for/category/slider/list',
   name: 'category_slider_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 50).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Index.vue */ "./resources/js/components/admin/category_slider/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Index.vue */ "./resources/js/components/admin/category_slider/Index.vue"));
   },
   meta: {
     title: 'category sliders',
@@ -82136,7 +82150,7 @@ var routes = [{
   path: '/backend/for/category/slider/add',
   name: 'add_category_slider',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(82)]).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Add.vue */ "./resources/js/components/admin/category_slider/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Add.vue */ "./resources/js/components/admin/category_slider/Add.vue"));
   },
   meta: {
     title: 'category slider add',
@@ -82146,7 +82160,7 @@ var routes = [{
   path: '/backend/for/category/slider/edit/:id',
   name: 'edit_category_slider',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(83)]).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Edit.vue */ "./resources/js/components/admin/category_slider/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./components/admin/category_slider/Edit.vue */ "./resources/js/components/admin/category_slider/Edit.vue"));
   },
   meta: {
     title: 'category slider edit',
@@ -82156,7 +82170,7 @@ var routes = [{
   path: '/backend/carrier/post/list',
   name: 'carrier_list',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Index.vue */ "./resources/js/components/admin/carrier/Index.vue"));
+    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Index.vue */ "./resources/js/components/admin/carrier/Index.vue"));
   },
   meta: {
     title: 'carriers',
@@ -82166,7 +82180,7 @@ var routes = [{
   path: '/backend/carrier/post/add',
   name: 'add_carrier',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(78)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Add.vue */ "./resources/js/components/admin/carrier/Add.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Add.vue */ "./resources/js/components/admin/carrier/Add.vue"));
   },
   meta: {
     title: 'carrier add',
@@ -82176,7 +82190,7 @@ var routes = [{
   path: '/backend/carrier/post/edit/:id',
   name: 'edit_carrier',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(79)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Edit.vue */ "./resources/js/components/admin/carrier/Edit.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Edit.vue */ "./resources/js/components/admin/carrier/Edit.vue"));
   },
   meta: {
     title: 'carrier edit',
@@ -82186,7 +82200,7 @@ var routes = [{
   path: '/backend/carrier/post/show/:id',
   name: 'show_carrier',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(80)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Show.vue */ "./resources/js/components/admin/carrier/Show.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/Show.vue */ "./resources/js/components/admin/carrier/Show.vue"));
   },
   meta: {
     title: 'carrier show',
@@ -82196,7 +82210,7 @@ var routes = [{
   path: '/backend/applicant/carrier/post/:id',
   name: 'candidate_carrier',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/JobApplied.vue */ "./resources/js/components/admin/carrier/JobApplied.vue"));
+    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./components/admin/carrier/JobApplied.vue */ "./resources/js/components/admin/carrier/JobApplied.vue"));
   },
   meta: {
     title: 'carrier applicant show',
@@ -82206,7 +82220,7 @@ var routes = [{
   path: '/backend/student/registed/in/course/:id',
   name: 'course_registered_students',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./components/admin/course/RegisteredStudetns.vue */ "./resources/js/components/admin/course/RegisteredStudetns.vue"));
+    return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./components/admin/course/RegisteredStudetns.vue */ "./resources/js/components/admin/course/RegisteredStudetns.vue"));
   },
   meta: {
     title: 'course registered studetns ',
@@ -82216,7 +82230,7 @@ var routes = [{
   path: '/backend/student/add/result/:id',
   name: 'add_student_result',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(93)]).then(__webpack_require__.bind(null, /*! ./components/admin/students/AddResult.vue */ "./resources/js/components/admin/students/AddResult.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(33)]).then(__webpack_require__.bind(null, /*! ./components/admin/students/AddResult.vue */ "./resources/js/components/admin/students/AddResult.vue"));
   },
   meta: {
     title: 'student result add',
@@ -82226,7 +82240,7 @@ var routes = [{
   path: '/backend/student/result/edit/:id',
   name: 'edit_student_result',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(94)]).then(__webpack_require__.bind(null, /*! ./components/admin/students/EditResult.vue */ "./resources/js/components/admin/students/EditResult.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(35)]).then(__webpack_require__.bind(null, /*! ./components/admin/students/EditResult.vue */ "./resources/js/components/admin/students/EditResult.vue"));
   },
   meta: {
     title: 'student result edit',
@@ -82236,7 +82250,7 @@ var routes = [{
   path: '/backend/student/details/:id',
   name: 'student_details',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./components/admin/students/Details.vue */ "./resources/js/components/admin/students/Details.vue"));
+    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./components/admin/students/Details.vue */ "./resources/js/components/admin/students/Details.vue"));
   },
   meta: {
     title: 'student details',
@@ -82246,7 +82260,7 @@ var routes = [{
   path: '/backend/students/list/display',
   name: 'students',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./components/admin/students/Students.vue */ "./resources/js/components/admin/students/Students.vue"));
+    return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./components/admin/students/Students.vue */ "./resources/js/components/admin/students/Students.vue"));
   },
   meta: {
     title: 'students list',
@@ -82256,7 +82270,7 @@ var routes = [{
   path: '/backend/general/setting',
   name: 'general_setting',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(87)]).then(__webpack_require__.bind(null, /*! ./components/admin/general_setting/General.vue */ "./resources/js/components/admin/general_setting/General.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(27)]).then(__webpack_require__.bind(null, /*! ./components/admin/general_setting/General.vue */ "./resources/js/components/admin/general_setting/General.vue"));
   },
   meta: {
     authAdmin: true
@@ -82265,7 +82279,7 @@ var routes = [{
   path: '/backend/footer/info',
   name: 'footer_setting',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(105)]).then(__webpack_require__.bind(null, /*! ./components/admin/footer_setting/Index.vue */ "./resources/js/components/admin/footer_setting/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(53)]).then(__webpack_require__.bind(null, /*! ./components/admin/footer_setting/Index.vue */ "./resources/js/components/admin/footer_setting/Index.vue"));
   },
   meta: {
     authAdmin: true
@@ -82274,7 +82288,7 @@ var routes = [{
   path: '/backend/theme/setting',
   name: 'theme_setting',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(38), __webpack_require__.e(20), __webpack_require__.e(73)]).then(__webpack_require__.bind(null, /*! ./components/admin/background_and_color/Index.vue */ "./resources/js/components/admin/background_and_color/Index.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./components/admin/background_and_color/Index.vue */ "./resources/js/components/admin/background_and_color/Index.vue"));
   },
   meta: {
     authAdmin: true

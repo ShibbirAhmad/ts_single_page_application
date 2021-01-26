@@ -44,7 +44,7 @@
           </div>
           <div class="col-lg-6 col-md-6">
           
-             <flip-countdown style="color:#fff" deadline="2021-02-15 00:00:00"></flip-countdown>
+             <flip-countdown style="color:#fff" deadline="2021-03-01 00:00:00"></flip-countdown>
            
           </div>
         </div>

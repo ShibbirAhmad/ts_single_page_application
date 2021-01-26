@@ -6,7 +6,7 @@
 	<header class="header-section">
 		<div class="container">
 			<!-- logo -->
-			<router-link :to="{ name : 'home' }" class="site-logo"><img :src="base_url+'images/logo.png'" alt="LOGO"></router-link>
+			<router-link :to="{ name : 'home' }" class="site-logo"><img :src="general_setting.logo?base_url+general_setting.logo :base_url+'images/logo.png'" ></router-link>
 			<div class="nav-switch">
 				<i  type="button" data-toggle="collapse" data-target="#navbarContent"
          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"  class="fa fa-bars"></i>
@@ -28,7 +28,7 @@
       <div class="container">
         
         <div class="nav-right">
-          <router-link :to="{name:'user_login'}"><i class="fa fa-user"></i></router-link>
+          <router-link :to="{name:'user_login'}">SIGN-IN/SIGN-UP</router-link>
            <a v-if="Object.keys(user).length" class="btn btn-secondary dropdown-toggle" type="button" id="dropDownBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            {{ user.name }}
           </a>
@@ -59,7 +59,7 @@ export default {
   mounted() {
     this.$store.dispatch("user");
     this.$store.dispatch("categories");
-    
+    this.$store.dispatch("general_setting");
   },
 
   data() {
@@ -86,6 +86,9 @@ export default {
   },
 
   computed: {
+    general_setting(){
+      return this.$store.getters.general_setting ;
+    },
     categories() {
     return  this.$store.getters.categories;
     },

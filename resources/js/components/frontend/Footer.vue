@@ -19,18 +19,18 @@
               <h5>QUICK LINKS</h5>
               <div class="line"></div>
               <ul class="link_line">
-                <li>
-                  <router-link :to="{ name: 'home' }"
-                    >CARRIER</router-link
-                  >
-                </li>
-                <li>
+               <li>
                   <router-link :to="{ name: 'home' }"
                     >HOME</router-link
                   >
                 </li>
                 <li>
                   <router-link :to="{ name: 'home' }"
+                    >CARRIER</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ name: 'blog' }"
                     >BLOG</router-link
                   >
                 </li>
@@ -68,15 +68,11 @@
                 </router-link>
               </li>
               <li>
-                <router-link :to="{ name: 'home' }">
+                <router-link :to="{ name: 'talibs_team' }">
                   TEAM
                 </router-link>
               </li>
-              <li>
-                <router-link :to="{ name: 'home' }"
-                  >ABOUT TALIBS
-                </router-link>
-              </li>
+             
             </ul>
           </div>
 
@@ -100,7 +96,7 @@
                       class="form-control subscribe_input"
                       
                     />
-				           	<button type="submit" class="btn subcribe-btn">subscirbe</button>
+				           	<button type="submit" class="btn subscribe-btn">subscirbe</button>
                   </div>
                   
                 </div>

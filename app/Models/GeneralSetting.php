@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneralSetting extends Model
 {
-   
+     public static function first(){
+         return GeneralSetting::latest()->first();
+     }  
 }
